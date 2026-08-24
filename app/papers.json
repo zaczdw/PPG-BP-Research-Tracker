@@ -13,8 +13,8 @@
       "source": {
         "venue": "arXiv",
         "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "url": "https://arxiv.org/abs/2607.23406",
+        "verification": "primary-abstract"
       },
       "topics": [
         "PPG",
@@ -83,7 +83,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "arXiv 题名与首次提交日期核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -171,6 +179,14 @@
         "deployment": "上线前需要用户提供少量 PPG+参考 BP 做微调；之后单次推理只需 PPG 和已保存的个体参数。",
         "leakage": "未发现推理时使用当前测试 BP；主要风险是同一用户的校准窗口与测试窗口过近，造成个体化结果偏乐观。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -182,8 +198,8 @@
       "source": {
         "venue": "EMBC 2026 / arXiv",
         "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "url": "https://arxiv.org/abs/2607.27076",
+        "verification": "primary-abstract"
       },
       "topics": [
         "PPG",
@@ -252,7 +268,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "arXiv 与 IEEE EMBC 2026 议程核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -338,7 +362,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -350,8 +382,8 @@
       "source": {
         "venue": "Preprint",
         "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "url": "https://arxiv.org/abs/2606.07365",
+        "verification": "primary-abstract"
       },
       "topics": [
         "PPG",
@@ -417,7 +449,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "arXiv 题名与首次提交日期核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -507,6 +547,14 @@
         "deployment": "完成入组校准后可仅用 PPG 推理；生成个人 LoRA adapter 时仍需要带参考 BP 的个人样本。",
         "leakage": "未发现当前测试 BP 进入推理；需继续核对个人校准窗口与测试窗口是否严格分离。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -594,6 +642,14 @@
         "deployment": "推理只需腕部 PPG，可选基线；适合趋势监测，不应外推为绝对 BP 产品验证。",
         "leakage": "开发与前瞻性验证队列分开，未见当前参考 BP 输入模型；侵入式 BP 仅用于评价。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -679,6 +735,14 @@
         "deployment": "适合校准后进行居家频繁测量；需要按设备说明完成初始校准。",
         "leakage": "属于独立设备验证，不是随机窗口训练评估；主要关注校准流程与参考测量协议，而非模型窗口泄露。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -690,8 +754,8 @@
       "source": {
         "venue": "arXiv",
         "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "url": "https://arxiv.org/abs/2601.21031",
+        "verification": "primary-abstract"
       },
       "topics": [
         "PPG",
@@ -757,7 +821,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "arXiv 题名与首次提交日期核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -769,8 +841,8 @@
       "source": {
         "venue": "Preprint",
         "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "url": "https://arxiv.org/abs/2601.12215",
+        "verification": "primary-abstract"
       },
       "topics": [
         "PPG",
@@ -836,7 +908,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2025 workshop / 2026 完整版",
+        "checked_on": "2026-08-24",
+        "basis": "2026 arXiv/ICLR 版本核验",
+        "note": "存在 2025 年较短的 workshop 版本；当前记录对应 2026 年完整题名版本。"
       }
     },
     {
@@ -932,6 +1012,14 @@
         "deployment": "仍处研究基准阶段；推理可能需要 PPG 和人口学信息，尚无独立临床产品验证。",
         "leakage": "重点要核对统一 benchmark 是否严格 subject-disjoint；数值达标不能替代标准规定的受试者级协议。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -1014,6 +1102,14 @@
         "deployment": "训练时需要 ECG 对齐监督，下游推理可以只用 PPG。",
         "leakage": "ECG 是训练监督而非测试目标；下游任务仍需重新审计 subject split 和 BP 标签使用方式。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -1025,8 +1121,8 @@
       "source": {
         "venue": "Preprint",
         "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "url": "https://arxiv.org/abs/2608.01820",
+        "verification": "primary-abstract"
       },
       "topics": [
         "PPG"
@@ -1091,7 +1187,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "arXiv 题名与首次提交日期核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -1174,7 +1278,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -1266,6 +1378,14 @@
         "deployment": "按论文报告的流程无法部署，因为真实系统不知道当前 ABP 窗口的均值和标准差。",
         "leakage": "严重：测试 ABP 用于逐窗反归一化，且 ABP 参与质量筛选；即使 subject-disjoint 和外部数据成立，也不能抵消目标泄露。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -1277,8 +1397,8 @@
       "source": {
         "venue": "Preprint",
         "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "url": "https://arxiv.org/abs/2605.09579",
+        "verification": "primary-abstract"
       },
       "topics": [
         "PPG",
@@ -1347,7 +1467,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "arXiv 题名与首次提交日期核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -1426,7 +1554,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -1506,7 +1642,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -1591,6 +1735,14 @@
         "deployment": "可作为下游多任务模型底座；具体 BP head 仍需单独验证。",
         "leakage": "数据构建本身不等于安全评估；复用时必须按受试者划分，并核对问答标签是否来自目标 BP。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -1601,9 +1753,9 @@
       "record_type": "paper",
       "source": {
         "venue": "Biomedical Signal Processing and Control",
-        "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "doi": "10.1016/j.bspc.2026.110445",
+        "url": "https://doi.org/10.1016/j.bspc.2026.110445",
+        "verification": "primary-metadata"
       },
       "topics": [
         "PPG",
@@ -1669,7 +1821,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 近似题名与 DOI 核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -1752,7 +1912,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -1763,9 +1931,9 @@
       "record_type": "paper",
       "source": {
         "venue": "Biomedical Signal Processing and Control",
-        "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "doi": "10.1016/j.bspc.2026.109852",
+        "url": "https://doi.org/10.1016/j.bspc.2026.109852",
+        "verification": "primary-full-text"
       },
       "topics": [
         "PPG",
@@ -1832,7 +2000,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2025 预印本 / 2026 期刊",
+        "checked_on": "2026-08-24",
+        "basis": "Elsevier 期刊文章核验",
+        "note": "SSRN 预印本发布于 2025 年；当前记录对应 2026 年正式期刊文章。"
       }
     },
     {
@@ -1915,7 +2091,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -2012,6 +2196,14 @@
         "deployment": "报告配置下连续 BLE 续航约 6 小时，长期使用还需要每日 recalibration。",
         "leakage": "需要明确每日重新校准使用的参考 BP；若同日测试紧邻校准，长期泛化可能被高估。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -2023,8 +2215,8 @@
       "source": {
         "venue": "arXiv",
         "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "url": "https://arxiv.org/abs/2608.12229",
+        "verification": "primary-abstract"
       },
       "topics": [
         "PPG"
@@ -2089,7 +2281,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "arXiv 题名与首次提交日期核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -2168,7 +2368,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -2247,7 +2455,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -2331,7 +2547,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -2411,7 +2635,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -2490,7 +2722,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -2569,7 +2809,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -2581,8 +2829,8 @@
       "source": {
         "venue": "arXiv",
         "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "url": "https://arxiv.org/abs/2608.00943",
+        "verification": "primary-abstract"
       },
       "topics": [
         "PPG",
@@ -2648,7 +2896,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "arXiv 题名与首次提交日期核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -2727,7 +2983,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -2810,7 +3074,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -2890,7 +3162,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -2973,7 +3253,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -3056,7 +3344,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -3068,8 +3364,8 @@
       "source": {
         "venue": "arXiv",
         "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "url": "https://arxiv.org/abs/2608.07759",
+        "verification": "primary-abstract"
       },
       "topics": [
         "PPG"
@@ -3134,7 +3430,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "arXiv 题名与首次提交日期核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -3213,7 +3517,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -3224,9 +3536,9 @@
       "record_type": "paper",
       "source": {
         "venue": "Frontiers in Digital Health",
-        "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "doi": "10.3389/fdgth.2026.1910212",
+        "url": "https://doi.org/10.3389/fdgth.2026.1910212",
+        "verification": "primary-abstract"
       },
       "topics": [
         "PPG"
@@ -3291,7 +3603,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Frontiers 正式文章核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -3373,7 +3693,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -3455,7 +3783,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -3540,6 +3876,14 @@
         "deployment": "只需第 0 天校准，之后手表独立输出；每日 Omron 仅用于研究验证。",
         "leakage": "未见验证期参考 BP 回写手表；主要问题不是泄露，而是校准点依赖和 BP 变化后的性能下降。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -3550,9 +3894,9 @@
       "record_type": "paper",
       "source": {
         "venue": "Hypertension Research",
-        "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "doi": "10.1038/s41440-026-02759-6",
+        "url": "https://www.nature.com/articles/s41440-026-02759-6",
+        "verification": "primary-full-text"
       },
       "topics": [
         "PPG",
@@ -3622,7 +3966,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2025 摘要 / 2026 期刊",
+        "checked_on": "2026-08-24",
+        "basis": "Hypertension Research 正式文章核验",
+        "note": "该研究先有 2025 年会议摘要；当前记录对应 2026 年正式期刊文章。"
       }
     },
     {
@@ -3706,6 +4058,14 @@
         "deployment": "跨模态 delay aligner 在预训练阶段学习；具体下游可仅保留目标模态，但 BP 任务需另做验证。",
         "leakage": "共享表征本身不是 BP 泄露；风险取决于下游 BP 标签、时间对齐和受试者划分。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -3715,10 +4075,10 @@
       "first_reported_in_daily": "2026-08-19",
       "record_type": "paper",
       "source": {
-        "venue": "KDD 2026",
+        "venue": "arXiv",
         "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "url": "https://arxiv.org/abs/2602.09328",
+        "verification": "primary-abstract"
       },
       "topics": [
         "PPG"
@@ -3783,7 +4143,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "arXiv 题名与首次提交日期核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -3862,7 +4230,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -3944,7 +4320,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -4035,6 +4419,14 @@
         "deployment": "需要初始 cuff/reference BP，并依赖可靠的同步与 SQA。",
         "leakage": "采用 subject-wise split 降低跨人泄露；仍要保证个人校准样本与测试时间段分离。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -4119,7 +4511,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -4205,6 +4605,14 @@
         "deployment": "若变化点由真实 BP 触发，流程并不自主；需要用 PPG/IMU/上下文构建可部署的触发器。",
         "leakage": "潜在高风险在触发机制：若用当前真实 BP 判断变化并决定重校准，就把目标信息带入了评估流程。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -4287,7 +4695,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -4370,7 +4786,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -4452,7 +4876,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -4534,7 +4966,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -4622,6 +5062,14 @@
         "deployment": "推理仅需 PPG 和已保存的高质量 reference embedding，不需要当前 BP。",
         "leakage": "未使用 BP 目标做质量筛选，目标泄露风险低；应继续避免同一受试者片段跨训练/测试。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -4705,6 +5153,14 @@
         "deployment": "需要两枚 ring，是额外佩戴成本；当前 BP 精度不足以支撑产品结论。",
         "leakage": "必须按参与者划分；若把同一人的左右手或不同 session 分到训练和测试，会显著高估泛化。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -4714,10 +5170,10 @@
       "first_reported_in_daily": "2026-08-22",
       "record_type": "review",
       "source": {
-        "venue": "Review publication not fully verified",
-        "doi": null,
-        "url": null,
-        "verification": "daily-index-only"
+        "venue": "JACC: Clinical Electrophysiology",
+        "doi": "10.1016/j.jacep.2026.06.034",
+        "url": "https://doi.org/10.1016/j.jacep.2026.06.034",
+        "verification": "primary-abstract"
       },
       "topics": [
         "PPG",
@@ -4786,7 +5242,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "JACC 正式文章核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -4886,6 +5350,14 @@
         "deployment": "推理需要多光谱 PPG、electro-potential、IMU、温度和人口学信息；高强度活动会自动拒测。",
         "leakage": "独立前瞻性队列，参考 ABPM 只用于比较；未发现用参考 BP 反归一化、选 beat 或做内部 SQA。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -4976,6 +5448,14 @@
         "deployment": "下游推理可只用 ring PPG，也可加入设备实际可得的 posture/IMU。",
         "leakage": "数据构建未见当前 BP 反归一化；最大风险是把同一人的不同手、体位或 session 随机分到训练和测试。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -5063,6 +5543,14 @@
         "deployment": "推理输入是 ring PPG 与 accelerometer；可用于运动场景下的 SQA 和鲁棒性研究。",
         "leakage": "数据本身不要求目标依赖处理；复用时必须按 subject 分组，不能随机打散高度重叠的 windows。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -5144,7 +5632,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -5226,7 +5722,15 @@
         "takeaway": "可作为后续阅读线索；在完成全文核验前，不应作为工程选型或临床证据。",
         "deployment": "推理输入来自题录初步标注，校准要求和真实部署条件仍待全文确认。",
         "leakage": "反归一化、对齐、切窗、质量筛选、校准以及 window/subject leakage 均待全文级审计。",
-        "evidence_status": "待全文核验"
+        "evidence_status": "题录年份已核验 · 全文待审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "Crossref 精确题名与出版年份核验",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -5311,6 +5815,14 @@
         "deployment": "推理可 PPG-only，但需要固定 EEMD/分量选择流程；实时计算成本与跨域稳定性尚未解决。",
         "leakage": "摘要未报告明显目标反归一化；subject split、切窗和外部验证仍需全文审计。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     },
     {
@@ -5395,6 +5907,14 @@
         "deployment": "推理需要 ECG/PPG-derived PTT 和个人参数；自适应更新的可用输入必须重新审计。",
         "leakage": "历史 BP 用于校准是明确的；若 fPTP 在测试时使用同时刻参考 BP 更新参数，就会形成目标依赖。",
         "evidence_status": "已完成重点深审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2020,
+        "display_year": "2020",
+        "checked_on": "2026-08-24",
+        "basis": "此前重点深审记录",
+        "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
       }
     }
   ]

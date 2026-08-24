@@ -177,7 +177,7 @@ export default function Home() {
           <span className="brand-mark">P</span>
           <span><strong>PPG·BP Evidence Atlas</strong><small>无袖带血压研究审计库</small></span>
         </a>
-        <nav aria-label="主要导航"><a href="#daily">今日简报</a><a href="#papers">论文搜索</a><a href="#datasets">数据集</a><a href="#audit">泄露审计</a></nav>
+        <nav aria-label="主要导航"><a href="#daily">今日简报</a><a href="#papers">论文搜索</a><a href="#audit">泄露审计</a></nav>
         <span className="update-pill">更新至 {latestDate?.replaceAll("-", ".")}</span>
       </header>
 
@@ -223,7 +223,7 @@ export default function Home() {
           <label><span>数据集</span><select value={dataset} onChange={(e) => { setDataset(e.target.value); setVisible(12); }}><option value="all">全部数据集</option>{datasetOptions.map((item) => <option key={item}>{item}</option>)}</select></label>
           <label><span>输入信号</span><select value={signal} onChange={(e) => { setSignal(e.target.value); setVisible(12); }}><option value="all">全部信号</option>{signalOptions.map((item) => <option key={item}>{item}</option>)}</select></label>
           <label><span>泄露风险</span><select value={risk} onChange={(e) => { setRisk(e.target.value); setVisible(12); }}><option value="all">全部风险</option><option value="flagged">高风险与严重泄露</option><option value="critical">严重泄露</option><option value="high">高风险</option><option value="medium">中风险</option><option value="low">低风险</option><option value="unknown">待审计</option></select></label>
-          <label><span>内容进度</span><select value={audit} onChange={(e) => { setAudit(e.target.value); setVisible(12); }}><option value="all">全部进度</option><option value="priority-reviewed">已完成重点深审</option><option value="preliminary-index">待全文核验</option></select></label>
+          <label><span>内容进度</span><select value={audit} onChange={(e) => { setAudit(e.target.value); setVisible(12); }}><option value="all">全部进度</option><option value="priority-reviewed">已完成重点深审</option><option value="preliminary-index">题录年份已核验，全文待审</option></select></label>
           <button className="reset-button" onClick={reset} disabled={!activeFilters}>重置{activeFilters ? ` · ${activeFilters}` : ""}</button>
         </div>
 
@@ -232,7 +232,7 @@ export default function Home() {
             <div className="paper-grid">
               {filtered.slice(0, visible).map((paper) => (
                 <button className="paper-card" key={paper.id} onClick={() => setSelected(paper)}>
-                  <div className="card-meta"><span>{paper.year}</span><span>{paper.source.venue}</span><em className={paper.audit_status === "priority-reviewed" ? "verified" : "pending"}>{paper.study_summary.evidence_status}</em></div>
+                  <div className="card-meta"><span>版本年份 {paper.publication_audit.display_year}</span><span>{paper.source.venue}</span><span>日报收录 {paper.first_reported_in_daily?.replaceAll("-", ".") ?? "补录"}</span><em className={paper.audit_status === "priority-reviewed" ? "verified" : "pending"}>{paper.study_summary.evidence_status}</em></div>
                   <h3>{paper.title}</h3>
                   <div className="card-summary"><span>这篇做了什么</span><p>{paper.study_summary.goal}</p></div>
                   <div className="card-conclusion"><span>一句话结论</span><p>{paper.study_summary.takeaway}</p></div>
@@ -250,14 +250,6 @@ export default function Home() {
         ) : <div className="empty-state"><strong>没有找到匹配记录</strong><p>换一个关键词，或清除部分筛选条件。</p><button onClick={reset}>清除筛选</button></div>}
       </section>
 
-      <section className="dataset-section" id="datasets">
-        <div className="section-heading"><div><span>数据集视角</span><h2>常用数据集与真实域差异</h2></div><p>点击数据集直接筛选论文</p></div>
-        <div className="dataset-grid">{datasetOptions.slice(0, 8).map((item) => {
-          const count = papers.filter((paper) => paper.datasets.includes(item)).length;
-          return <button key={item} onClick={() => { setDataset(item); setVisible(12); document.querySelector("#papers")?.scrollIntoView(); }}><strong>{item}</strong><span>{count} 篇记录</span><i>→</i></button>;
-        })}</div>
-      </section>
-
       <section className="audit-section" id="audit">
         <div className="audit-copy"><span>ABP / BP 泄露审计</span><h2>漂亮的 MAE，可能只是因为测试时已经知道答案。</h2><p>数据库把训练监督与测试目标依赖严格分开。Subject-disjoint 并不能抵消当前 ABP 反归一化、对齐或筛选造成的泄露。</p><button onClick={() => { setRisk("flagged"); document.querySelector("#papers")?.scrollIntoView(); }}>查看全部高风险记录</button></div>
         <div className="critical-card"><span>严重案例 · TCN–BiLSTM</span><h3>每个测试 ABP 窗口的 μ/σ 被用于恢复 mmHg。</h3><div><AuditLine label="Subject-disjoint" value={true} /><AuditLine label="External dataset" value={true} /><AuditLine label="测试 ABP 反归一化" value="是" danger /><AuditLine label="ABP 质量筛选" value="是" danger /></div><button onClick={() => setSelected(papers.find((paper) => paper.title.includes("TCN–BiLSTM")) ?? null)}>打开完整审计 →</button></div>
@@ -269,13 +261,14 @@ export default function Home() {
         <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setSelected(null); }}>
           <section className="detail-panel" role="dialog" aria-modal="true" aria-labelledby="paper-detail-title">
             <button className="close-button" onClick={() => setSelected(null)} aria-label="关闭论文详情">×</button>
-            <div className="detail-kicker">{selected.year} · {selected.source.venue}</div>
+            <div className="detail-kicker">版本年份 {selected.publication_audit.display_year} · {selected.source.venue} · 日报收录 {selected.first_reported_in_daily?.replaceAll("-", ".") ?? "补录"}</div>
             <h2 id="paper-detail-title">{selected.title}</h2>
             <div className="detail-badges">
               <span className={`badge deploy ${selected.deployment.level}`}>{deployLabel[selected.deployment.level] ?? selected.deployment.judgment}</span>
               <span className={`badge risk ${selected.leakage_audit.risk_level}`}>{riskLabel[selected.leakage_audit.risk_level] ?? "风险已记录"}</span>
               <span className={`badge neutral ${selected.audit_status === "priority-reviewed" ? "verified" : "pending"}`}>{selected.study_summary.evidence_status}</span>
             </div>
+            <div className="publication-note"><strong>年份已经核验</strong><span>{selected.publication_audit.basis}。{selected.publication_audit.note}</span></div>
             {selected.audit_status !== "priority-reviewed" && <div className="verification-banner"><strong>这篇仍在全文核验队列中</strong><span>目前只展示可确认的研究方向；方法、指标与结论不做推测。</span></div>}
             <div className="reading-flow" aria-label="论文内容解读">
               <article><span>01</span><div><h3>这篇研究做了什么</h3><p>{selected.study_summary.goal}</p></div></article>

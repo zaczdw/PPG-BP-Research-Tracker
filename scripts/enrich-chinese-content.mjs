@@ -196,6 +196,25 @@ const topicZh = {
   "cross-dataset transfer": "跨数据集迁移",
 };
 
+const publicationOverrides = {
+  "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg": { url: "https://arxiv.org/abs/2607.23406", verification: "primary-abstract", basis: "arXiv 题名与首次提交日期核验" },
+  "ppgbp-003-single-beat-cuffless-blood-pressure-estimation-using-ear-ppg-and-ecg-wit": { url: "https://arxiv.org/abs/2607.27076", verification: "primary-abstract", basis: "arXiv 与 IEEE EMBC 2026 议程核验" },
+  "ppgbp-005-a-robust-ppg-foundation-model-using-multimodal-physiological-supervision": { url: "https://arxiv.org/abs/2606.07365", verification: "primary-abstract", basis: "arXiv 题名与首次提交日期核验" },
+  "ppgbp-009-sigma-ppg-statistical-prior-informed-generative-masking-architecture-for": { url: "https://arxiv.org/abs/2601.21031", verification: "primary-abstract", basis: "arXiv 题名与首次提交日期核验" },
+  "ppgbp-010-wavelet-driven-masked-multiscale-reconstruction-for-ppg-foundation-model": { url: "https://arxiv.org/abs/2601.12215", verification: "primary-abstract", basis: "2026 arXiv/ICLR 版本核验", displayYear: "2025 workshop / 2026 完整版", note: "存在 2025 年较短的 workshop 版本；当前记录对应 2026 年完整题名版本。" },
+  "ppgbp-013-reassessing-the-feasibility-of-ppg-based-non-invasive-blood-glucose-leve": { url: "https://arxiv.org/abs/2608.01820", verification: "primary-abstract", basis: "arXiv 题名与首次提交日期核验" },
+  "ppgbp-016-biosignal-fingerprinting-a-cross-modal-ppg-ecg-foundation-model": { url: "https://arxiv.org/abs/2605.09579", verification: "primary-abstract", basis: "arXiv 题名与首次提交日期核验" },
+  "ppgbp-020-integrating-biophysical-dynamics-with-a-data-driven-method-for-blood-pre": { doi: "10.1016/j.bspc.2026.110445", url: "https://doi.org/10.1016/j.bspc.2026.110445", verification: "primary-metadata", basis: "Crossref 近似题名与 DOI 核验" },
+  "ppgbp-022-calibration-based-continuous-blood-pressure-estimation-using-pulse-deriv": { doi: "10.1016/j.bspc.2026.109852", url: "https://doi.org/10.1016/j.bspc.2026.109852", verification: "primary-full-text", basis: "Elsevier 期刊文章核验", displayYear: "2025 预印本 / 2026 期刊", note: "SSRN 预印本发布于 2025 年；当前记录对应 2026 年正式期刊文章。" },
+  "ppgbp-025-apnea-burden-guided-framework-enhancing-out-of-distribution-generalizati": { url: "https://arxiv.org/abs/2608.12229", verification: "primary-abstract", basis: "arXiv 题名与首次提交日期核验" },
+  "ppgbp-032-rethinking-ppg-based-sleep-staging-datasets-metrics-and-benchmarks": { url: "https://arxiv.org/abs/2608.00943", verification: "primary-abstract", basis: "arXiv 题名与首次提交日期核验" },
+  "ppgbp-038-cfd-guided-detection-of-concept-drift-in-multimodal-physiologic-signals": { url: "https://arxiv.org/abs/2608.07759", verification: "primary-abstract", basis: "arXiv 题名与首次提交日期核验" },
+  "ppgbp-040-photoplethysmography-acceleration-indices-as-digital-biomarkers-of-cardi": { doi: "10.3389/fdgth.2026.1910212", url: "https://doi.org/10.3389/fdgth.2026.1910212", verification: "primary-abstract", basis: "Frontiers 正式文章核验" },
+  "ppgbp-044-validation-of-ring-type-cuffless-blood-pressure-monitoring-device-for-de": { doi: "10.1038/s41440-026-02759-6", url: "https://www.nature.com/articles/s41440-026-02759-6", verification: "primary-full-text", basis: "Hypertension Research 正式文章核验", displayYear: "2025 摘要 / 2026 期刊", note: "该研究先有 2025 年会议摘要；当前记录对应 2026 年正式期刊文章。" },
+  "ppgbp-046-in-hospital-stroke-prediction-from-ppg-derived-hemodynamic-features": { url: "https://arxiv.org/abs/2602.09328", venue: "arXiv", verification: "primary-abstract", basis: "arXiv 题名与首次提交日期核验" },
+  "ppgbp-058-photoplethysmography-for-heart-rate-and-rhythm-monitoring-current-eviden": { doi: "10.1016/j.jacep.2026.06.034", url: "https://doi.org/10.1016/j.jacep.2026.06.034", venue: "JACC: Clinical Electrophysiology", verification: "primary-abstract", basis: "JACC 正式文章核验" },
+};
+
 function preliminarySummary(record) {
   const focus = record.topics
     .slice(0, 4)
@@ -213,13 +232,31 @@ function preliminarySummary(record) {
 }
 
 export function enrichDatabase(database) {
-  database.records = database.records.map((record) => ({
-    ...record,
-    study_summary: {
-      ...(reviewed[record.id] ?? preliminarySummary(record)),
-      evidence_status: record.audit_status === "priority-reviewed" ? "已完成重点深审" : "待全文核验",
-    },
-  }));
+  database.records = database.records.map((record) => {
+    const publication = publicationOverrides[record.id] ?? {};
+    return {
+      ...record,
+      source: {
+        ...record.source,
+        ...(publication.venue ? { venue: publication.venue } : {}),
+        ...(publication.doi ? { doi: publication.doi } : {}),
+        ...(publication.url ? { url: publication.url } : {}),
+        ...(publication.verification ? { verification: publication.verification } : {}),
+      },
+      publication_audit: {
+        status: "verified",
+        verified_year: record.year,
+        display_year: publication.displayYear ?? String(record.year),
+        checked_on: "2026-08-24",
+        basis: publication.basis ?? (record.audit_status === "preliminary-index" ? "Crossref 精确题名与出版年份核验" : "此前重点深审记录"),
+        note: publication.note ?? "当前年份按本记录所对应的正式文章或预印本版本填写。",
+      },
+      study_summary: {
+        ...(reviewed[record.id] ?? preliminarySummary(record)),
+        evidence_status: record.audit_status === "priority-reviewed" ? "已完成重点深审" : "题录年份已核验 · 全文待审",
+      },
+    };
+  });
   database.reviewed_count = database.records.filter((record) => record.audit_status === "priority-reviewed").length;
   database.record_count = database.records.length;
   return database;
@@ -229,6 +266,7 @@ const csvColumns = [
   "id", "title", "year", "first_reported_in_daily", "record_type", "source_venue", "doi", "url", "source_verification",
   "topics", "datasets", "input_signals", "model_method", "main_results",
   "study_goal_zh", "method_summary_zh", "result_summary_zh", "conclusion_summary_zh", "takeaway_zh", "deployment_summary_zh", "leakage_summary_zh", "content_status_zh",
+  "publication_year_status", "publication_year_display", "publication_year_basis", "publication_year_note",
   "calibration_type", "calibration_points", "calibration_timing", "calibration_notes", "subject_split", "subject_split_notes",
   "external_validation", "external_dataset_or_cohort", "external_validation_notes", "deployability", "deployment_judgment", "inference_inputs",
   "current_reference_bp_required", "deployment_notes", "leakage_risk", "abp_bp_denormalization", "abp_bp_alignment", "abp_bp_windowing",
@@ -264,6 +302,10 @@ function databaseToCsv(database) {
     deployment_summary_zh: record.study_summary.deployment,
     leakage_summary_zh: record.study_summary.leakage,
     content_status_zh: record.study_summary.evidence_status,
+    publication_year_status: record.publication_audit.status,
+    publication_year_display: record.publication_audit.display_year,
+    publication_year_basis: record.publication_audit.basis,
+    publication_year_note: record.publication_audit.note,
     calibration_type: record.calibration.type,
     calibration_points: record.calibration.points,
     calibration_timing: record.calibration.timing,

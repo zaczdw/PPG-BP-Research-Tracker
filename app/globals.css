@@ -220,8 +220,14 @@ footer p { color: var(--muted); font-size: 11px; }
 .detail-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
 .detail-badges .verified { background: #e4f1e9; color: #25644f; }
 .detail-badges .pending { background: #fbedd2; color: #8a642c; }
+.publication-note {
+  margin: -6px 0 16px; padding: 13px 16px; display: flex; align-items: baseline; gap: 12px;
+  border: 1px solid #cfe0d6; border-radius: 12px; background: #f0f6f1; color: #285c4b;
+}
+.publication-note strong { flex: 0 0 auto; font-size: 12px; }
+.publication-note span { color: #57706a; font-size: 11px; line-height: 1.6; }
 .verification-banner {
-  margin: -6px 0 20px; padding: 15px 18px; display: flex; align-items: baseline; gap: 12px;
+  margin: 0 0 20px; padding: 15px 18px; display: flex; align-items: baseline; gap: 12px;
   border: 1px solid #ead5a9; border-radius: 12px; background: #fff5df; color: #755422;
 }
 .verification-banner strong { font-size: 13px; }
@@ -271,6 +277,7 @@ footer p { color: var(--muted); font-size: 11px; }
   .detail-panel { padding: 26px 18px; }
   .modal-backdrop { padding: 10px; }
   .verification-banner { align-items: start; flex-direction: column; gap: 5px; }
+  .publication-note { align-items: start; flex-direction: column; gap: 5px; }
   .takeaway-box { grid-template-columns: 1fr; gap: 8px; }
   .detail-facts { grid-template-columns: 1fr; }
   footer { display: block; }
