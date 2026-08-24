@@ -17,7 +17,8 @@ PPG、无袖带血压与可穿戴心血管研究的结构化论文数据库和�
 - `data/papers.csv`：表格版本
 - `daily/`：每日科研简报
 - `app/`：交互式网站
-- `pages/`：GitHub Pages 静态入口
+- `pages/`：GitHub Pages 构建入口
+- `site/`：可直接发布的静态网站
 - `.github/workflows/pages.yml`：自动构建与发布
 
 ## 本地运行
@@ -27,4 +28,4 @@ npm ci
 npm run build:pages
 ```
 
-静态产物生成在 `pages-dist/`。推送到 `main` 后，GitHub Actions 会自动发布 GitHub Pages。
+静态产物生成在 `pages-dist/`，同步到 `site/` 后即可发布。推送到 `main` 后，GitHub Actions 会自动发布 GitHub Pages。

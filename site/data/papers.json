@@ -1,0 +1,4751 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-08-24T00:00:00+08:00",
+  "record_count": 65,
+  "reviewed_count": 20,
+  "records": [
+    {
+      "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
+      "title": "Blood Pressure Estimation from PPG: A Comparative Study of Direct and ECG-Mediated Deep Learning Pipelines",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-11",
+      "record_type": "paper",
+      "source": {
+        "venue": "arXiv",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "ECG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "ECG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "ECG"
+      ]
+    },
+    {
+      "id": "ppgbp-002-evaluating-cross-dataset-transfer-learning-for-photoplethysmography-base",
+      "title": "Evaluating cross-dataset transfer learning for photoplethysmography-based blood pressure estimation",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-11",
+      "record_type": "paper",
+      "source": {
+        "venue": "Scientific Reports",
+        "doi": "10.1038/s41598-026-43409-8",
+        "url": "https://www.nature.com/articles/s41598-026-43409-8",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "cross-dataset transfer",
+        "personalization"
+      ],
+      "datasets": [
+        "MIMIC-III",
+        "VitalDB",
+        "Radboud wearable dataset"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "Compact BP-CRNN pretrained on a source dataset; last convolutional and fully connected layers are fine-tuned with limited target-subject data.",
+      "main_results": "Cross-dataset personalization on 200 patients achieved SBP/DBP MAE 3.36/1.81 mmHg, about 13% better than no transfer; external wearable-domain errors remained around SBP 10.5–10.9 and DBP 6.9 mmHg in the prior review.",
+      "calibration": {
+        "type": "subject-specific fine-tuning",
+        "points": null,
+        "timing": "onboarding/target adaptation",
+        "notes": "Needs limited target-user PPG with reference BP."
+      },
+      "subject_split": {
+        "status": true,
+        "notes": "Evaluation is organized by target subjects; source and target datasets are distinct."
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "Radboud wearable dataset",
+        "notes": "Shows clear hospital-to-wearable domain gap."
+      },
+      "deployment": {
+        "level": "conditional",
+        "judgment": "有条件可部署",
+        "inference_inputs": [
+          "PPG",
+          "stored personalized weights"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "Personal reference BP is required before deployment, not for each prediction."
+      },
+      "leakage_audit": {
+        "risk_level": "low-to-medium",
+        "abp_bp_denormalization": "not reported as current-test target dependent",
+        "abp_bp_alignment": "dataset synchronization used; no per-window target alignment confirmed",
+        "abp_bp_windowing": "reference BP used to create supervised target windows",
+        "abp_bp_quality_filtering": "quality filtering present; exact target dependence needs protocol audit",
+        "target_dependent_calibration": "historical target-subject BP used for fine-tuning",
+        "window_leakage": "controlled by subject-specific protocol but temporal proximity remains a concern",
+        "subject_leakage": "not the primary risk; evaluation is personalized by design",
+        "notes": "Strong deployment relevance, but personalized results cannot be read as calibration-free cross-person generalization."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "MIMIC-III",
+        "VitalDB",
+        "Radboud wearable dataset"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "stored personalized weights"
+      ]
+    },
+    {
+      "id": "ppgbp-003-single-beat-cuffless-blood-pressure-estimation-using-ear-ppg-and-ecg-wit",
+      "title": "Single-Beat Cuffless Blood Pressure Estimation Using Ear-PPG and ECG with a Lightweight Hybrid Learning Framework",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-11",
+      "record_type": "paper",
+      "source": {
+        "venue": "EMBC 2026 / arXiv",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "ECG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "ECG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "ECG"
+      ]
+    },
+    {
+      "id": "ppgbp-004-smartwatch-photoplethysmography-derived-heart-age-via-ecg-guided-cross-m",
+      "title": "Smartwatch Photoplethysmography-Derived Heart Age via ECG-Guided Cross-Modal Pretraining as a Digital Biomarker of Vascular Aging",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-11",
+      "record_type": "paper",
+      "source": {
+        "venue": "Preprint",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "foundation model",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "ECG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "ECG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "ECG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-005-a-robust-ppg-foundation-model-using-multimodal-physiological-supervision",
+      "title": "A robust PPG foundation model using multimodal physiological supervision",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-11",
+      "record_type": "paper",
+      "source": {
+        "venue": "Preprint",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "foundation model"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-006-few-shot-personalized-blood-pressure-estimation-from-photoplethysmograph",
+      "title": "Few-Shot Personalized Blood Pressure Estimation from Photoplethysmography and Physiological Priors via Low-Rank Adaptation",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-12",
+      "record_type": "paper",
+      "source": {
+        "venue": "IEEE Journal of Biomedical and Health Informatics",
+        "doi": null,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41701592/",
+        "verification": "primary-metadata/abstract"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "personalization",
+        "LoRA",
+        "physiological prior"
+      ],
+      "datasets": [
+        "UCI Cuffless BP",
+        "University of Queensland",
+        "CAS-BP"
+      ],
+      "input_signals": [
+        "PPG",
+        "physiological priors"
+      ],
+      "model_method": "Population-pretrained Transformer personalized with sampling-rate-robust LoRA (SRR-LoRA) and pulse-pressure consistency loss.",
+      "main_results": "Reported SBP MAE 1.52 mmHg and DBP MAE 1.07 mmHg after few-shot personalization; 2,405 pretraining subjects and 316 personalization subjects were described in the prior daily review.",
+      "calibration": {
+        "type": "few-shot personal fine-tuning",
+        "points": null,
+        "timing": "onboarding",
+        "notes": "Requires labeled personal PPG/BP examples; exact shot count varies by experiment and is not safely reduced here to a single number."
+      },
+      "subject_split": {
+        "status": "reported-subject-aware",
+        "notes": "Personalization cohorts are subject-based; exact train/validation/test protocol still needs full-text table verification."
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "Multiple datasets used, but no clearly independent external clinical validation was confirmed."
+      },
+      "deployment": {
+        "level": "conditional",
+        "judgment": "有条件可部署",
+        "inference_inputs": [
+          "PPG",
+          "stored personalized LoRA parameters"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "Deployment can be PPG-only after onboarding, but cuff/reference BP is needed to create the personalized adapter."
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not_found",
+        "abp_bp_alignment": "not_found",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "historical personal BP labels used for onboarding",
+        "window_leakage": "not fully verified",
+        "subject_leakage": "lower risk if reported subject protocol is followed",
+        "notes": "No evidence that current test BP is needed at inference; personalization can still make same-person evaluation optimistic if calibration/test windows are too close."
+      },
+      "notes": "重点深审；不要把“少样本个体化”误写成“无需校准”。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "UCI Cuffless BP",
+        "University of Queensland",
+        "CAS-BP"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "stored personalized LoRA parameters"
+      ]
+    },
+    {
+      "id": "ppgbp-007-feasibility-and-performance-evaluation-of-ppg-on-a-galaxy-watch-in-conti",
+      "title": "Feasibility and performance evaluation of PPG on a Galaxy Watch in continuous central blood pressure monitoring",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-12",
+      "record_type": "paper",
+      "source": {
+        "venue": "European Heart Journal – Digital Health",
+        "doi": null,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12912915/",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "PPG",
+        "Galaxy Watch",
+        "central BP",
+        "change tracking",
+        "external prospective validation"
+      ],
+      "datasets": [
+        "6117 measurements/440 development participants",
+        "114 catheterization validation participants"
+      ],
+      "input_signals": [
+        "Galaxy Watch 6 PPG",
+        "optional baseline calibration"
+      ],
+      "model_method": "PPG algorithm detects relative MAP/SBP/DBP changes against invasive central aortic BP; prospective catheterization evaluation.",
+      "main_results": "For ≥15% MAP increase AUC 0.85; MAP-change correlation r=0.92 with bias 0.51 mmHg; median detection delay 1 min; uncalibrated change detection remained robust.",
+      "calibration": {
+        "type": "baseline calibration optional for change tracking",
+        "points": null,
+        "timing": "baseline",
+        "notes": "Calibrated and uncalibrated relative-change analyses were both reported."
+      },
+      "subject_split": {
+        "status": true,
+        "notes": "Development and prospective evaluation cohorts are separate."
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "114 prospective catheterization patients",
+        "notes": "Reference is invasive central aortic BP."
+      },
+      "deployment": {
+        "level": "promising-change-tracking",
+        "judgment": "适合 ΔBP/MAP 变化检测，非绝对 BP 产品验证",
+        "inference_inputs": [
+          "wrist PPG",
+          "optional baseline"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "Protocol did not satisfy all relevant validation requirements."
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "not reported",
+        "abp_bp_alignment": "minute-level paired reference used for evaluation",
+        "abp_bp_windowing": "fixed time points",
+        "abp_bp_quality_filtering": "not reported as target-based",
+        "target_dependent_calibration": "baseline only/optional",
+        "window_leakage": "not applicable across separate cohorts",
+        "subject_leakage": "NO apparent cohort overlap",
+        "notes": "Reference BP defines outcomes but is not needed by deployed PPG model."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "6117 measurements/440 development participants",
+        "114 catheterization validation participants"
+      ],
+      "inference_inputs": [
+        "wrist PPG",
+        "optional baseline"
+      ]
+    },
+    {
+      "id": "ppgbp-008-validation-and-subgroup-analysis-of-the-accuracy-of-the-photoplethysmogr",
+      "title": "Validation and Subgroup Analysis of the Accuracy of the Photoplethysmography-based Microlife Cuffless Upper-arm Wearable Blood Pressure Monitor",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-12",
+      "record_type": "paper",
+      "source": {
+        "venue": "American Journal of Hypertension",
+        "doi": "10.1093/ajh/hpaf238",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41390956/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "clinical validation",
+        "skin tone",
+        "age"
+      ],
+      "datasets": [
+        "prospective 120-participant validation cohort"
+      ],
+      "input_signals": [
+        "upper-arm PPG",
+        "stored cuff calibration"
+      ],
+      "model_method": "Commercial upper-arm PPG cuffless monitor evaluated with sequential same-arm measurements under AAMI/ESH/ISO 81060-2:2018/Amd 1:2020.",
+      "main_results": "120 adults; met AAMI/ESH/ISO accuracy criteria and showed broadly consistent results across age and Fitzpatrick skin-tone groups.",
+      "calibration": {
+        "type": "individual cuff calibration",
+        "points": null,
+        "timing": "before validation",
+        "notes": "Calibrated against a clinically validated mercury sphygmomanometer."
+      },
+      "subject_split": {
+        "status": "not applicable to device validation",
+        "notes": "Prospective measurement validation rather than model train/test split."
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "120-participant prospective validation",
+        "notes": "General adult population with subgroup analysis."
+      },
+      "deployment": {
+        "level": "strong-conditional",
+        "judgment": "临床验证较强但需要袖带校准",
+        "inference_inputs": [
+          "upper-arm PPG",
+          "stored personal calibration"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "Suitable for frequent home measurements after calibration."
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "not reported",
+        "abp_bp_alignment": "sequential same-arm reference protocol",
+        "abp_bp_windowing": "device-defined",
+        "abp_bp_quality_filtering": "not reported as reference-target based",
+        "target_dependent_calibration": "historical cuff calibration only",
+        "window_leakage": "not applicable",
+        "subject_leakage": "not applicable to prospective device validation",
+        "notes": "Calibration is an authorized deployment input, not leakage, provided later reference readings are only evaluation targets."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "prospective 120-participant validation cohort"
+      ],
+      "inference_inputs": [
+        "upper-arm PPG",
+        "stored personal calibration"
+      ]
+    },
+    {
+      "id": "ppgbp-009-sigma-ppg-statistical-prior-informed-generative-masking-architecture-for",
+      "title": "SIGMA-PPG: Statistical-prior Informed Generative Masking Architecture for PPG Foundation Model",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-12",
+      "record_type": "paper",
+      "source": {
+        "venue": "arXiv",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "foundation model"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-010-wavelet-driven-masked-multiscale-reconstruction-for-ppg-foundation-model",
+      "title": "Wavelet-Driven Masked Multiscale Reconstruction for PPG Foundation Models",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-12",
+      "record_type": "paper",
+      "source": {
+        "venue": "Preprint",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "foundation model"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-011-benchmarking-and-enhancing-ppg-based-cuffless-blood-pressure-estimation-",
+      "title": "Benchmarking and Enhancing PPG-Based Cuffless Blood Pressure Estimation Methods",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-13",
+      "record_type": "paper",
+      "source": {
+        "venue": "BIOSIGNALS 2026",
+        "doi": "10.5220/0014245400004070",
+        "url": "https://www.scitepress.org/PublishedPapers/2026/142454/",
+        "verification": "primary-paper"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "benchmark",
+        "demographics",
+        "clinical criteria"
+      ],
+      "datasets": [
+        "NBPDB",
+        "MIMIC-III",
+        "VitalDB"
+      ],
+      "input_signals": [
+        "PPG",
+        "age",
+        "sex",
+        "BMI"
+      ],
+      "model_method": "Standardized 101,453-segment benchmark from 1,103 healthy adults; compares multiple models and demographic fusion.",
+      "main_results": "No baseline model met AAMI/ISO numerical limits; demographic-enhanced MInception reduced error 23% to SBP/DBP MAE 4.75/2.90 mmHg.",
+      "calibration": {
+        "type": "none reported",
+        "points": 0,
+        "timing": "none",
+        "notes": "Demographics are covariates, not cuff calibration."
+      },
+      "subject_split": {
+        "status": "reported standardized benchmark",
+        "notes": "Full split manifest should be preserved in reuse."
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "Derived from two public ICU/OR datasets, not consumer-device clinical validation."
+      },
+      "deployment": {
+        "level": "research-benchmark",
+        "judgment": "有助于公平比较，非产品验证",
+        "inference_inputs": [
+          "PPG",
+          "age",
+          "sex",
+          "BMI"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "Numerical standard thresholds alone do not establish protocol compliance."
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not reported",
+        "abp_bp_alignment": "curated synchronized signals",
+        "abp_bp_windowing": "high-quality segment selection",
+        "abp_bp_quality_filtering": "curation likely uses signal/physiological constraints; audit manifest needed",
+        "target_dependent_calibration": "NO",
+        "window_leakage": "controlled by standardized protocol; verify implementation",
+        "subject_leakage": "reported controlled",
+        "notes": "Healthy-adult subset and demographic baselines may narrow target variance."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "NBPDB",
+        "MIMIC-III",
+        "VitalDB"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "age",
+        "sex",
+        "BMI"
+      ]
+    },
+    {
+      "id": "ppgbp-012-anyppg-an-ecg-guided-ppg-foundation-model-trained-on-over-100-000-hours-",
+      "title": "AnyPPG: An ECG-Guided PPG Foundation Model Trained on Over 100,000 Hours of Recordings for Holistic Health Profiling",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-13",
+      "record_type": "paper",
+      "source": {
+        "venue": "arXiv",
+        "doi": null,
+        "url": "https://arxiv.org/abs/2511.01747",
+        "verification": "primary-metadata"
+      },
+      "topics": [
+        "PPG",
+        "foundation model",
+        "ECG-guided pretraining",
+        "wearable"
+      ],
+      "datasets": [
+        "six multi-source synchronized PPG-ECG datasets"
+      ],
+      "input_signals": [
+        "PPG at deployment",
+        "ECG only during pretraining"
+      ],
+      "model_method": "Dual-modal alignment places synchronized PPG and ECG representations in a shared physiological space; downstream use can retain only the PPG encoder.",
+      "main_results": "Pretraining covers about 109,909 h from 58,796 subjects; reports average gains of 12.8% in regression and 9.1% in classification across 11 tasks.",
+      "calibration": {
+        "type": "task-specific downstream adaptation",
+        "points": null,
+        "timing": "downstream",
+        "notes": "No cuff BP calibration protocol is established by the foundation-model paper."
+      },
+      "subject_split": {
+        "status": "reported across downstream datasets",
+        "notes": "Exact per-task split must be checked before BP claims."
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "six independent downstream datasets",
+        "notes": "Broad health tasks, not a dedicated cuffless BP device validation."
+      },
+      "deployment": {
+        "level": "research-enabler",
+        "judgment": "PPG-only 表征可部署",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "ECG is privileged training supervision, not required at inference."
+      },
+      "leakage_audit": {
+        "risk_level": "low for target leakage / medium for downstream split provenance",
+        "abp_bp_denormalization": "not applicable",
+        "abp_bp_alignment": "ECG–PPG synchronization is a training signal, not BP target leakage",
+        "abp_bp_windowing": "not applicable to absolute BP output",
+        "abp_bp_quality_filtering": "not applicable",
+        "target_dependent_calibration": "not applicable",
+        "window_leakage": "task-specific",
+        "subject_leakage": "task-specific",
+        "notes": "Do not treat hypertension classification or foundation-model gains as absolute SBP/DBP validation."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "six multi-source synchronized PPG-ECG datasets"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-013-reassessing-the-feasibility-of-ppg-based-non-invasive-blood-glucose-leve",
+      "title": "Reassessing the Feasibility of PPG-Based Non-Invasive Blood Glucose Level Estimation",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-13",
+      "record_type": "paper",
+      "source": {
+        "venue": "Preprint",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-014-soft-multi-wavelength-photoplethysmography-enables-reliable-neonatal-blo",
+      "title": "Soft, Multi-Wavelength Photoplethysmography Enables Reliable Neonatal Blood Pressure Monitoring Via Error Stratification",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-13",
+      "record_type": "paper",
+      "source": {
+        "venue": "Advanced Science",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-015-arterial-blood-pressure-waveform-reconstruction-estimation-from-ppg-usin",
+      "title": "Arterial blood pressure waveform reconstruction estimation from PPG using TCN–BiLSTM",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-13",
+      "record_type": "paper",
+      "source": {
+        "venue": "American Heart Journal Plus",
+        "doi": "10.1016/j.ahjo.2026.100837",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13375927/",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "PPG",
+        "ABP waveform reconstruction",
+        "cuffless BP",
+        "TCN",
+        "BiLSTM",
+        "target leakage"
+      ],
+      "datasets": [
+        "VitalDB",
+        "MIMIC-IV"
+      ],
+      "input_signals": [
+        "PPG",
+        "first derivative PPG",
+        "second derivative PPG"
+      ],
+      "model_method": "8 s PPG windows (2 s stride) are mapped to normalized ABP waveforms by a TCN–BiLSTM with extrema-aware Huber loss.",
+      "main_results": "VitalDB reported SBP MAE/RMSE 3.61/5.24 and DBP 1.79/2.37 mmHg; external MIMIC-IV table reported about 4.6/1.9 mmHg MAE.",
+      "calibration": {
+        "type": "none claimed",
+        "points": 0,
+        "timing": "none",
+        "notes": "However, each test ABP window supplies its own mean and standard deviation for denormalization, which functions as unavailable target information."
+      },
+      "subject_split": {
+        "status": true,
+        "notes": "VitalDB split 1,568/328/330 subjects; overlapping windows stay within subject partitions."
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "MIMIC-IV",
+        "notes": "External test without retraining is reported, but the same target-dependent preprocessing issue applies."
+      },
+      "deployment": {
+        "level": "not-deployable-as-reported",
+        "judgment": "按论文流程不可部署为 PPG-only 绝对 BP",
+        "inference_inputs": [
+          "PPG",
+          "current true ABP window mean",
+          "current true ABP window standard deviation"
+        ],
+        "current_reference_bp_required": true,
+        "notes": "Real deployment cannot know current ABP μ/σ needed to restore mmHg."
+      },
+      "leakage_audit": {
+        "risk_level": "critical",
+        "abp_bp_denormalization": "YES — per-window true ABP μ/σ stored and used for denormalization",
+        "abp_bp_alignment": "not explicitly reported; synchronization source is pre-extracted paired data",
+        "abp_bp_windowing": "YES — ABP peaks/troughs define labels and validity; minimum three ABP peaks required",
+        "abp_bp_quality_filtering": "YES — true SBP/DBP/PP ranges and ABP peak count filter windows",
+        "target_dependent_calibration": "YES in effect through per-window ABP denormalization",
+        "window_leakage": "overlapping windows, but subject-wise partitions prevent cross-subject-window overlap",
+        "subject_leakage": "NO according to reported subject-wise split",
+        "notes": "Subject split and external data do not cancel leakage caused by current-test ABP statistics and ABP-based test selection."
+      },
+      "notes": "本库最高优先级泄露案例。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "VitalDB",
+        "MIMIC-IV"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "current true ABP window mean",
+        "current true ABP window standard deviation"
+      ]
+    },
+    {
+      "id": "ppgbp-016-biosignal-fingerprinting-a-cross-modal-ppg-ecg-foundation-model",
+      "title": "Biosignal Fingerprinting: A Cross-Modal PPG-ECG Foundation Model",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-13",
+      "record_type": "paper",
+      "source": {
+        "venue": "Preprint",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "foundation model"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "ECG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "ECG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "ECG"
+      ]
+    },
+    {
+      "id": "ppgbp-017-cardiac-health-assessment-across-scenarios-and-devices-using-a-multimoda",
+      "title": "Cardiac health assessment across scenarios and devices using a multimodal foundation model pretrained on data from 1.7 million individuals",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-13",
+      "record_type": "paper",
+      "source": {
+        "venue": "Nature Machine Intelligence",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "foundation model"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "not_reported"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "not_reported"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "not_reported"
+      ]
+    },
+    {
+      "id": "ppgbp-018-foundation-models-enable-wearable-signal-screening-for-cardiovascular-di",
+      "title": "Foundation models enable wearable signal screening for cardiovascular disease among people living with HIV",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-13",
+      "record_type": "paper",
+      "source": {
+        "venue": "Communications Medicine",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "foundation model",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-019-pulselm-a-foundation-dataset-and-benchmark-for-ppg-text-learning",
+      "title": "PulseLM: A Foundation Dataset and Benchmark for PPG-Text Learning",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-13",
+      "record_type": "dataset-paper",
+      "source": {
+        "venue": "arXiv",
+        "doi": null,
+        "url": "https://arxiv.org/abs/2603.03331",
+        "verification": "primary-metadata"
+      },
+      "topics": [
+        "PPG",
+        "foundation dataset",
+        "PPG-text",
+        "question answering"
+      ],
+      "datasets": [
+        "15 public PPG sources"
+      ],
+      "input_signals": [
+        "PPG",
+        "text question"
+      ],
+      "model_method": "Harmonized PPG segments paired with physiological question–answer tasks.",
+      "main_results": "About 1.31 million 10-second PPG segments and 3.15 million QA pairs across 12 physiological QA tasks.",
+      "calibration": {
+        "type": "not applicable",
+        "points": 0,
+        "timing": "not applicable",
+        "notes": "Dataset/benchmark, not a cuffless BP calibration method."
+      },
+      "subject_split": {
+        "status": "varies-by-source/task",
+        "notes": "Must preserve subject IDs from each constituent dataset."
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "Benchmark aggregation, not clinical BP validation."
+      },
+      "deployment": {
+        "level": "research-enabler",
+        "judgment": "研究基础设施",
+        "inference_inputs": [
+          "PPG",
+          "task/question specification"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "Useful for multitask representation; does not validate absolute BP measurement."
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not applicable to dataset itself",
+        "abp_bp_alignment": "varies by source dataset",
+        "abp_bp_windowing": "source-dependent",
+        "abp_bp_quality_filtering": "source-dependent",
+        "target_dependent_calibration": "not applicable",
+        "window_leakage": "high risk if constituent windows are randomly split",
+        "subject_leakage": "must be actively prevented",
+        "notes": "Aggregating many sources amplifies split-provenance risk."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "15 public PPG sources"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "task/question specification"
+      ]
+    },
+    {
+      "id": "ppgbp-020-integrating-biophysical-dynamics-with-a-data-driven-method-for-blood-pre",
+      "title": "Integrating biophysical dynamics with a data-driven method for blood pressure estimation using photoplethysmography",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-14",
+      "record_type": "paper",
+      "source": {
+        "venue": "Biomedical Signal Processing and Control",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-021-last-cbpm-photoplethysmography-based-quasi-continuous-blood-pressure-mon",
+      "title": "LAST-CBPM: photoplethysmography-based quasi-continuous blood pressure monitoring algorithm",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-14",
+      "record_type": "paper",
+      "source": {
+        "venue": "Biomedical Signal Processing and Control",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-022-calibration-based-continuous-blood-pressure-estimation-using-pulse-deriv",
+      "title": "Calibration-based continuous blood pressure estimation using pulse-derived signals and feature normalization",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-14",
+      "record_type": "paper",
+      "source": {
+        "venue": "Biomedical Signal Processing and Control",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "calibration/personalization"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-023-personalized-calibration-and-hybrid-feature-fusion-for-continuous-blood-",
+      "title": "Personalized Calibration and Hybrid Feature Fusion for Continuous Blood Pressure Estimation Using PPG and ECG Signals",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-14",
+      "record_type": "paper",
+      "source": {
+        "venue": "Sensors",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "calibration/personalization"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "ECG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "ECG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "ECG"
+      ]
+    },
+    {
+      "id": "ppgbp-024-cuffless-hemodynamic-monitoring-with-physics-informed-machine-learning-m",
+      "title": "Cuffless hemodynamic monitoring with physics-informed machine learning models",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-15",
+      "record_type": "paper",
+      "source": {
+        "venue": "Nature Communications",
+        "doi": "10.1038/s41467-026-72693-1",
+        "url": "https://www.nature.com/articles/s41467-026-72693-1",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "BioZ",
+        "cuffless BP",
+        "sPINN",
+        "physics-informed ML",
+        "smartwatch"
+      ],
+      "datasets": [
+        "PulseDB + synthetic BioZ",
+        "75 healthy participants",
+        "hypertension/CVD clinical cohorts",
+        "one-year pilot"
+      ],
+      "input_signals": [
+        "wrist BioZ resistance/reactance",
+        "space-time coordinates",
+        "optional anthropometric/anatomical metadata"
+      ],
+      "model_method": "BioZ signal encoder plus signal-tagged PINN constrained by Navier–Stokes/elastic-tube physics predicts BP and radial/axial velocity fields.",
+      "main_results": "Cross-sectional r² ranges about 0.588–0.854 across cohorts; subject-specific models reached higher r². One-year pilot required daily recalibration to maintain performance.",
+      "calibration": {
+        "type": "population model plus optional subject-specific/daily recalibration",
+        "points": null,
+        "timing": "daily in longitudinal pilot",
+        "notes": "Despite calibration-free framing, full text reports limited longitudinal generalization and daily recalibration in the pilot."
+      },
+      "subject_split": {
+        "status": "mixed/limited",
+        "notes": "Population-wide results are shown without test-exclusive patients; subject-specific results are not unseen-subject generalization."
+      },
+      "external_validation": {
+        "status": "clinical feasibility cohorts",
+        "dataset_or_cohort": "healthy, hypertension, CVD and ICU/outpatient cohorts",
+        "notes": "No established cuffless BP validation protocol yet."
+      },
+      "deployment": {
+        "level": "promising-but-not-ready",
+        "judgment": "硬件可穿戴，算法纵向稳定性不足",
+        "inference_inputs": [
+          "wrist BioZ",
+          "stored model",
+          "optional demographics",
+          "possibly recent recalibration"
+        ],
+        "current_reference_bp_required": "not for each estimate; daily reference may be needed longitudinally",
+        "notes": "Watch battery about 6 h under continuous BLE in reported configuration."
+      },
+      "leakage_audit": {
+        "risk_level": "high evaluation/generalization risk",
+        "abp_bp_denormalization": "not identified as current-window inverse scaling",
+        "abp_bp_alignment": "paired BP used to train adaptive filter",
+        "abp_bp_windowing": "paired signals used in training",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "daily reference recalibration in longitudinal pilot",
+        "window_leakage": "not fully audited",
+        "subject_leakage": "population results not test-exclusive; subject-specific models are personalized",
+        "notes": "Not necessarily classic target leakage, but evidence does not establish calibration-free unseen-user longitudinal deployment."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "PulseDB + synthetic BioZ",
+        "75 healthy participants",
+        "hypertension/CVD clinical cohorts",
+        "one-year pilot"
+      ],
+      "inference_inputs": [
+        "wrist BioZ",
+        "stored model",
+        "optional demographics",
+        "possibly recent recalibration"
+      ]
+    },
+    {
+      "id": "ppgbp-025-apnea-burden-guided-framework-enhancing-out-of-distribution-generalizati",
+      "title": "Apnea Burden-Guided Framework: Enhancing Out-of-Distribution Generalization in PPG-Based Sleep Apnea Characterization",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-15",
+      "record_type": "paper",
+      "source": {
+        "venue": "arXiv",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-026-external-conditioning-of-data-collection-enhances-the-information-conten",
+      "title": "External conditioning of data collection enhances the information content from wearable sensors",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-15",
+      "record_type": "paper",
+      "source": {
+        "venue": "npj Cardiovascular Health",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-027-a-four-wavelength-photoplethysmography-dataset-for-non-invasive-hemoglob",
+      "title": "A Four-Wavelength Photoplethysmography dataset for non-invasive hemoglobin assessment",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-15",
+      "record_type": "dataset-paper",
+      "source": {
+        "venue": "Scientific Data",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "dataset/benchmark"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-028-towards-trustworthy-ai-driven-cuffless-blood-pressure-monitoring",
+      "title": "Towards trustworthy AI-driven cuffless blood pressure monitoring",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-15",
+      "record_type": "paper",
+      "source": {
+        "venue": "npj Digital Medicine",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "signal quality/trustworthiness",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-029-from-ppg-to-blood-pressure-at-the-edge-quantization-aware-architecture-s",
+      "title": "From PPG to Blood Pressure at the Edge: Quantization-Aware Architecture Selection and On-MCU Validation",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-16",
+      "record_type": "paper",
+      "source": {
+        "venue": "Sensors",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-030-blood-pressure-estimation-using-single-photoplethysmography-signal-based",
+      "title": "Blood pressure estimation using single photoplethysmography signal based on ResNet-BiGRU",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-16",
+      "record_type": "paper",
+      "source": {
+        "venue": "Biomedical Engineering / Biomedizinische Technik",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-031-utilizing-multi-ppg-sensor-site-information-in-a-localized-wrist-area-fo",
+      "title": "Utilizing Multi-PPG-Sensor Site Information in a Localized Wrist Area for Improving Cuffless Blood Pressure Estimation",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-16",
+      "record_type": "paper",
+      "source": {
+        "venue": "IEEE Journal of Biomedical and Health Informatics",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-032-rethinking-ppg-based-sleep-staging-datasets-metrics-and-benchmarks",
+      "title": "Rethinking PPG-based Sleep Staging: Datasets, Metrics, and Benchmarks",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-16",
+      "record_type": "paper",
+      "source": {
+        "venue": "arXiv",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "dataset/benchmark"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-033-roadmap-of-remote-photoplethysmography-from-heart-rate-measurement-towar",
+      "title": "Roadmap of remote photoplethysmography from heart rate measurement toward clinical translation",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-16",
+      "record_type": "review",
+      "source": {
+        "venue": "npj Digital Medicine",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "review"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-034-peak-independent-cuffless-blood-pressure-monitoring-using-a-smart-sock-t",
+      "title": "Peak-Independent Cuffless Blood Pressure Monitoring Using a Smart Sock: The Role of Temporal Lag Modeling in Foot-Based PPG",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-17",
+      "record_type": "paper",
+      "source": {
+        "venue": "Sensors",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-035-a-comparative-study-of-signal-representations-methods-and-deep-learning-",
+      "title": "A Comparative Study of Signal Representations Methods and Deep Learning Architectures for PPG-Based Cuffless Blood Pressure Estimation",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-17",
+      "record_type": "paper",
+      "source": {
+        "venue": "Sensors",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "foundation model"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-036-multitaskbp-reliable-ppg-based-blood-pressure-measurement-under-motion-a",
+      "title": "MultitaskBP: Reliable PPG-Based Blood Pressure Measurement Under Motion Artifact Corruption",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-17",
+      "record_type": "paper",
+      "source": {
+        "venue": "IEEE Transactions on Instrumentation and Measurement",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "signal quality/trustworthiness"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-037-innovative-wearable-platform-for-synchronized-biosignals-acquisition-a-p",
+      "title": "Innovative Wearable Platform for Synchronized Biosignals Acquisition: A Proof of Concept in a Cuff-Less Blood Pressure Monitoring Case Study",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-17",
+      "record_type": "paper",
+      "source": {
+        "venue": "Publication not fully verified",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-038-cfd-guided-detection-of-concept-drift-in-multimodal-physiologic-signals",
+      "title": "CFD-Guided Detection of Concept Drift in Multimodal Physiologic Signals",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-17",
+      "record_type": "paper",
+      "source": {
+        "venue": "arXiv",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "not_reported"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "not_reported"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "not_reported"
+      ]
+    },
+    {
+      "id": "ppgbp-039-cap-towards-ppg-universal-representation-learning-with-patient-level-sup",
+      "title": "CAP: Towards PPG Universal Representation Learning with Patient-level Supervision",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-18",
+      "record_type": "paper",
+      "source": {
+        "venue": "KDD 2026",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "foundation model"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-040-photoplethysmography-acceleration-indices-as-digital-biomarkers-of-cardi",
+      "title": "Photoplethysmography Acceleration Indices as Digital Biomarkers of Cardiometabolic Health",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-18",
+      "record_type": "paper",
+      "source": {
+        "venue": "Frontiers in Digital Health",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-041-motion-aware-low-power-wearable-photoplethysmography-system-with-metamat",
+      "title": "Motion-Aware Low-Power Wearable Photoplethysmography System with Metamaterial-Enhanced Wireless Telemetry",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-18",
+      "record_type": "paper",
+      "source": {
+        "venue": "IEEE Transactions on Biomedical Circuits and Systems",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-042-circuit-free-cardiovascular-monitoring-via-smartphone-readable-skin-inte",
+      "title": "Circuit-Free Cardiovascular Monitoring via Smartphone-Readable Skin-Interfaced Nanophotonic Films",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-18",
+      "record_type": "paper",
+      "source": {
+        "venue": "Advanced Materials",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-043-long-term-accuracy-and-stability-of-blood-pressure-measurements-from-a-s",
+      "title": "Long-term accuracy and stability of blood pressure measurements from a smartwatch: Prospective validation study",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-18",
+      "record_type": "paper",
+      "source": {
+        "venue": "Digital Health",
+        "doi": "10.1177/20552076261415923",
+        "url": "https://doi.org/10.1177/20552076261415923",
+        "verification": "primary-full-text/abstract"
+      },
+      "topics": [
+        "PPG",
+        "smartwatch",
+        "cuffless BP",
+        "28-day calibration stability"
+      ],
+      "datasets": [
+        "37-participant 28-day prospective cohort"
+      ],
+      "input_signals": [
+        "Samsung Galaxy Watch 5 PPG pipeline",
+        "stored Day-0 cuff calibration"
+      ],
+      "model_method": "Day-0 calibration followed by 27 days of paired Galaxy Watch 5 and Omron M4 measurements.",
+      "main_results": "Overall MD about −0.34 mmHg SBP and +0.62 mmHg DBP; estimated 28-day drift −0.19/+1.02 mmHg. Error increased when actual BP moved about 10 mmHg away from the initial calibration point.",
+      "calibration": {
+        "type": "single onboarding cuff calibration per manufacturer workflow",
+        "points": null,
+        "timing": "Day 0; recommended 28-day interval",
+        "notes": "Prospective longitudinal evaluation of calibration stability."
+      },
+      "subject_split": {
+        "status": "not applicable",
+        "notes": "Device validation cohort, not a retrained ML split."
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "37-participant prospective 28-day study",
+        "notes": "Small, mostly young/normotensive cohort limits generalizability."
+      },
+      "deployment": {
+        "level": "strong-conditional",
+        "judgment": "真实 28 天可用证据，但人群有限",
+        "inference_inputs": [
+          "smartwatch PPG",
+          "stored Day-0 calibration"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "Daily Omron values were reference only and did not update watch outputs."
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "NO evidence",
+        "abp_bp_alignment": "paired timing for validation only",
+        "abp_bp_windowing": "device workflow",
+        "abp_bp_quality_filtering": "not reported as target-dependent",
+        "target_dependent_calibration": "historical Day-0 cuff only",
+        "window_leakage": "not applicable",
+        "subject_leakage": "not applicable",
+        "notes": "Validates stability, not universal accuracy across hypertensive BP ranges."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "37-participant 28-day prospective cohort"
+      ],
+      "inference_inputs": [
+        "smartwatch PPG",
+        "stored Day-0 calibration"
+      ]
+    },
+    {
+      "id": "ppgbp-044-validation-of-ring-type-cuffless-blood-pressure-monitoring-device-for-de",
+      "title": "Validation of ring-type cuffless blood pressure monitoring device for detecting awake-asleep BP variations compared to ambulatory BP monitoring device",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-19",
+      "record_type": "paper",
+      "source": {
+        "venue": "Hypertension Research",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-045-cardiostate-jepa-delay-aware-cross-modal-learning-of-a-shared-cardiac-re",
+      "title": "CardioState-JEPA: Delay-Aware Cross-Modal Learning of a Shared Cardiac Representation",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-19",
+      "record_type": "paper",
+      "source": {
+        "venue": "arXiv",
+        "doi": null,
+        "url": "https://arxiv.org/abs/2608.12944",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "ECG",
+        "PCG",
+        "foundation model",
+        "JEPA",
+        "delay alignment"
+      ],
+      "datasets": [
+        "multiple unimodal and paired cardiac datasets"
+      ],
+      "input_signals": [
+        "PPG or ECG or PCG"
+      ],
+      "model_method": "Two-stage joint-embedding predictive architecture with modality tokenizers, shared Transformer, masked latent prediction, and learned cross-modal delay alignment.",
+      "main_results": "Frozen encoder reports +8.2 AUROC points for PPG classification, +18.8 for PCG murmur detection and +15.5 for ECG classification over the best SSL baseline.",
+      "calibration": {
+        "type": "not applicable",
+        "points": 0,
+        "timing": "not applicable",
+        "notes": "No cuffless BP calibration study."
+      },
+      "subject_split": {
+        "status": "task-specific",
+        "notes": "Downstream protocols vary."
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "25 downstream tasks",
+        "notes": "Not a BP-regression validation."
+      },
+      "deployment": {
+        "level": "research-enabler",
+        "judgment": "可作为 PPG encoder",
+        "inference_inputs": [
+          "one available cardiac modality, e.g. PPG"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "Delay aligner is learned during pretraining; BP head still needs separate validation."
+      },
+      "leakage_audit": {
+        "risk_level": "low for BP target leakage",
+        "abp_bp_denormalization": "not applicable",
+        "abp_bp_alignment": "cross-modal delay alignment uses paired sensors, not BP target",
+        "abp_bp_windowing": "not applicable",
+        "abp_bp_quality_filtering": "not applicable",
+        "target_dependent_calibration": "not applicable",
+        "window_leakage": "task-specific",
+        "subject_leakage": "task-specific",
+        "notes": "No absolute BP claim should be inferred."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "multiple unimodal and paired cardiac datasets"
+      ],
+      "inference_inputs": [
+        "one available cardiac modality, e.g. PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-046-in-hospital-stroke-prediction-from-ppg-derived-hemodynamic-features",
+      "title": "In-Hospital Stroke Prediction from PPG-Derived Hemodynamic Features",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-19",
+      "record_type": "paper",
+      "source": {
+        "venue": "KDD 2026",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-047-a-dual-output-physiology-informed-neural-network-architecture-for-contin",
+      "title": "A Dual-Output Physiology-Informed Neural Network Architecture for Continuous Cuffless Blood Pressure Waveform Estimation: A Proof-of-Concept",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-19",
+      "record_type": "paper",
+      "source": {
+        "venue": "Artery Research",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "not_reported"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "not_reported"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "not_reported"
+      ]
+    },
+    {
+      "id": "ppgbp-048-automated-cardiac-arrest-detection-using-wrist-derived-photoplethysmogra",
+      "title": "Automated cardiac arrest detection using wrist-derived photoplethysmography during withdrawal of life-sustaining treatment: a prospective clinical validation study",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-19",
+      "record_type": "paper",
+      "source": {
+        "venue": "The Lancet Regional Health – Europe",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-049-the-role-of-dataset-integrity-calibration-and-signal-quality-in-neural-n",
+      "title": "The role of dataset integrity, calibration and signal quality in neural network-based blood pressure estimation",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-20",
+      "record_type": "paper",
+      "source": {
+        "venue": "Scientific Reports",
+        "doi": "10.1038/s41598-026-66882-7",
+        "url": "https://doi.org/10.1038/s41598-026-66882-7",
+        "verification": "primary-metadata/abstract"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "dataset integrity",
+        "calibration",
+        "signal synchronization",
+        "data leakage"
+      ],
+      "datasets": [
+        "curated MIMIC-III",
+        "curated VitalDB"
+      ],
+      "input_signals": [
+        "PPG",
+        "ECG-derived features for one baseline"
+      ],
+      "model_method": "MLP, ResNet and TCN are compared on datasets differing in synchronization; subject-wise splits and 3–9 initial reference measurements test calibration effects.",
+      "main_results": "VitalDB consistently outperformed MIMIC-III; calibration gains diminished beyond three measurements; calibrated DBP reached numerical clinical limits while SBP remained difficult.",
+      "calibration": {
+        "type": "initial subject-specific reference BP",
+        "points": "3–9 tested",
+        "timing": "initial",
+        "notes": "Diminishing return beyond three initial measurements."
+      },
+      "subject_split": {
+        "status": true,
+        "notes": "Abstract explicitly reports subject-wise splits to prevent leakage."
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "Cross-dataset comparison is not the same as training on one and untouched external testing on another."
+      },
+      "deployment": {
+        "level": "conditional",
+        "judgment": "有条件可部署",
+        "inference_inputs": [
+          "PPG",
+          "possibly ECG/PAT features depending model",
+          "stored calibration"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "Requires initial cuff/reference measurements; emphasizes synchronized data and SQA."
+      },
+      "leakage_audit": {
+        "risk_level": "low-to-medium",
+        "abp_bp_denormalization": "not reported as current-window dependent",
+        "abp_bp_alignment": "dataset-level synchronization is studied, not oracle per-window alignment",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "signal-quality curation used; exact target dependence needs methods audit",
+        "target_dependent_calibration": "historical first 3–9 references only",
+        "window_leakage": "reduced by subject-wise split",
+        "subject_leakage": "NO according to abstract",
+        "notes": "A methodological audit paper; still requires checking how curated test windows were selected."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "curated MIMIC-III",
+        "curated VitalDB"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "possibly ECG/PAT features depending model",
+        "stored calibration"
+      ]
+    },
+    {
+      "id": "ppgbp-050-wearable-cuffless-and-portable-devices-for-blood-pressure-monitoring-201",
+      "title": "Wearable, cuffless, and portable devices for blood pressure monitoring (2015–2025): a scoping review of technologies, calibration, clinical validation, and regulatory frameworks",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-20",
+      "record_type": "review",
+      "source": {
+        "venue": "Frontiers in Digital Health",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "calibration/personalization",
+        "wearable deployment",
+        "review"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-051-change-point-aware-evaluation-and-re-calibration-of-ppg-based-blood-pres",
+      "title": "Change Point–Aware Evaluation and Re-Calibration of PPG-Based Blood Pressure Estimation",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-21",
+      "record_type": "paper",
+      "source": {
+        "venue": "MLHC 2026 / arXiv",
+        "doi": null,
+        "url": "https://arxiv.org/abs/2608.18639",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "change point",
+        "recalibration",
+        "evaluation"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "BP trajectory for change-point evaluation"
+      ],
+      "model_method": "Detects distributional change points in BP trajectories, evaluates models around fluctuations, and triggers targeted recalibration.",
+      "main_results": "Shows substantial model degradation near BP change points; periodic calibration is insufficient, while change-point-triggered recalibration improves robustness (exact values pending table extraction).",
+      "calibration": {
+        "type": "change-point-triggered",
+        "points": null,
+        "timing": "test-time/event-triggered",
+        "notes": "Deployment validity depends on whether trigger detection uses predicted BP/PPG only or true reference BP."
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "Full evaluation protocol requires audit."
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "No independent clinical external validation confirmed."
+      },
+      "deployment": {
+        "level": "conceptual/conditional",
+        "judgment": "触发机制需改造成无参考 BP",
+        "inference_inputs": [
+          "PPG",
+          "change trigger available at deployment"
+        ],
+        "current_reference_bp_required": "potentially",
+        "notes": "If true BP change points trigger recalibration, the reported protocol is not autonomous."
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "YES for evaluation periods around true BP change points",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "potentially YES — trigger is defined from BP trajectories",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "Valuable evaluation framework; its deployment claim must separate oracle change points from detectable real-world triggers."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "change trigger available at deployment"
+      ]
+    },
+    {
+      "id": "ppgbp-052-clinical-validation-of-photoplethysmography-based-finger-cuffless-blood-",
+      "title": "Clinical Validation of Photoplethysmography-Based Finger Cuffless Blood Pressure Monitoring Following European Society of Hypertension Recommendations",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-21",
+      "record_type": "paper",
+      "source": {
+        "venue": "Journal of the American Heart Association",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-053-when-is-rppg-physiologically-valid-for-stress-and-workload-monitoring-a-",
+      "title": "When is rPPG physiologically valid for stress and workload monitoring? A PRISMA-ScR scoping review",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-21",
+      "record_type": "review",
+      "source": {
+        "venue": "Frontiers in Digital Health",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "wearable deployment",
+        "review"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-054-fuzzy-accuracy-compensates-for-label-subjectivity-in-classification-of-s",
+      "title": "Fuzzy Accuracy Compensates for Label Subjectivity in Classification of Skin Tone Using Wearable Photoplethysmography Signals",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-21",
+      "record_type": "paper",
+      "source": {
+        "venue": "FUZZ-IEEE 2026 / arXiv",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-055-optimizing-health-prediction-using-wearable-sensor-data-machine-learning",
+      "title": "Optimizing health prediction using wearable sensor data: Machine learning for anomaly detection in PPG and HRV signals",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-21",
+      "record_type": "paper",
+      "source": {
+        "venue": "Procedia Computer Science",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-056-domain-independent-ppg-signal-quality-assessment-framework-via-represent",
+      "title": "Domain-independent PPG signal quality assessment framework via representation learning",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-22",
+      "record_type": "paper",
+      "source": {
+        "venue": "Scientific Reports",
+        "doi": "10.1038/s41598-026-58783-6",
+        "url": "https://www.nature.com/articles/s41598-026-58783-6",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "PPG",
+        "signal quality",
+        "representation learning",
+        "domain generalization"
+      ],
+      "datasets": [
+        "CSL finger PPG",
+        "WCS wrist PPG",
+        "AA neck PPG"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "Fine-tunes a pretrained PPG Transformer with triplet loss; quality is embedding distance to high-quality reference embeddings.",
+      "main_results": "Approximate F1: 90% finger, 95% wrist with generalized references, 70% neck.",
+      "calibration": {
+        "type": "reference-embedding set",
+        "points": null,
+        "timing": "device/domain setup",
+        "notes": "No BP calibration; reference embeddings define signal-quality score."
+      },
+      "subject_split": {
+        "status": "reported evaluation across datasets",
+        "notes": "Exact subject partition details need table-level audit."
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "wrist and neck datasets",
+        "notes": "Cross-location generalization is central."
+      },
+      "deployment": {
+        "level": "deployable-front-end",
+        "judgment": "适合作为 BP 模型前置 SQA",
+        "inference_inputs": [
+          "PPG",
+          "stored high-quality reference embeddings"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "Real-time compatible; no BP target needed."
+      },
+      "leakage_audit": {
+        "risk_level": "low for BP target leakage",
+        "abp_bp_denormalization": "not applicable",
+        "abp_bp_alignment": "not applicable",
+        "abp_bp_windowing": "not BP-target based",
+        "abp_bp_quality_filtering": "PPG morphology/expert quality labels, not BP values",
+        "target_dependent_calibration": "not applicable",
+        "window_leakage": "dataset-specific",
+        "subject_leakage": "dataset-specific",
+        "notes": "If used in BP studies, freeze SQA before test evaluation and avoid tuning thresholds on test BP error."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "CSL finger PPG",
+        "WCS wrist PPG",
+        "AA neck PPG"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "stored high-quality reference embeddings"
+      ]
+    },
+    {
+      "id": "ppgbp-057-large-scale-bilateral-cardiovascular-monitoring-via-wearable-rings",
+      "title": "Large-scale bilateral cardiovascular monitoring via wearable rings",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-22",
+      "record_type": "paper",
+      "source": {
+        "venue": "npj Digital Medicine",
+        "doi": "10.1038/s41746-026-03036-z",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42477400/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "ring",
+        "bilateral",
+        "cuffless BP",
+        "benchmark"
+      ],
+      "datasets": [
+        "MAIBO-derived bilateral benchmark"
+      ],
+      "input_signals": [
+        "left ring PPG",
+        "right ring PPG"
+      ],
+      "model_method": "Twelve backbones benchmark bilateral and averaged ring-PPG prediction across cardiovascular/demographic targets.",
+      "main_results": "97,559 valid samples from 1,810 participants; bilateral SBP/DBP MAE 12.36/8.21 mmHg, only modestly better than cohort-mean baselines 13.81/9.27.",
+      "calibration": {
+        "type": "none reported",
+        "points": 0,
+        "timing": "none",
+        "notes": "Population benchmark."
+      },
+      "subject_split": {
+        "status": "needs full-method verification",
+        "notes": "Do not assume session-level split is safe."
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "Single benchmark cohort."
+      },
+      "deployment": {
+        "level": "limited-for-BP",
+        "judgment": "HR 价值较强，绝对 BP 价值有限",
+        "inference_inputs": [
+          "bilateral ring PPG"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "Two-ring requirement is itself a deployment cost."
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not reported",
+        "abp_bp_alignment": "session-synchronized reference BP",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "valid-sample selection requires audit",
+        "target_dependent_calibration": "not reported",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown pending split verification",
+        "notes": "Transparent weak BP result is more credible than near-zero MAE under unsafe splits."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "MAIBO-derived bilateral benchmark"
+      ],
+      "inference_inputs": [
+        "bilateral ring PPG"
+      ]
+    },
+    {
+      "id": "ppgbp-058-photoplethysmography-for-heart-rate-and-rhythm-monitoring-current-eviden",
+      "title": "Photoplethysmography for Heart Rate and Rhythm Monitoring: Current Evidence and Clinical Applications",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-22",
+      "record_type": "review",
+      "source": {
+        "venue": "Review publication not fully verified",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-059-evaluation-of-alysis-001-cuffless-blood-pressure-estimation-algorithm-ag",
+      "title": "Evaluation of Alysis-001 cuffless blood pressure estimation algorithm against the European Society of Hypertension awake/asleep test criteria in hypertensive patients",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-23",
+      "record_type": "paper",
+      "source": {
+        "venue": "Hypertension Research",
+        "doi": "10.1038/s41440-026-02728-z",
+        "url": "https://www.nature.com/articles/s41440-026-02728-z",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "cuffless BP",
+        "wearable",
+        "clinical validation",
+        "ESH awake/asleep",
+        "calibration-free"
+      ],
+      "datasets": [
+        "independent development cohorts: 953 seated-rest + 150 treadmill",
+        "prospective 24 h hypertensive cohort"
+      ],
+      "input_signals": [
+        "green/red/IR PPG",
+        "electro-potential pulse signal",
+        "accelerometer",
+        "gyroscope",
+        "skin temperature",
+        "age",
+        "height",
+        "weight"
+      ],
+      "model_method": "Biomechanical Moens–Korteweg-based multiparametric algorithm estimates velocity, volume and arterial elasticity; motion/posture correction and signal-quality rejection are applied.",
+      "main_results": "92 enrolled, 78 analyzed; passed all ESH awake/asleep criteria under both extraction strategies; ICC >0.70, non-dipper sensitivity 0.93, specificity 0.75, accuracy 0.82.",
+      "calibration": {
+        "type": "demographic calibration only",
+        "points": 0,
+        "timing": "none",
+        "notes": "Uses age, height and weight; no initial or periodic cuff calibration."
+      },
+      "subject_split": {
+        "status": true,
+        "notes": "Evaluation cohort has no overlap with independent development datasets."
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "prospective 24 h hypertensive outpatients",
+        "notes": "Reference ABPM every 30 min; ESH awake/asleep primary test, not the entire cuffless-device validation suite."
+      },
+      "deployment": {
+        "level": "strong-conditional",
+        "judgment": "真实可穿戴证据较强",
+        "inference_inputs": [
+          "multispectral PPG",
+          "electro-potential",
+          "IMU",
+          "temperature",
+          "demographics"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "Automatically rejects high-intensity activity; does not require cuff calibration."
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "NO evidence",
+        "abp_bp_alignment": "30-min aggregation used for comparison, not to generate individual estimates",
+        "abp_bp_windowing": "wearable uses fixed 10 s cycles; reference ABPM does not select beats",
+        "abp_bp_quality_filtering": "internal sensor SQA/IMU rejection, not reference-BP filtering",
+        "target_dependent_calibration": "NO — demographics only",
+        "window_leakage": "not applicable to independent prospective cohort",
+        "subject_leakage": "NO cohort overlap reported",
+        "notes": "Reference ABPM is used for validation, not fed into Alysis estimates."
+      },
+      "notes": "重点深审；通过 awake/asleep primary test does not equal completing every ESH test.",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "independent development cohorts: 953 seated-rest + 150 treadmill",
+        "prospective 24 h hypertensive cohort"
+      ],
+      "inference_inputs": [
+        "multispectral PPG",
+        "electro-potential",
+        "IMU",
+        "temperature",
+        "demographics"
+      ]
+    },
+    {
+      "id": "ppgbp-060-a-multi-posture-asymmetry-aware-intelligent-bilateral-observation-datase",
+      "title": "A Multi-posture Asymmetry-aware Intelligent Bilateral Observation Dataset for Cardiovascular Monitoring",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-24",
+      "record_type": "dataset-paper",
+      "source": {
+        "venue": "Scientific Data",
+        "doi": "10.1038/s41597-026-07915-8",
+        "url": "https://www.nature.com/articles/s41597-026-07915-8",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "PPG",
+        "dataset",
+        "ring",
+        "bilateral",
+        "posture",
+        "cuffless BP"
+      ],
+      "datasets": [
+        "MAIBO"
+      ],
+      "input_signals": [
+        "left ring PPG",
+        "right ring PPG",
+        "posture",
+        "age",
+        "sex",
+        "BMI"
+      ],
+      "model_method": "Dataset descriptor: synchronized bilateral ring PPG across three standardized postures with SBP/DBP/HR and demographic labels.",
+      "main_results": "1,810 participants and 7,478 sessions; designed for bilateral and posture-dependent cardiovascular benchmarking.",
+      "calibration": {
+        "type": "not applicable to dataset",
+        "points": 0,
+        "timing": "not applicable",
+        "notes": "Reference BP labels are provided; downstream users must define calibration protocol."
+      },
+      "subject_split": {
+        "status": "not imposed",
+        "notes": "Dataset users must split by participant ID; random session/window split is unsafe."
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "Dataset resource, not an externally validated estimator."
+      },
+      "deployment": {
+        "level": "research-enabler",
+        "judgment": "贴近 ring wearable",
+        "inference_inputs": [
+          "ring PPG",
+          "optional posture/IMU"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "Suitable for left→right and posture-shift tests."
+      },
+      "leakage_audit": {
+        "risk_level": "low at dataset construction / high if mis-split",
+        "abp_bp_denormalization": "not inherent",
+        "abp_bp_alignment": "reference labels synchronized at session level",
+        "abp_bp_windowing": "downstream-defined",
+        "abp_bp_quality_filtering": "dataset QC present; no current-BP inverse scaling found",
+        "target_dependent_calibration": "downstream-defined",
+        "window_leakage": "must avoid random sessions/windows",
+        "subject_leakage": "must enforce subject-disjoint partitions",
+        "notes": "Dataset does not guarantee safe downstream splitting by itself."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "MAIBO"
+      ],
+      "inference_inputs": [
+        "ring PPG",
+        "optional posture/IMU"
+      ]
+    },
+    {
+      "id": "ppgbp-061-healthring-physiology-dataset-for-health-sensing-on-rings",
+      "title": "HealthRing: Physiology Dataset for Health Sensing on Rings",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-24",
+      "record_type": "dataset-paper",
+      "source": {
+        "venue": "Scientific Data",
+        "doi": "10.1038/s41597-026-07289-x",
+        "url": "https://www.nature.com/articles/s41597-026-07289-x",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "PPG",
+        "dataset",
+        "ring",
+        "motion artifact",
+        "wearable",
+        "cuffless BP"
+      ],
+      "datasets": [
+        "HealthRing"
+      ],
+      "input_signals": [
+        "reflective red/IR PPG",
+        "transmissive red/IR PPG",
+        "3-axis accelerometer"
+      ],
+      "model_method": "Three synchronized cohorts: controlled stimuli, semi-free-living activities and treadmill running; RingTool provides signal-processing and DL baselines.",
+      "main_results": "54 adults; controlled+daily benchmarks: SBP/DBP MAE 12.98/7.64 mmHg, HR 5.33 bpm, RR 2.98 breaths/min, SpO2 1.72%.",
+      "calibration": {
+        "type": "benchmark-dependent",
+        "points": null,
+        "timing": "not_reported",
+        "notes": "Dataset paper does not establish a product calibration protocol."
+      },
+      "subject_split": {
+        "status": "dataset benchmark dependent",
+        "notes": "Downstream users must preserve subject separation."
+      },
+      "external_validation": {
+        "status": "cross-cohort stress test",
+        "dataset_or_cohort": "treadmill cohort",
+        "notes": "Motion cohort tests transfer, but BP benchmark is mainly controlled/daily."
+      },
+      "deployment": {
+        "level": "research-enabler",
+        "judgment": "真实 wearable 数据价值高，BP 精度有限",
+        "inference_inputs": [
+          "ring PPG",
+          "accelerometer"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "Supports rejection/robustness research under arm swing."
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not reported as target-dependent",
+        "abp_bp_alignment": "synchronized labels are dataset ground truth",
+        "abp_bp_windowing": "benchmark-defined; audit before reuse",
+        "abp_bp_quality_filtering": "quality controls present; target dependence not established",
+        "target_dependent_calibration": "not inherent",
+        "window_leakage": "possible if windows are shuffled",
+        "subject_leakage": "must be actively prevented",
+        "notes": "Benchmark MAE is not a consumer-device validation."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "HealthRing"
+      ],
+      "inference_inputs": [
+        "ring PPG",
+        "accelerometer"
+      ]
+    },
+    {
+      "id": "ppgbp-062-validation-of-photoplethysmography-derived-short-term-heart-rate-variabi",
+      "title": "Validation of photoplethysmography-derived short-term heart rate variability using a wearable device",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-24",
+      "record_type": "paper",
+      "source": {
+        "venue": "Scientific Reports",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-063-feasibility-of-a-noninvasive-photoplethysmography-based-wearable-chest-p",
+      "title": "Feasibility of a noninvasive photoplethysmography-based wearable chest patch for cardiac output assessment during exercise compared with thermodilution right heart catheterization",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-24",
+      "record_type": "paper",
+      "source": {
+        "venue": "Scientific Reports",
+        "doi": null,
+        "url": null,
+        "verification": "daily-index-only"
+      },
+      "topics": [
+        "PPG",
+        "wearable deployment"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG",
+        "IMU/context (possible)"
+      ],
+      "model_method": "首批索引记录；方法细节待全文二次核验。",
+      "main_results": "首批索引记录；定量结果待全文二次核验。",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "论文未完成校准字段核验。"
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "未完成全文核验。"
+      },
+      "external_validation": {
+        "status": "unknown",
+        "dataset_or_cohort": null,
+        "notes": "未完成全文核验。"
+      },
+      "deployment": {
+        "level": "unknown",
+        "judgment": "待核验",
+        "inference_inputs": [
+          "PPG",
+          "IMU/context (possible)"
+        ],
+        "current_reference_bp_required": "unknown",
+        "notes": "不得将日报摘要直接等同于产品可部署证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "unknown",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "未完成全文级审计。"
+      },
+      "notes": "来自此前 PPG 科研日报的首批去重索引。",
+      "audit_status": "preliminary-index",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "IMU/context (possible)"
+      ]
+    },
+    {
+      "id": "ppgbp-064-causal-decomposition-of-ppg-signals-for-cuffless-blood-pressure-estimati",
+      "title": "Causal Decomposition of PPG Signals for Cuffless Blood Pressure Estimation",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-24",
+      "record_type": "paper",
+      "source": {
+        "venue": "IEEE Transactions on Biomedical Engineering",
+        "doi": "10.1109/TBME.2026.3702361",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42268766/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "EEMD",
+        "causal inference",
+        "interpretability"
+      ],
+      "datasets": [
+        "not_reported"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "EEMD decomposes PPG into IMFs; counterfactual exclusion and structural causal modeling select BP-relevant components; CNN/GBRT/PAT baselines are compared.",
+      "main_results": "IMF4–6 showed strongest causal association; CNN using IMF4+5 achieved SBP/DBP MAE 5.55/3.45 mmHg, improving 26.39%/17.86% over original PPG.",
+      "calibration": {
+        "type": "unknown",
+        "points": null,
+        "timing": "unknown",
+        "notes": "Abstract does not describe a deployment calibration protocol."
+      },
+      "subject_split": {
+        "status": "unknown",
+        "notes": "Needs full-text protocol audit."
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "No external cohort confirmed from abstract."
+      },
+      "deployment": {
+        "level": "promising-research",
+        "judgment": "算法上可 PPG-only，证据不足",
+        "inference_inputs": [
+          "PPG",
+          "fixed EEMD/component-selection pipeline"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "Causal component selection is learned offline; real-time EEMD cost and cross-dataset stability remain open."
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not reported",
+        "abp_bp_alignment": "not reported",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "not reported",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "Causal language does not substitute for subject-disjoint and external validation."
+      },
+      "notes": "重点深审。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "not_reported"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "fixed EEMD/component-selection pipeline"
+      ]
+    },
+    {
+      "id": "ppgbp-065-a-revised-point-to-point-calibration-approach-with-adaptive-errors-corre",
+      "title": "A Revised Point-to-Point Calibration Approach with Adaptive Errors Correction to Weaken Initial Sensitivity of Cuff-Less Blood Pressure Estimation",
+      "year": 2020,
+      "first_reported_in_daily": null,
+      "record_type": "paper",
+      "source": {
+        "venue": "Sensors",
+        "doi": null,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7218878/",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "cuffless BP",
+        "PTT",
+        "calibration",
+        "adaptive correction"
+      ],
+      "datasets": [
+        "controlled exercise cohort"
+      ],
+      "input_signals": [
+        "ECG/PPG-derived PTT",
+        "stored calibration parameters"
+      ],
+      "model_method": "Compares original one-point PTP calibration with mean PTP (mPTP) and penalty-factor adaptive PTP (fPTP) correction across exercise intensities.",
+      "main_results": "mPTP and fPTP reduce sensitivity to a single initial calm-state sample and improve consistency relative to oPTP; exact metrics retained in source paper.",
+      "calibration": {
+        "type": "mPTP/fPTP point-to-point",
+        "points": "multiple calm-state points for mean; adaptive correction thereafter",
+        "timing": "initial + real-time correction",
+        "notes": "Older calibration baseline included because it was explicitly referenced in prior planning."
+      },
+      "subject_split": {
+        "status": "not applicable/within-subject calibration study",
+        "notes": "Not an unseen-subject DL benchmark."
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "Controlled cohort only."
+      },
+      "deployment": {
+        "level": "conditional",
+        "judgment": "可作为校准基线",
+        "inference_inputs": [
+          "PTT or pulse-derived features",
+          "stored individual parameters"
+        ],
+        "current_reference_bp_required": "depends on adaptive correction implementation",
+        "notes": "Must ensure fPTP updates do not use contemporaneous reference BP unavailable in deployment."
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not applicable",
+        "abp_bp_alignment": "ECG–PPG timing is an input feature",
+        "abp_bp_windowing": "protocol-defined",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "historical BP definitely used; real-time correction path requires audit",
+        "window_leakage": "not applicable",
+        "subject_leakage": "not applicable",
+        "notes": "Calibration study, not calibration-free estimation."
+      },
+      "notes": "补录此前明确提到的校准基线。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-24",
+      "dataset": [
+        "controlled exercise cohort"
+      ],
+      "inference_inputs": [
+        "PTT or pulse-derived features",
+        "stored individual parameters"
+      ]
+    }
+  ]
+}
