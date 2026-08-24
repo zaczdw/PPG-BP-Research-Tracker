@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "PPG·BP Evidence Atlas",
     description: "无袖带血压研究审计库",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "PPG·BP Evidence Atlas" }],
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "PPG·BP Evidence Atlas" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "PPG·BP Evidence Atlas",
     description: "无袖带血压研究审计库",
-    images: ["/og.png"],
+    images: ["/og.jpg"],
   },
 };
 
