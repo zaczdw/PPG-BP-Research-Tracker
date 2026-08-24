@@ -7,6 +7,7 @@
   },
   "scripts": {
     "sync:data": "node scripts/sync-data.mjs",
+    "archive:generate": "node scripts/generate-daily-archives.mjs",
     "predev": "npm run sync:data",
     "dev": "vinext dev",
     "prebuild": "npm run sync:data",

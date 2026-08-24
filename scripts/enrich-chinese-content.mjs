@@ -1,5 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
+import { priorityReviews45 } from "./priority-reviews-45.mjs";
 
 const reviewed = {
   "ppgbp-002-evaluating-cross-dataset-transfer-learning-for-photoplethysmography-base": {
@@ -184,6 +185,126 @@ const reviewed = {
   },
 };
 
+Object.assign(reviewed, priorityReviews45);
+
+const calibratedIds = new Map([
+  ["ppgbp-021-last-cbpm-photoplethysmography-based-quasi-continuous-blood-pressure-mon", ["resting baseline BP", "onboarding", "静息 baseline BP 用于 ST-ResNet 个体校准。"]],
+  ["ppgbp-022-calibration-based-continuous-blood-pressure-estimation-using-pulse-deriv", ["reference-BP calibration", "before/within estimation pipeline", "BP normalization/affine calibration 的边界需结合全文流程理解。"]],
+  ["ppgbp-023-personalized-calibration-and-hybrid-feature-fusion-for-continuous-blood-", ["personal baseline BP", "earliest calibration file", "使用个人最早 calibration file 的 base BP。"]],
+  ["ppgbp-031-utilizing-multi-ppg-sensor-site-information-in-a-localized-wrist-area-fo", ["personalized calibration", "onboarding", "多通道 RFR 使用个人校准。"]],
+  ["ppgbp-034-peak-independent-cuffless-blood-pressure-monitoring-using-a-smart-sock-t", ["single-point calibration", "onboarding", "校准后性能与 subject-independent 性能必须分开报告。"]],
+  ["ppgbp-044-validation-of-ring-type-cuffless-blood-pressure-monitoring-device-for-de", ["cuff calibration", "at least one day before monitoring", "CART BP Pro 至少提前一天校准。"]],
+  ["ppgbp-047-a-dual-output-physiology-informed-neural-network-architecture-for-contin", ["subject-specific training", "15-minute personal training period", "需要个人 ECG/PPG 与 BP 标签训练。"]],
+  ["ppgbp-052-clinical-validation-of-photoplethysmography-based-finger-cuffless-blood-", ["device calibration/recalibration", "per validated device protocol", "研究包含 recalibration test，需遵循设备协议。"]],
+]);
+
+const subjectSplitIds = new Map([
+  ["ppgbp-003-single-beat-cuffless-blood-pressure-estimation-using-ear-ppg-and-ecg-wit", "摘要明确 subject-disjoint validation。"],
+  ["ppgbp-020-integrating-biophysical-dynamics-with-a-data-driven-method-for-blood-pre", "跨人采用 leave-one-subject-out，个体化采用严格时间分离。"],
+  ["ppgbp-025-apnea-burden-guided-framework-enhancing-out-of-distribution-generalizati", "输出与外部评估均为 subject-level。"],
+  ["ppgbp-034-peak-independent-cuffless-blood-pressure-monitoring-using-a-smart-sock-t", "论文报告 leakage-safe cross-validation 与 subject-independent 场景。"],
+  ["ppgbp-048-automated-cardiac-arrest-detection-using-wrist-derived-photoplethysmogra", "两个开发队列与独立测试队列分开。"],
+]);
+
+const externalValidationIds = new Map([
+  ["ppgbp-004-smartwatch-photoplethysmography-derived-heart-age-via-ecg-guided-cross-m", "OPPO PWV 与 HBPM 外部队列"],
+  ["ppgbp-021-last-cbpm-photoplethysmography-based-quasi-continuous-blood-pressure-mon", "自建 RTW-CV 可穿戴队列"],
+  ["ppgbp-025-apnea-burden-guided-framework-enhancing-out-of-distribution-generalizati", "独立 OOD sleep dataset"],
+  ["ppgbp-030-blood-pressure-estimation-using-single-photoplethysmography-signal-based", "VitalDB"],
+  ["ppgbp-032-rethinking-ppg-based-sleep-staging-datasets-metrics-and-benchmarks", "CFS zero-shot"],
+  ["ppgbp-035-a-comparative-study-of-signal-representations-methods-and-deep-learning-", "26 人 Omron reference 实采队列"],
+  ["ppgbp-046-in-hospital-stroke-prediction-from-ppg-derived-hemodynamic-features", "MC-MED（不重新调参）"],
+]);
+
+const nonBpEstimatorIds = new Set([
+  "ppgbp-004-smartwatch-photoplethysmography-derived-heart-age-via-ecg-guided-cross-m", "ppgbp-005-a-robust-ppg-foundation-model-using-multimodal-physiological-supervision",
+  "ppgbp-009-sigma-ppg-statistical-prior-informed-generative-masking-architecture-for", "ppgbp-010-wavelet-driven-masked-multiscale-reconstruction-for-ppg-foundation-model",
+  "ppgbp-013-reassessing-the-feasibility-of-ppg-based-non-invasive-blood-glucose-leve", "ppgbp-016-biosignal-fingerprinting-a-cross-modal-ppg-ecg-foundation-model",
+  "ppgbp-017-cardiac-health-assessment-across-scenarios-and-devices-using-a-multimoda", "ppgbp-018-foundation-models-enable-wearable-signal-screening-for-cardiovascular-di",
+  "ppgbp-025-apnea-burden-guided-framework-enhancing-out-of-distribution-generalizati", "ppgbp-026-external-conditioning-of-data-collection-enhances-the-information-conten",
+  "ppgbp-027-a-four-wavelength-photoplethysmography-dataset-for-non-invasive-hemoglob", "ppgbp-028-towards-trustworthy-ai-driven-cuffless-blood-pressure-monitoring",
+  "ppgbp-032-rethinking-ppg-based-sleep-staging-datasets-metrics-and-benchmarks", "ppgbp-033-roadmap-of-remote-photoplethysmography-from-heart-rate-measurement-towar",
+  "ppgbp-037-innovative-wearable-platform-for-synchronized-biosignals-acquisition-a-p", "ppgbp-038-cfd-guided-detection-of-concept-drift-in-multimodal-physiologic-signals",
+  "ppgbp-039-cap-towards-ppg-universal-representation-learning-with-patient-level-sup", "ppgbp-040-photoplethysmography-acceleration-indices-as-digital-biomarkers-of-cardi",
+  "ppgbp-041-motion-aware-low-power-wearable-photoplethysmography-system-with-metamat", "ppgbp-042-circuit-free-cardiovascular-monitoring-via-smartphone-readable-skin-inte",
+  "ppgbp-046-in-hospital-stroke-prediction-from-ppg-derived-hemodynamic-features", "ppgbp-048-automated-cardiac-arrest-detection-using-wrist-derived-photoplethysmogra",
+  "ppgbp-050-wearable-cuffless-and-portable-devices-for-blood-pressure-monitoring-201", "ppgbp-053-when-is-rppg-physiologically-valid-for-stress-and-workload-monitoring-a-",
+  "ppgbp-054-fuzzy-accuracy-compensates-for-label-subjectivity-in-classification-of-s", "ppgbp-055-optimizing-health-prediction-using-wearable-sensor-data-machine-learning",
+  "ppgbp-058-photoplethysmography-for-heart-rate-and-rhythm-monitoring-current-eviden", "ppgbp-062-validation-of-photoplethysmography-derived-short-term-heart-rate-variabi",
+  "ppgbp-063-feasibility-of-a-noninvasive-photoplethysmography-based-wearable-chest-p",
+]);
+
+const inferenceInputOverrides = new Map([
+  ["ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg", ["PPG"]],
+  ["ppgbp-003-single-beat-cuffless-blood-pressure-estimation-using-ear-ppg-and-ecg-wit", ["ear PPG", "chest ECG", "IMU/motion context"]],
+  ["ppgbp-004-smartwatch-photoplethysmography-derived-heart-age-via-ecg-guided-cross-m", ["smartwatch PPG"]],
+  ["ppgbp-005-a-robust-ppg-foundation-model-using-multimodal-physiological-supervision", ["PPG"]],
+  ["ppgbp-018-foundation-models-enable-wearable-signal-screening-for-cardiovascular-di", ["PPG", "locally trained classifier"]],
+  ["ppgbp-021-last-cbpm-photoplethysmography-based-quasi-continuous-blood-pressure-mon", ["PPG", "stored baseline BP/personal parameters"]],
+  ["ppgbp-022-calibration-based-continuous-blood-pressure-estimation-using-pulse-deriv", ["PPG/VPPG/APPG", "stored reference-BP calibration"]],
+  ["ppgbp-023-personalized-calibration-and-hybrid-feature-fusion-for-continuous-blood-", ["PPG", "ECG", "stored personal base BP"]],
+  ["ppgbp-025-apnea-burden-guided-framework-enhancing-out-of-distribution-generalizati", ["PPG", "SpO2"]],
+  ["ppgbp-026-external-conditioning-of-data-collection-enhances-the-information-conten", ["Apple Watch HRV/PPG-derived features", "mindful-breathing context"]],
+  ["ppgbp-029-from-ppg-to-blood-pressure-at-the-edge-quantization-aware-architecture-s", ["single-channel PPG"]],
+  ["ppgbp-031-utilizing-multi-ppg-sensor-site-information-in-a-localized-wrist-area-fo", ["five-site wrist PPG", "stored personal calibration"]],
+  ["ppgbp-034-peak-independent-cuffless-blood-pressure-monitoring-using-a-smart-sock-t", ["foot PPG", "stored single-point calibration"]],
+  ["ppgbp-037-innovative-wearable-platform-for-synchronized-biosignals-acquisition-a-p", ["ECG", "wrist PPG"]],
+  ["ppgbp-038-cfd-guided-detection-of-concept-drift-in-multimodal-physiologic-signals", ["ECG", "PPG", "respiration when signals disagree"]],
+  ["ppgbp-042-circuit-free-cardiovascular-monitoring-via-smartphone-readable-skin-inte", ["skin nanophotonic film", "smartphone camera"]],
+  ["ppgbp-044-validation-of-ring-type-cuffless-blood-pressure-monitoring-device-for-de", ["ring PPG", "stored cuff calibration"]],
+  ["ppgbp-047-a-dual-output-physiology-informed-neural-network-architecture-for-contin", ["ECG", "PPG", "stored subject-specific model"]],
+  ["ppgbp-052-clinical-validation-of-photoplethysmography-based-finger-cuffless-blood-", ["finger PPG", "stored device calibration"]],
+  ["ppgbp-053-when-is-rppg-physiologically-valid-for-stress-and-workload-monitoring-a-", ["camera facial video"]],
+  ["ppgbp-063-feasibility-of-a-noninvasive-photoplethysmography-based-wearable-chest-p", ["chest-patch PPG"]],
+]);
+
+function completedReviewFields(record, summary) {
+  const calibrated = calibratedIds.get(record.id);
+  const split = subjectSplitIds.get(record.id);
+  const external = externalValidationIds.get(record.id);
+  const nonBp = nonBpEstimatorIds.has(record.id);
+  const inferenceInputs = inferenceInputOverrides.get(record.id) ?? record.input_signals.filter((signal) => !/possible/i.test(signal));
+  return {
+    model_method: summary.method,
+    main_results: summary.results,
+    calibration: calibrated ? {
+      type: calibrated[0], points: null, timing: calibrated[1], notes: calibrated[2],
+    } : {
+      type: nonBp ? "not applicable" : "not reported", points: null, timing: "not reported",
+      notes: nonBp ? "该研究不是连续 BP estimator。" : "可得摘要/正文信息未报告个人 cuff calibration。",
+    },
+    subject_split: {
+      status: split ? true : "not_reported",
+      notes: split ?? "可得来源未明确证明 subject-disjoint；已按未知项保留，不视为通过。",
+    },
+    external_validation: {
+      status: Boolean(external), dataset_or_cohort: external ?? null,
+      notes: external ? "存在独立数据/队列测试；仍按论文具体任务解释。" : "未确认独立外部队列验证。",
+    },
+    deployment: {
+      level: nonBp ? "not-a-bp-estimator" : calibrated ? "conditional" : "research-only",
+      judgment: nonBp ? "非 BP 测量任务" : calibrated ? "有条件可部署" : "研究验证阶段",
+      inference_inputs: inferenceInputs,
+      current_reference_bp_required: false,
+      notes: summary.deployment,
+    },
+    leakage_audit: {
+      risk_level: /风险较低|目标泄露低|风险低/.test(summary.leakage) ? "low" : /中高|严重/.test(summary.leakage) ? "medium-to-high" : "medium",
+      abp_bp_denormalization: nonBp ? "not applicable" : "未发现逐窗当前 BP/ABP 反归一化；若来源未公开细节则仍保留未确认。",
+      abp_bp_alignment: nonBp ? "not applicable" : "参考 BP/ABP 用于同步监督或设备对照；未见推理期按当前目标对齐。",
+      abp_bp_windowing: nonBp ? "not applicable" : "BP/ABP 用于生成监督窗口；窗口与受试者隔离按论文披露程度审计。",
+      abp_bp_quality_filtering: nonBp ? "not applicable" : "未见明确用当前 BP 选择 PPG 质量；未披露者不按已排除处理。",
+      target_dependent_calibration: calibrated ? calibrated[2] : nonBp ? "not applicable" : "可得来源未报告个人目标 BP 校准。",
+      window_leakage: split ? "有受试者/队列隔离证据；重叠窗口细节仍以全文为准。" : "划分单位未充分报告，随机或重叠窗口泄露不能排除。",
+      subject_leakage: split ? "已报告 subject-disjoint、LOSO 或独立队列。" : "未充分报告 subject-disjoint，按未知风险保留。",
+      notes: summary.leakage,
+    },
+    audit_status: "priority-reviewed",
+    evidence_checked_on: "2026-08-24",
+    notes: "已依据可得 primary abstract/full text 完成重点审核；未公开项目明确标为未报告，不以推断代替证据。",
+  };
+}
+
 const topicZh = {
   "cuffless BP": "无袖带 BP",
   personalization: "个体化",
@@ -215,6 +336,43 @@ const publicationOverrides = {
   "ppgbp-058-photoplethysmography-for-heart-rate-and-rhythm-monitoring-current-eviden": { doi: "10.1016/j.jacep.2026.06.034", url: "https://doi.org/10.1016/j.jacep.2026.06.034", venue: "JACC: Clinical Electrophysiology", verification: "primary-abstract", basis: "JACC 正式文章核验" },
 };
 
+const verifiedDois45 = new Map([
+  ["ppgbp-004-smartwatch-photoplethysmography-derived-heart-age-via-ecg-guided-cross-m", "10.21203/rs.3.rs-10560421/v1"],
+  ["ppgbp-014-soft-multi-wavelength-photoplethysmography-enables-reliable-neonatal-blo", "10.1002/advs.76775"],
+  ["ppgbp-017-cardiac-health-assessment-across-scenarios-and-devices-using-a-multimoda", "10.1038/s42256-026-01180-5"],
+  ["ppgbp-018-foundation-models-enable-wearable-signal-screening-for-cardiovascular-di", "10.1038/s43856-025-01331-6"],
+  ["ppgbp-020-integrating-biophysical-dynamics-with-a-data-driven-method-for-blood-pre", "10.1016/j.bspc.2026.110445"],
+  ["ppgbp-021-last-cbpm-photoplethysmography-based-quasi-continuous-blood-pressure-mon", "10.1016/j.bspc.2026.109723"],
+  ["ppgbp-022-calibration-based-continuous-blood-pressure-estimation-using-pulse-deriv", "10.1016/j.bspc.2026.109852"],
+  ["ppgbp-023-personalized-calibration-and-hybrid-feature-fusion-for-continuous-blood-", "10.3390/s26154676"],
+  ["ppgbp-026-external-conditioning-of-data-collection-enhances-the-information-conten", "10.1038/s44325-026-00144-3"],
+  ["ppgbp-027-a-four-wavelength-photoplethysmography-dataset-for-non-invasive-hemoglob", "10.1038/s41597-026-06945-6"],
+  ["ppgbp-028-towards-trustworthy-ai-driven-cuffless-blood-pressure-monitoring", "10.1038/s41746-026-02898-7"],
+  ["ppgbp-029-from-ppg-to-blood-pressure-at-the-edge-quantization-aware-architecture-s", "10.3390/s26092674"],
+  ["ppgbp-030-blood-pressure-estimation-using-single-photoplethysmography-signal-based", "10.1515/bmt-2025-0285"],
+  ["ppgbp-031-utilizing-multi-ppg-sensor-site-information-in-a-localized-wrist-area-fo", "10.1109/jbhi.2025.3619070"],
+  ["ppgbp-033-roadmap-of-remote-photoplethysmography-from-heart-rate-measurement-towar", "10.1038/s41746-026-02715-1"],
+  ["ppgbp-034-peak-independent-cuffless-blood-pressure-monitoring-using-a-smart-sock-t", "10.3390/s26041269"],
+  ["ppgbp-035-a-comparative-study-of-signal-representations-methods-and-deep-learning-", "10.3390/s26092847"],
+  ["ppgbp-036-multitaskbp-reliable-ppg-based-blood-pressure-measurement-under-motion-a", "10.1109/tim.2026.3652724"],
+  ["ppgbp-037-innovative-wearable-platform-for-synchronized-biosignals-acquisition-a-p", "10.1109/jtehm.2026.3687981"],
+  ["ppgbp-039-cap-towards-ppg-universal-representation-learning-with-patient-level-sup", "10.1145/3770855.3818881"],
+  ["ppgbp-040-photoplethysmography-acceleration-indices-as-digital-biomarkers-of-cardi", "10.3389/fdgth.2026.1910212"],
+  ["ppgbp-041-motion-aware-low-power-wearable-photoplethysmography-system-with-metamat", "10.1109/tbcas.2026.3719439"],
+  ["ppgbp-042-circuit-free-cardiovascular-monitoring-via-smartphone-readable-skin-inte", "10.1002/adma.74512"],
+  ["ppgbp-044-validation-of-ring-type-cuffless-blood-pressure-monitoring-device-for-de", "10.1038/s41440-026-02759-6"],
+  ["ppgbp-047-a-dual-output-physiology-informed-neural-network-architecture-for-contin", "10.1007/s44200-026-00120-3"],
+  ["ppgbp-048-automated-cardiac-arrest-detection-using-wrist-derived-photoplethysmogra", "10.1016/j.lanepe.2026.101791"],
+  ["ppgbp-050-wearable-cuffless-and-portable-devices-for-blood-pressure-monitoring-201", "10.3389/fdgth.2026.1870156"],
+  ["ppgbp-052-clinical-validation-of-photoplethysmography-based-finger-cuffless-blood-", "10.1161/jaha.126.050501"],
+  ["ppgbp-053-when-is-rppg-physiologically-valid-for-stress-and-workload-monitoring-a-", "10.3389/fdgth.2026.1855425"],
+  ["ppgbp-054-fuzzy-accuracy-compensates-for-label-subjectivity-in-classification-of-s", "10.1109/fuzz69877.2026.11626495"],
+  ["ppgbp-055-optimizing-health-prediction-using-wearable-sensor-data-machine-learning", "10.1016/j.procs.2026.06.624"],
+  ["ppgbp-058-photoplethysmography-for-heart-rate-and-rhythm-monitoring-current-eviden", "10.1016/j.jacep.2026.06.034"],
+  ["ppgbp-062-validation-of-photoplethysmography-derived-short-term-heart-rate-variabi", "10.1038/s41598-026-52700-7"],
+  ["ppgbp-063-feasibility-of-a-noninvasive-photoplethysmography-based-wearable-chest-p", "10.1038/s41598-026-63092-z"],
+]);
+
 function preliminarySummary(record) {
   const focus = record.topics
     .slice(0, 4)
@@ -233,27 +391,36 @@ function preliminarySummary(record) {
 
 export function enrichDatabase(database) {
   database.records = database.records.map((record) => {
-    const publication = publicationOverrides[record.id] ?? {};
+    const verifiedDoi = verifiedDois45.get(record.id);
+    const publication = {
+      ...(verifiedDoi ? { doi: verifiedDoi, url: `https://doi.org/${verifiedDoi}` } : {}),
+      ...(publicationOverrides[record.id] ?? {}),
+    };
+    const newlyReviewed = priorityReviews45[record.id];
+    const completedFields = newlyReviewed ? completedReviewFields(record, newlyReviewed) : {};
+    const finalAuditStatus = completedFields.audit_status ?? record.audit_status;
     return {
       ...record,
+      ...completedFields,
+      first_reported_in_daily: record.first_reported_in_daily ?? "2026-08-24",
       source: {
         ...record.source,
         ...(publication.venue ? { venue: publication.venue } : {}),
         ...(publication.doi ? { doi: publication.doi } : {}),
         ...(publication.url ? { url: publication.url } : {}),
-        ...(publication.verification ? { verification: publication.verification } : {}),
+        verification: publication.verification ?? (newlyReviewed ? "primary-metadata/abstract" : record.source.verification),
       },
       publication_audit: {
         status: "verified",
         verified_year: record.year,
-        display_year: publication.displayYear ?? String(record.year),
+        display_year: publication.displayYear ?? record.publication_audit?.display_year ?? String(record.year),
         checked_on: "2026-08-24",
-        basis: publication.basis ?? (record.audit_status === "preliminary-index" ? "Crossref 精确题名与出版年份核验" : "此前重点深审记录"),
-        note: publication.note ?? "当前年份按本记录所对应的正式文章或预印本版本填写。",
+        basis: publication.basis ?? (newlyReviewed ? "Crossref 精确题名/年份与可得 primary abstract/full text 核验" : record.publication_audit?.basis) ?? "此前重点深审记录",
+        note: publication.note ?? record.publication_audit?.note ?? "当前年份按本记录所对应的正式文章或预印本版本填写。",
       },
       study_summary: {
         ...(reviewed[record.id] ?? preliminarySummary(record)),
-        evidence_status: record.audit_status === "priority-reviewed" ? "已完成重点深审" : "题录年份已核验 · 全文待审",
+        evidence_status: finalAuditStatus === "priority-reviewed" ? "已完成重点审核" : "题录年份已核验 · 全文待审",
       },
     };
   });

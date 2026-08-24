@@ -18,6 +18,8 @@ const deployLabel: Record<string, string> = {
   "promising-change-tracking": "适合变化追踪",
   "research-benchmark": "研究基准",
   "conceptual/conditional": "概念验证",
+  "not-a-bp-estimator": "非 BP 测量任务",
+  "research-only": "研究验证阶段",
   unknown: "待核验",
 };
 
@@ -26,6 +28,7 @@ const riskLabel: Record<string, string> = {
   high: "高风险",
   "high evaluation/generalization risk": "高评估风险",
   medium: "中风险",
+  "medium-to-high": "中高风险",
   "low-to-medium": "低至中风险",
   "low for target leakage / medium for downstream split provenance": "目标泄露低，下游划分待核验",
   "low for BP target leakage": "BP 目标泄露风险低",
@@ -46,6 +49,8 @@ const calibrationLabel: Record<string, string> = {
   "benchmark-dependent": "由下游 benchmark 决定",
   "demographic calibration only": "仅使用人口学信息，不做 cuff 校准",
   "mPTP/fPTP point-to-point": "mPTP/fPTP 点对点校准",
+  "not applicable": "不适用",
+  "not reported": "未报告",
   none: "无需校准",
 };
 
@@ -192,7 +197,7 @@ export default function Home() {
         </label>
         <div className="quick-links">
           <button onClick={() => { setRisk("flagged"); document.querySelector("#papers")?.scrollIntoView(); }}>查看高风险论文</button>
-          <button onClick={() => { setAudit("priority-reviewed"); document.querySelector("#papers")?.scrollIntoView(); }}>只看重点深审</button>
+          <button onClick={() => { setAudit("priority-reviewed"); document.querySelector("#papers")?.scrollIntoView(); }}>只看已审核论文</button>
         </div>
       </section>
 
@@ -223,7 +228,7 @@ export default function Home() {
           <label><span>数据集</span><select value={dataset} onChange={(e) => { setDataset(e.target.value); setVisible(12); }}><option value="all">全部数据集</option>{datasetOptions.map((item) => <option key={item}>{item}</option>)}</select></label>
           <label><span>输入信号</span><select value={signal} onChange={(e) => { setSignal(e.target.value); setVisible(12); }}><option value="all">全部信号</option>{signalOptions.map((item) => <option key={item}>{item}</option>)}</select></label>
           <label><span>泄露风险</span><select value={risk} onChange={(e) => { setRisk(e.target.value); setVisible(12); }}><option value="all">全部风险</option><option value="flagged">高风险与严重泄露</option><option value="critical">严重泄露</option><option value="high">高风险</option><option value="medium">中风险</option><option value="low">低风险</option><option value="unknown">待审计</option></select></label>
-          <label><span>内容进度</span><select value={audit} onChange={(e) => { setAudit(e.target.value); setVisible(12); }}><option value="all">全部进度</option><option value="priority-reviewed">已完成重点深审</option><option value="preliminary-index">题录年份已核验，全文待审</option></select></label>
+          <label><span>内容进度</span><select value={audit} onChange={(e) => { setAudit(e.target.value); setVisible(12); }}><option value="all">全部进度</option><option value="priority-reviewed">已完成重点审核</option></select></label>
           <button className="reset-button" onClick={reset} disabled={!activeFilters}>重置{activeFilters ? ` · ${activeFilters}` : ""}</button>
         </div>
 
@@ -255,7 +260,7 @@ export default function Home() {
         <div className="critical-card"><span>严重案例 · TCN–BiLSTM</span><h3>每个测试 ABP 窗口的 μ/σ 被用于恢复 mmHg。</h3><div><AuditLine label="Subject-disjoint" value={true} /><AuditLine label="External dataset" value={true} /><AuditLine label="测试 ABP 反归一化" value="是" danger /><AuditLine label="ABP 质量筛选" value="是" danger /></div><button onClick={() => setSelected(papers.find((paper) => paper.title.includes("TCN–BiLSTM")) ?? null)}>打开完整审计 →</button></div>
       </section>
 
-      <footer><div className="brand"><span className="brand-mark">P</span><span><strong>PPG·BP Evidence Atlas</strong><small>先看证据，再看精度。</small></span></div><p>当前版本：{papers.length} 条记录 · {reviewed} 条重点深审 · 数据核验于 2026-08-24</p></footer>
+      <footer><div className="brand"><span className="brand-mark">P</span><span><strong>PPG·BP Evidence Atlas</strong><small>先看证据，再看精度。</small></span></div><p>当前版本：{papers.length} 条记录 · {reviewed} 条已完成重点审核 · 数据核验于 2026-08-24</p></footer>
 
       {selected && (
         <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setSelected(null); }}>
