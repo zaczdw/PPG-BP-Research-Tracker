@@ -2,6 +2,7 @@ import { copyFile, cp, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { enrichFile } from "./enrich-chinese-content.mjs";
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const externalDataDir = resolve(scriptDir, "../../data");
@@ -10,6 +11,7 @@ const repositoryDataDir = resolve(scriptDir, "../data");
 const repositoryDailyDir = resolve(scriptDir, "../daily");
 
 if (existsSync(resolve(externalDataDir, "papers.json"))) {
+  await enrichFile(resolve(externalDataDir, "papers.json"));
   await mkdir(repositoryDataDir, { recursive: true });
   await copyFile(resolve(externalDataDir, "papers.json"), resolve(repositoryDataDir, "papers.json"));
   if (existsSync(resolve(externalDataDir, "papers.csv"))) {
@@ -23,6 +25,7 @@ if (existsSync(externalDailyDir)) {
 }
 
 const source = resolve(repositoryDataDir, "papers.json");
+await enrichFile(source);
 const destinations = [
   resolve(scriptDir, "../app/papers.json"),
   resolve(scriptDir, "../public/data/papers.json"),
@@ -32,4 +35,12 @@ for (const destination of destinations) {
   await mkdir(dirname(destination), { recursive: true });
   await copyFile(source, destination);
   console.log(`Synced ${source} -> ${destination}`);
+}
+
+const csvSource = resolve(repositoryDataDir, "papers.csv");
+const csvDestination = resolve(scriptDir, "../public/data/papers.csv");
+if (existsSync(csvSource)) {
+  await mkdir(dirname(csvDestination), { recursive: true });
+  await copyFile(csvSource, csvDestination);
+  console.log(`Synced ${csvSource} -> ${csvDestination}`);
 }
