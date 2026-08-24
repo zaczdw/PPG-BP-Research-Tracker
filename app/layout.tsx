@@ -6,6 +6,7 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ppg-bp-evidence-atlas.hankzdw.chatgpt.site"),
   title: "PPG·BP Evidence Atlas｜无袖带血压研究审计库",
   description: "检索 PPG 与无袖带血压论文，核对部署路径、校准方式和数据泄露风险。",
   openGraph: {

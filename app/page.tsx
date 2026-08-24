@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import tracker from "../public/data/papers.json";
+import tracker from "./papers.json";
 
 type Paper = (typeof tracker.records)[number];
 type Scalar = string | number | boolean | null;
