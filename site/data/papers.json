@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-08-24T00:00:00+08:00",
-  "record_count": 65,
-  "reviewed_count": 65,
+  "generated_at": "2026-08-25T09:36:29+08:00",
+  "record_count": 66,
+  "reviewed_count": 66,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -5911,6 +5911,99 @@
         "checked_on": "2026-08-24",
         "basis": "此前重点深审记录",
         "note": "当前年份按本记录所对应的正式文章或预印本版本填写。"
+      }
+    },
+    {
+      "id": "ppgbp-066-mechanical-contact-conditions-in-wearable-reflectance-photoplethysmography",
+      "title": "Mechanical Contact Conditions in Wearable Reflectance Photoplethysmography: Scoping Review",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-25",
+      "record_type": "review",
+      "source": {
+        "venue": "JMIR mHealth and uHealth",
+        "doi": "10.2196/99333",
+        "url": "https://mhealth.jmir.org/2026/1/e99333",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "PPG",
+        "signal quality",
+        "sensor-skin contact",
+        "wearable deployment",
+        "review"
+      ],
+      "datasets": [
+        "21 included studies; no single benchmark dataset"
+      ],
+      "input_signals": [
+        "wearable reflectance PPG",
+        "contact force/pressure metadata"
+      ],
+      "model_method": "采用 scoping review 方法检索 PubMed、IEEE Xplore、Scopus 和 Web of Science，检索截止 2026-06-01；在 52 篇全文评估记录中纳入 21 项研究，系统整理 contact force/pressure 的定义、测量、控制、报告方式及其对 PPG 信号、波形特征和下游生理估计的影响。",
+      "main_results": "21 项研究差异较大，样本量从单人实验到 1142 人腕部 PPG 数据集不等。接触条件会改变 AC/DC 分量、幅值、波形形态、导数特征、不同波长响应和 fiducial point 检测，也可能影响 HR、SpO2、PAT/PTT、BP 相关估计与 HRV；但证据主要来自小样本、短期受控实验，free-living 验证和人群多样性不足。",
+      "calibration": {
+        "type": "not applicable",
+        "points": null,
+        "timing": "not applicable",
+        "notes": "本研究是接触条件综述，不是 BP estimator，也未提出部署用 BP 校准流程。"
+      },
+      "subject_split": {
+        "status": "not applicable",
+        "notes": "综述本身不训练预测模型；纳入研究的划分协议存在异质性，不能据此推定统一的 subject-disjoint 设计。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "综述未形成可外部验证的单一模型；作者明确指出 free-living validation 有限。"
+      },
+      "deployment": {
+        "level": "not-a-bp-estimator",
+        "judgment": "不是 BP 预测器，但对 wearable PPG 部署条件具有直接指导价值",
+        "inference_inputs": [
+          "wearable reflectance PPG",
+          "可选的 contact force/pressure 或佩戴松紧上下文"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "部署含义是把 sensor-skin mechanical condition 作为信号质量与模型上下文，而不是把实验室固定佩戴条件默认成真实世界常量。"
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "not applicable",
+        "abp_bp_alignment": "not applicable",
+        "abp_bp_windowing": "not applicable",
+        "abp_bp_quality_filtering": "not applicable",
+        "target_dependent_calibration": "not applicable",
+        "window_leakage": "not applicable to the review itself",
+        "subject_leakage": "not applicable to the review itself",
+        "notes": "本研究不训练 BP 模型，因此不存在自身的 ABP/BP 反归一化、对齐、切窗或校准泄露；其主要风险提示是接触条件可能成为设备或协议 shortcut，跨设备与 free-living 评估应显式控制。"
+      },
+      "notes": "正式期刊全文与 Crossref 元数据均已核验。该文直接补充了 wearable PPG 的佩戴接触、信号质量和真实部署证据，不应被解读为新的 BP 精度模型。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-25",
+      "dataset": [
+        "21 included studies; no single benchmark dataset"
+      ],
+      "inference_inputs": [
+        "wearable reflectance PPG",
+        "可选的 contact force/pressure 或佩戴松紧上下文"
+      ],
+      "study_summary": {
+        "goal": "梳理 wearable reflectance PPG 中 sensor-skin contact force 与 contact pressure 如何被定义、测量和控制，以及它们如何影响信号质量、波形特征与下游生理估计。",
+        "method": "检索 PubMed、IEEE Xplore、Scopus 和 Web of Science 至 2026-06-01，并补充参考文献追溯；52 篇全文进入评估，最终纳入 21 项研究。",
+        "results": "接触条件与 PPG 的 AC/DC 分量、幅值、形态、导数指标、波长响应和特征点检测变化有关，也会影响 HR、SpO2、PAT/PTT、BP 相关估计和 HRV。现有研究以健康志愿者和短期受控实验为主，样本与报告规范差异明显。",
+        "conclusion": "sensor-skin mechanical condition 是 wearable PPG 测量链的一部分；需要统一报告单位、接触面积和探头几何，并加强 free-living、多人群以及 force-aware SQA 的验证。",
+        "takeaway": "数据库一句话判断：这是重要的部署与 SQA 综述，不是新的 BP estimator；它解释了为什么相同算法在不同佩戴松紧和设备结构下可能失效。",
+        "deployment": "真实产品应记录或估计接触状态，或在模型中加入 contact-aware quality flag；仅在实验室固定表带松紧下取得的结果不能直接外推到日常佩戴。",
+        "leakage": "综述自身无 ABP/BP 目标泄露；但接触条件可能与设备、受试者或实验协议绑定，若随机切窗，模型可能学习佩戴条件 shortcut，因此原始研究仍需 subject-disjoint 和跨设备审计。",
+        "evidence_status": "正式期刊全文已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-25",
+        "basis": "JMIR 正式期刊 XML 全文与 Crossref DOI 元数据",
+        "note": "当前记录对应 2026-08-24 正式期刊版本（DOI 10.2196/99333）；JMIR preprint DOI 10.2196/preprints.99333 于 2026-04-24 发布，两个版本年份均为 2026。"
       }
     }
   ]

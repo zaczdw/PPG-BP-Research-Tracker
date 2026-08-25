@@ -414,13 +414,15 @@ export function enrichDatabase(database) {
         status: "verified",
         verified_year: record.year,
         display_year: publication.displayYear ?? record.publication_audit?.display_year ?? String(record.year),
-        checked_on: "2026-08-24",
+        checked_on: record.publication_audit?.checked_on ?? "2026-08-24",
         basis: publication.basis ?? (newlyReviewed ? "Crossref 精确题名/年份与可得 primary abstract/full text 核验" : record.publication_audit?.basis) ?? "此前重点深审记录",
         note: publication.note ?? record.publication_audit?.note ?? "当前年份按本记录所对应的正式文章或预印本版本填写。",
       },
       study_summary: {
-        ...(reviewed[record.id] ?? preliminarySummary(record)),
-        evidence_status: finalAuditStatus === "priority-reviewed" ? "已完成重点审核" : "题录年份已核验 · 全文待审",
+        ...(reviewed[record.id] ?? record.study_summary ?? preliminarySummary(record)),
+        evidence_status: reviewed[record.id]
+          ? (finalAuditStatus === "priority-reviewed" ? "已完成重点审核" : "题录年份已核验 · 全文待审")
+          : (record.study_summary?.evidence_status ?? (finalAuditStatus === "priority-reviewed" ? "已完成重点审核" : "题录年份已核验 · 全文待审")),
       },
     };
   });
