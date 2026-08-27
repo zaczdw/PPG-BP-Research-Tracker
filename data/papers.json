@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-08-25T09:36:29+08:00",
-  "record_count": 66,
-  "reviewed_count": 66,
+  "generated_at": "2026-08-27T21:00:00+08:00",
+  "record_count": 71,
+  "reviewed_count": 71,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -6004,6 +6004,472 @@
         "checked_on": "2026-08-25",
         "basis": "JMIR 正式期刊 XML 全文与 Crossref DOI 元数据",
         "note": "当前记录对应 2026-08-24 正式期刊版本（DOI 10.2196/99333）；JMIR preprint DOI 10.2196/preprints.99333 于 2026-04-24 发布，两个版本年份均为 2026。"
+      }
+    },
+    {
+      "id": "ppgbp-067-practical-optimization-of-deep-learning-models-for-cuffless-blood-pressure",
+      "title": "Practical Optimization of Deep Learning Models for Cuffless Blood Pressure Estimation From Photoplethysmography",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-27",
+      "record_type": "paper",
+      "source": {
+        "venue": "Physiological Measurement",
+        "doi": "10.1088/1361-6579/ae944f",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42546757/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "deep learning",
+        "sampling frequency",
+        "ABP waveform"
+      ],
+      "datasets": [
+        "MIMIC waveform database; 205,850 paired 10-s PPG-ABP segments"
+      ],
+      "input_signals": [
+        "PPG at 125/62.5/31.25 Hz"
+      ],
+      "model_method": "采用 multiresolution U-Net 将 PPG 转换为 ABP 波形，比较 125、62.5 和 31.25 Hz 输入，并比较逐段极值与多峰平均两种 SBP/DBP 提取方式，同时分析呼吸频率及 BP 极端区间的误差。",
+      "main_results": "62.5 Hz 相比 125 Hz 将 SBP/DBP MAE 从 6.34/3.27 降至 5.24/2.87 mmHg；31.25 Hz 明显恶化至 16.09/9.10 mmHg。多峰平均优于单次极值，低/高 SBP 区间误差更高。",
+      "calibration": {
+        "type": "not reported",
+        "points": null,
+        "timing": "not reported",
+        "notes": "摘要未报告个体 cuff calibration；研究重点是采样率与 BP 提取策略。"
+      },
+      "subject_split": {
+        "status": "not reported",
+        "notes": "摘要只报告片段数量，未明确证明 subject-disjoint 划分；作者也要求进一步进行 subject-level 验证。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "仅报告 MIMIC 波形数据，未见独立外部队列。"
+      },
+      "deployment": {
+        "level": "research-only",
+        "judgment": "采样率结论有工程价值，临床部署仍需受试者级验证",
+        "inference_inputs": [
+          "PPG"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "推理目标只需 PPG；62.5 Hz 是精度与采样成本之间的候选折中点。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "not reported",
+        "abp_bp_alignment": "paired PPG-ABP segments are used for supervision",
+        "abp_bp_windowing": "205,850 overlapping status not reported",
+        "abp_bp_quality_filtering": "not reported",
+        "target_dependent_calibration": "not reported",
+        "window_leakage": "cannot be excluded from abstract",
+        "subject_leakage": "subject-disjoint split not established",
+        "notes": "大窗口数不能替代独立受试者数；在 subject-level 验证补齐前，低 MAE 不能直接外推到新患者。"
+      },
+      "notes": "2026-08-27 近期遗漏补录；PubMed 正式题录与摘要已核验。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-27",
+      "dataset": [
+        "MIMIC waveform database; 205,850 paired 10-s PPG-ABP segments"
+      ],
+      "inference_inputs": [
+        "PPG"
+      ],
+      "study_summary": {
+        "goal": "量化 PPG→ABP 深度模型中采样频率、SBP/DBP 提取方式、呼吸频率和 BP 极端范围对误差的影响。",
+        "method": "在 205,850 个 10 秒 PPG-ABP 片段上训练 multiresolution U-Net，比较三种采样率和两种波形极值提取策略。",
+        "results": "62.5 Hz 的 SBP/DBP MAE 为 5.24/2.87 mmHg，优于 125 Hz 的 6.34/3.27；31.25 Hz 降采样过度，误差升至 16.09/9.10。",
+        "conclusion": "适度降采样可能兼顾精度和设备资源，多峰平均更稳；但 BP 极端范围仍是明显薄弱点。",
+        "takeaway": "工程上最有价值的是 62.5 Hz 折中结论；证据上最大的缺口是摘要未证明受试者级隔离。",
+        "deployment": "只需 PPG，但在独立患者和临床标准验证前仍属于研究级方案。",
+        "leakage": "片段数量很大而 subject split 未披露，window/subject leakage 不能排除，风险评为高。",
+        "evidence_status": "正式期刊摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-27",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "Physiological Measurement 于 2026-08-21 收录；日报日期是补录日期，不代表论文首发日期。"
+      }
+    },
+    {
+      "id": "ppgbp-068-development-and-validation-of-a-deep-learning-model-for-stroke-volume-and-bp",
+      "title": "Development and Validation of a Deep Learning-Based Model for Estimating Stroke Volume and Blood Pressures Simultaneously Using Electrocardiogram and Photoplethysmogram",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-27",
+      "record_type": "paper",
+      "source": {
+        "venue": "Digital Health",
+        "doi": "10.1177/20552076261479434",
+        "url": "https://doi.org/10.1177/20552076261479434",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "PPG",
+        "ECG",
+        "cuffless BP",
+        "stroke volume",
+        "perioperative monitoring"
+      ],
+      "datasets": [
+        "881 surgical cases; temporal hold-out test: 128 cases / 31,637 segments"
+      ],
+      "input_signals": [
+        "ECG",
+        "PPG",
+        "first/second PPG derivatives",
+        "demographics",
+        "ECG-derived features"
+      ],
+      "model_method": "基于 881 例手术病例的 20 秒 ECG/PPG 片段，联合 PPG 一、二阶导数、人口统计学与 ECG 特征，同时回归 SV、SBP 和 DBP；以时间后移病例队列作 hold-out。",
+      "main_results": "128 例测试病例中，SV MAE 10.761 mL/beat；SBP/DBP 平均误差 0.661/1.439 mmHg，误差标准差 9.716/6.684 mmHg，论文报告满足 ISO 81060-3:2022 相应标准。",
+      "calibration": {
+        "type": "not reported",
+        "points": null,
+        "timing": "not reported",
+        "notes": "模型使用人口统计学和多模态信号；可得正文摘要未报告测试期个人 cuff calibration。"
+      },
+      "subject_split": {
+        "status": "temporal case-level hold-out",
+        "notes": "按病例形成时间后移测试队列，测试集 128 例；优于随机窗口拆分，但仍是单中心回顾性数据。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "单中心首尔大学医院数据，未见外院独立验证。"
+      },
+      "deployment": {
+        "level": "conditional",
+        "judgment": "具备连续多参数监测潜力，但需要 ECG、人口学信息及跨中心验证",
+        "inference_inputs": [
+          "ECG",
+          "PPG",
+          "PPG derivatives",
+          "demographics"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "不是 PPG-only；设备和临床场景必须同时稳定采集 ECG 与 PPG。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not reported",
+        "abp_bp_alignment": "20-s ECG/PPG segments paired with invasive ABP labels",
+        "abp_bp_windowing": "case-level temporal hold-out reported",
+        "abp_bp_quality_filtering": "arterial-line plausibility and signal-quality filters were applied",
+        "target_dependent_calibration": "not reported",
+        "window_leakage": "reduced by case-level hold-out",
+        "subject_leakage": "test cases are separated temporally; exact patient-repeat handling requires full protocol audit",
+        "notes": "时间后移病例测试降低窗口泄露，但单中心与信号筛选仍可能高估跨设备、跨机构泛化。"
+      },
+      "notes": "2026-08-27 近期遗漏补录；SAGE 正式全文页与 PubMed 元数据已核验。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-27",
+      "dataset": [
+        "881 surgical cases; temporal hold-out test: 128 cases / 31,637 segments"
+      ],
+      "inference_inputs": [
+        "ECG",
+        "PPG",
+        "PPG derivatives",
+        "demographics"
+      ],
+      "study_summary": {
+        "goal": "从非侵入 ECG/PPG 同时估计每搏量、收缩压和舒张压，减少连续血流动力学监测对动脉导管的依赖。",
+        "method": "回顾 881 例手术数据，以 20 秒 ECG/PPG、PPG 导数、人口学和 ECG 特征训练多任务模型，并使用时间后移的 128 例病例测试。",
+        "results": "SV MAE 10.761 mL/beat；SBP/DBP 平均误差 0.661/1.439 mmHg，标准差 9.716/6.684 mmHg。",
+        "conclusion": "多模态模型可同时提供 SV 与 BP，但仍需要外院和不同设备验证。",
+        "takeaway": "病例级时间 hold-out 是优点；它不是 PPG-only，工程成本与输入依赖高于单光学传感器方案。",
+        "deployment": "推理需要 ECG、PPG、导数、人口学及 ECG 特征；当前参考 BP 未被列为推理输入。",
+        "leakage": "病例级 hold-out 降低随机窗口泄露；ABP plausibility filter 和患者重复处理仍需完整协议核对。",
+        "evidence_status": "正式期刊全文页已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-27",
+        "basis": "SAGE Digital Health 正式文章页与 PubMed DOI 元数据",
+        "note": "正式文章于 2026-08-18 在线发表；日报日期是补录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-069-non-invasive-arterial-blood-pressure-waveform-generation-in-critically-ill",
+      "title": "Non-Invasive Arterial Blood Pressure Waveform Generation in Critically Ill Patients: A Sensor-Based Deep Learning Approach",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-27",
+      "record_type": "paper",
+      "source": {
+        "venue": "Computers in Biology and Medicine",
+        "doi": "10.1016/j.compbiomed.2026.111861",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42456268/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "ECG",
+        "ABP waveform",
+        "critical care",
+        "uncertainty quantification"
+      ],
+      "datasets": [
+        "28 ICU patients; 15,489 paired 5-s ECG/PPG segments"
+      ],
+      "input_signals": [
+        "wearable high-frequency PPG",
+        "ECG"
+      ],
+      "model_method": "在 Johns Hopkins 四个 ICU 的 28 名患者中，以可穿戴阵列获取高频 ECG/PPG，使用 CNN/LSTM 重建逐搏 ABP 波形，并用 split-conformal prediction 输出校准后的不确定性区间。",
+      "main_results": "CNN/LSTM 的波形 R²=0.732、总体 MAE 6.42±3.82 mmHg，SBP/DBP MAE 6.21±3.89/3.41±3.02 mmHg；接近使用同步高质量信号的 upper-bound 模型。",
+      "calibration": {
+        "type": "not reported",
+        "points": null,
+        "timing": "not reported",
+        "notes": "摘要未报告个体 cuff calibration；conformal calibration 用于不确定性覆盖，不等同于个人 BP 校准。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "仅报告 28 人和 15,489 片段，摘要未说明训练/测试是否按患者完全隔离。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "同一医院四个 ICU，未见外部机构验证。"
+      },
+      "deployment": {
+        "level": "research-only",
+        "judgment": "ICU 场景和不确定性输出有价值，但样本小且需 ECG+PPG",
+        "inference_inputs": [
+          "wearable PPG",
+          "ECG"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "目标是替代连续动脉导管信息；推理期无需输入当前 ABP，但传感器阵列尚属研究原型。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "not reported",
+        "abp_bp_alignment": "wearable ECG/PPG synchronized with invasive ABP",
+        "abp_bp_windowing": "15,489 five-second segments; overlap not reported",
+        "abp_bp_quality_filtering": "sensor/ground-truth quality handling not fully reported in abstract",
+        "target_dependent_calibration": "conformal calibration targets uncertainty coverage, not patient BP calibration",
+        "window_leakage": "cannot be excluded",
+        "subject_leakage": "patient-disjoint split not established in abstract",
+        "notes": "仅 28 名患者却产生 15,489 片段，若不是 patient-disjoint，窗口相关性会显著抬高表现。"
+      },
+      "notes": "2026-08-27 近期遗漏补录；PubMed 正式摘要已核验。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-27",
+      "dataset": [
+        "28 ICU patients; 15,489 paired 5-s ECG/PPG segments"
+      ],
+      "inference_inputs": [
+        "wearable PPG",
+        "ECG"
+      ],
+      "study_summary": {
+        "goal": "用可穿戴 ECG/PPG 重建 ICU 患者逐搏 ABP 波形，并给出可校准的不确定性区间。",
+        "method": "28 名 ICU 患者、15,489 个 5 秒片段，CNN/LSTM 重建 ABP，split-conformal prediction 估计覆盖区间。",
+        "results": "R²=0.732，总体 MAE 6.42±3.82 mmHg，SBP/DBP MAE 6.21±3.89/3.41±3.02 mmHg。",
+        "conclusion": "研究证明可穿戴信号保留了较多血流动力学信息，但还不足以替代大规模临床验证。",
+        "takeaway": "不确定性输出是亮点；28 人的小队列和未披露的 patient split 是主要可信度限制。",
+        "deployment": "需要同步 ECG 与高频 PPG，不需要当前 ABP；目前更适合 ICU 研究验证而非通用腕戴部署。",
+        "leakage": "大量短片段来自极少患者，摘要未证明 patient-disjoint，window/subject leakage 风险高。",
+        "evidence_status": "正式期刊摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-27",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "期刊卷期日期为 2026-08-15，电子版于 2026-07-15；日报日期是补录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-070-high-quality-ppg-enabled-by-narrowband-red-phosphor-leds-for-bp",
+      "title": "High-Quality Photoplethysmography Signal Enabled by Narrowband Red Phosphor Converted Light-Emitting Diodes for Accurate Blood-Pressure Monitoring",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-27",
+      "record_type": "paper",
+      "source": {
+        "venue": "Advanced Materials",
+        "doi": "10.1002/adma.202521971",
+        "url": "https://advanced.onlinelibrary.wiley.com/doi/10.1002/adma.202521971",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "blood pressure",
+        "optical hardware",
+        "signal quality",
+        "wearable sensing"
+      ],
+      "datasets": [
+        "wearable PPG prototype; cohort size not reported in abstract"
+      ],
+      "input_signals": [
+        "narrowband red pc-LED PPG"
+      ],
+      "model_method": "以 RLGF:Mn4+ 微晶荧光粉和蓝光 InGaN 芯片构建窄带红光 pc-LED（FWHM 13.4 nm），替代商业红光模块；比较热漂移、PPG/VPG/APG 特征稳定性，并用基础 CNN 做 BP proof-of-concept。",
+      "main_results": "pc-LED 外量子效率 52%、电光效率 32.03%，20–100°C 峰位漂移≤0.3 nm；独立测试集上的 SBP/DBP MAE 为 2.86/2.40 mmHg。",
+      "calibration": {
+        "type": "not reported",
+        "points": null,
+        "timing": "not reported",
+        "notes": "摘要未披露个人 BP 校准或测试集构成。"
+      },
+      "subject_split": {
+        "status": "independent test set claimed; unit not reported",
+        "notes": "论文摘要称独立测试集，但未说明是否为独立受试者、设备批次或随机片段。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "硬件原型的内部独立测试，未见外部队列或跨设备验证。"
+      },
+      "deployment": {
+        "level": "proof-of-concept",
+        "judgment": "光源工程创新突出，BP 精度仅能视为概念验证",
+        "inference_inputs": [
+          "narrowband red PPG"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "可减少下游算法对复杂去噪的依赖，但材料、封装、肤色和运动条件仍需系统验证。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "not reported",
+        "abp_bp_alignment": "not reported",
+        "abp_bp_windowing": "not reported",
+        "abp_bp_quality_filtering": "hardware comparison may select high-quality segments; protocol not available in abstract",
+        "target_dependent_calibration": "not reported",
+        "window_leakage": "not reported",
+        "subject_leakage": "independent test set unit not reported",
+        "notes": "极低 MAE 来自 proof-of-concept，样本量、标签范围和划分单位未披露，不能按临床验证解读。"
+      },
+      "notes": "2026-08-27 近期遗漏补录；Wiley 正式文章摘要与 PubMed DOI 已核验。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-27",
+      "dataset": [
+        "wearable PPG prototype; cohort size not reported in abstract"
+      ],
+      "inference_inputs": [
+        "narrowband red PPG"
+      ],
+      "study_summary": {
+        "goal": "从发光材料与光源工程层面提高 PPG 原始信号质量，再验证其对 BP 估计的价值。",
+        "method": "开发窄带、低热漂移红光 pc-LED，比较商业模块的 PPG/VPG/APG 特征，并以基础 CNN 做 BP 估计。",
+        "results": "20–100°C 峰位漂移≤0.3 nm；概念验证 SBP/DBP MAE 为 2.86/2.40 mmHg。",
+        "conclusion": "优化光学前端可能比单纯增加模型复杂度更直接地改善 PPG 质量。",
+        "takeaway": "这是材料—器件—算法链条的亮点论文，但 BP 数字缺少样本规模和受试者级划分支撑。",
+        "deployment": "需要特制窄带红光硬件；潜在优势是更稳定的波形特征和更低的算法负担。",
+        "leakage": "独立测试集的划分单位、样本量和 BP 分布未披露，极低 MAE 暂不作为临床级证据。",
+        "evidence_status": "正式期刊摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-27",
+        "basis": "Wiley Advanced Materials 正式文章页与 PubMed DOI 元数据",
+        "note": "正式文章于 2026-08-06 在线发表；日报日期是补录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-071-ppg-based-remote-blood-pressure-monitoring-compared-with-24h-abpm",
+      "title": "Photoplethysmography Based Remote Cardiac Blood Pressure Monitoring Compared With 24-h Ambulatory Blood Pressure Monitoring",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-27",
+      "record_type": "paper",
+      "source": {
+        "venue": "Blood Pressure Monitoring",
+        "doi": "10.1097/MBP.0000000000000804",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42274189/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "ABPM",
+        "wrist wearable",
+        "clinical comparison"
+      ],
+      "datasets": [
+        "40 adults; prospective single-center 24-h paired ABPM study"
+      ],
+      "input_signals": [
+        "wrist PPG",
+        "initial cuff calibration"
+      ],
+      "model_method": "40 名成人在标准 24 小时 ABPM 同时佩戴腕式、袖带校准的 CardioWatch 287-2，比较全天、清醒、睡眠、昼夜变化、dipper 分类和运动状态下的平均 BP 差异。",
+      "main_results": "24 小时平均 SBP/DBP 绝对差为 3.65±4.57/2.98±3.91 mmHg；清醒—睡眠变化差为 2.36±2.40/2.17±2.13 mmHg，运动下表现保持稳定。",
+      "calibration": {
+        "type": "cuff-calibrated",
+        "points": "initial/reference cuff calibration; exact count not in abstract",
+        "timing": "before or during 24-h monitoring; exact protocol not reported",
+        "notes": "这是明确的校准型设备，不能视为 calibration-free PPG→BP。"
+      },
+      "subject_split": {
+        "status": "not applicable to paired prospective device comparison",
+        "notes": "研究是 40 人前瞻性设备对照，不是训练/测试模型论文；算法训练集未在摘要中披露。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "前瞻性但单中心、40 人；属于独立设备比较队列而非多中心验证。"
+      },
+      "deployment": {
+        "level": "conditional",
+        "judgment": "最接近真实 24 小时使用，但依赖袖带校准且样本较小",
+        "inference_inputs": [
+          "wrist PPG",
+          "stored cuff calibration"
+        ],
+        "current_reference_bp_required": "periodic requirement not reported",
+        "notes": "能够覆盖昼夜与运动场景；仍需更大、多中心、不同肤色和长期漂移验证。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "commercial algorithm not disclosed",
+        "abp_bp_alignment": "device outputs compared with 30-min ABPM readings",
+        "abp_bp_windowing": "not a window-split training report",
+        "abp_bp_quality_filtering": "commercial device handling not disclosed",
+        "target_dependent_calibration": "historical cuff BP is explicitly required",
+        "window_leakage": "not applicable to paired evaluation",
+        "subject_leakage": "not applicable to paired evaluation; development data remain undisclosed",
+        "notes": "评估设计本身不是随机窗口基准，但商业算法训练数据和校准更新机制不可见；历史 cuff 校准是明确输入。"
+      },
+      "notes": "2026-08-27 近期遗漏补录；PubMed 正式摘要已核验。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-08-27",
+      "dataset": [
+        "40 adults; prospective single-center 24-h paired ABPM study"
+      ],
+      "inference_inputs": [
+        "wrist PPG",
+        "stored cuff calibration"
+      ],
+      "study_summary": {
+        "goal": "验证袖带校准腕式 PPG 设备能否在真实 24 小时场景中替代部分 ABPM 功能。",
+        "method": "40 名成人同步接受 30 分钟间隔 ABPM 和连续腕式 PPG 监测，比较全天、清醒、睡眠、dipper 与运动条件。",
+        "results": "全天平均 SBP/DBP 绝对差 3.65±4.57/2.98±3.91 mmHg；昼夜变化差 2.36±2.40/2.17±2.13 mmHg。",
+        "conclusion": "结果支持腕式 PPG 用于 24 小时远程 BP 监测的可行性，但仍是小样本单中心初步证据。",
+        "takeaway": "真实场景证据强于纯 MIMIC 窗口模型；必须明确它是 cuff-calibrated，而非无校准算法。",
+        "deployment": "需要腕式 PPG 和已保存的袖带校准参数；长期重校准频率仍需核实。",
+        "leakage": "评价本身没有随机窗口泄露问题，但商业算法训练数据、质量筛选及校准更新机制不透明。",
+        "evidence_status": "正式期刊摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-08-27",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "期刊卷期日期为 2026-08-01，文章记录日期为 2026-06-24；日报日期是补录日期。"
       }
     }
   ]
