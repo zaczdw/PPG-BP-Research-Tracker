@@ -212,7 +212,7 @@ export default function Home() {
         <div className="section-heading"><div><span>今日简报 · {latestDate}</span><h2>最新纳入数据库</h2></div><p>共 {latest.length} 项新增或补录</p></div>
         <div className="daily-layout">
           <div className="daily-list">
-            {latest.slice(0, 4).map((paper, index) => (
+            {latest.map((paper, index) => (
               <button key={paper.id} onClick={() => setSelected(paper)} className="daily-item">
                 <span>{String(index + 1).padStart(2, "0")}</span><div><strong>{paper.title}</strong><small>{paper.study_summary.takeaway}</small></div><i>↗</i>
               </button>
