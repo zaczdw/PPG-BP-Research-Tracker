@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-08-27T21:00:00+08:00",
-  "record_count": 71,
-  "reviewed_count": 71,
+  "generated_at": "2026-09-01T23:38:00+08:00",
+  "record_count": 76,
+  "reviewed_count": 76,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -6470,6 +6470,495 @@
         "checked_on": "2026-08-27",
         "basis": "PubMed 正式期刊题录、DOI 与摘要",
         "note": "期刊卷期日期为 2026-08-01，文章记录日期为 2026-06-24；日报日期是补录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-072-hypertension-screening-via-awake-sleep-differences-in-ppg-signals",
+      "title": "Hypertension Screening via Awake-Sleep Differences in Photoplethysmogram Signals",
+      "year": 2026,
+      "first_reported_in_daily": "2026-09-01",
+      "record_type": "paper",
+      "source": {
+        "venue": "European Heart Journal - Digital Health",
+        "doi": "10.1093/ehjdh/ztag131",
+        "url": "https://academic.oup.com/ehjdh/article/7/7/ztag131/8760871",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "PPG",
+        "hypertension screening",
+        "awake-sleep",
+        "machine learning",
+        "external validation"
+      ],
+      "datasets": [
+        "Aurora-BP: 180 subjects",
+        "CUHK-BP external test: 26 subjects"
+      ],
+      "input_signals": [
+        "ambulatory wrist PPG",
+        "awake/sleep timing"
+      ],
+      "model_method": "提取 20 个 PPG 时域和形态学指标，对每位受试者的清醒与睡眠片段做 Mann-Whitney U 检验，将离散化 P 值作为四种机器学习模型输入；Aurora-BP 开发，CUHK-BP 独立外部验证。",
+      "main_results": "SVM 内部测试准确率 81.1±8.4%、F1 82.8±8.1%；外部测试仅用时域指标达到 84.6% 准确率和 86.7% F1，dicrotic notch 相关时域指标泛化最好。",
+      "calibration": {
+        "type": "not applicable to direct BP estimation",
+        "points": null,
+        "timing": "not applicable",
+        "notes": "输出是高血压风险分类而非连续 SBP/DBP；不需要个体 BP 数值校准，但需要同一人的清醒与睡眠 PPG。"
+      },
+      "subject_split": {
+        "status": "subject-level internal hold-out",
+        "notes": "Aurora-BP 保留 18 名受试者作内部测试；特征在受试者层面生成，避免随机窗口拆分。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "CUHK-BP, 26 subjects",
+        "notes": "独立数据集外部验证，但外部样本量较小。"
+      },
+      "deployment": {
+        "level": "conditional",
+        "judgment": "适合可穿戴高血压风险筛查，不替代诊断性 BP 测量",
+        "inference_inputs": [
+          "multi-epoch ambulatory PPG",
+          "awake/sleep labels"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "至少需要多个有效日间和夜间片段；研究中的 awake/sleep 由活动时段或自报近似，并非临床 actigraphy。"
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "not applicable",
+        "abp_bp_alignment": "cuff BP labels define hypertension cohorts, not per-window regression inputs",
+        "abp_bp_windowing": "subject-level aggregate features",
+        "abp_bp_quality_filtering": "PPG quality threshold and minimum valid awake/sleep measurements applied without current target BP",
+        "target_dependent_calibration": "not applicable",
+        "window_leakage": "low due to subject-level features",
+        "subject_leakage": "independent external dataset",
+        "notes": "主要剩余风险是样本量小、睡眠标签近似和队列差异，而不是传统随机窗口泄露。"
+      },
+      "notes": "2026-09-01 新近索引补录；Oxford 正式全文与 PubMed DOI 元数据已核验。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-01",
+      "dataset": [
+        "Aurora-BP: 180 subjects",
+        "CUHK-BP external test: 26 subjects"
+      ],
+      "inference_inputs": [
+        "multi-epoch ambulatory PPG",
+        "awake/sleep labels"
+      ],
+      "study_summary": {
+        "goal": "利用同一人的清醒—睡眠 PPG 变化筛查未管理高血压，而不是直接回归瞬时 BP。",
+        "method": "在 Aurora-BP 提取 20 个 PPG 指标并形成受试者级昼夜差异特征，SVM 等模型训练后用 CUHK-BP 外部验证。",
+        "results": "SVM 内部准确率 81.1±8.4%、F1 82.8±8.1%；外部准确率 84.6%、F1 86.7%。",
+        "conclusion": "昼夜 PPG 时域变化可形成可穿戴高血压风险提示，外部验证提供了初步泛化证据。",
+        "takeaway": "这是筛查模型而非连续 BP estimator；受试者级设计和独立外部验证是明显优点。",
+        "deployment": "需要长时间腕部 PPG 和可靠清醒/睡眠划分，不需要当前参考 BP，但不能替代临床确诊。",
+        "leakage": "特征按受试者聚合且外部数据集独立，传统 window/subject leakage 风险低；小样本和睡眠标签误差仍需关注。",
+        "evidence_status": "正式期刊全文已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-01",
+        "basis": "Oxford Academic 正式全文与 PubMed DOI 元数据",
+        "note": "文章于 2026-08-13 在线发表，2026-08-27 完成校正排版；2026-09-01 是数据库补录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-073-pmb-nn-physiology-centered-hybrid-ai-for-personalized-hemodynamic-monitoring",
+      "title": "PMB-NN: Physiology-Centered Hybrid AI for Personalized Hemodynamic Monitoring From Photoplethysmography",
+      "year": 2026,
+      "first_reported_in_daily": "2026-09-01",
+      "record_type": "paper",
+      "source": {
+        "venue": "Computer Methods and Programs in Biomedicine",
+        "doi": "10.1016/j.cmpb.2026.109479",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42248129/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "physiology-informed AI",
+        "Windkessel",
+        "personalization"
+      ],
+      "datasets": [
+        "10 healthy young adults, multi-day activities",
+        "transfer cohort: 37 adults aged 18-88"
+      ],
+      "input_signals": [
+        "PPG-derived timing features",
+        "demographics",
+        "estimated cardiac output"
+      ],
+      "model_method": "将两元 Windkessel 模型嵌入神经网络，以外周阻力 R 和动脉顺应性 C 作为生理约束；按受试者个体训练，PPG 时序特征为输入，人口学信息推断心输出量 Q。",
+      "main_results": "SBP/DBP 中位 MAE 7.2/3.9 mmHg，并能估计 R（0.13 mmHg·s/ml）和 C（0.19 ml/mmHg）；15 dB 运动噪声下保持韧性，5 分钟校准被识别为实用个体化阈值。",
+      "calibration": {
+        "type": "subject-specific",
+        "points": "5 minutes of personal data recommended",
+        "timing": "initial personalization",
+        "notes": "明确是个体化模型，不是 calibration-free；训练还依赖心输出量估计。"
+      },
+      "subject_split": {
+        "status": "within-subject multi-day evaluation",
+        "notes": "主要队列只有 10 人且按受试者个体建模；不能解释为 unseen-subject 泛化。"
+      },
+      "external_validation": {
+        "status": "limited transfer evaluation",
+        "dataset_or_cohort": "37 adults, 18-88 years, autonomic challenges",
+        "notes": "测试生理可转移性，但不是独立大规模临床验证。"
+      },
+      "deployment": {
+        "level": "conditional",
+        "judgment": "生理可解释性强，但依赖个人校准和 Q 估计",
+        "inference_inputs": [
+          "PPG timing features",
+          "demographics",
+          "stored personalized parameters",
+          "estimated cardiac output"
+        ],
+        "current_reference_bp_required": "initial calibration required",
+        "notes": "日常监测前需约 5 分钟个体校准；自主神经挑战下数值误差增大。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not reported",
+        "abp_bp_alignment": "reference BP is used for subject-specific training",
+        "abp_bp_windowing": "multi-day within-subject design; exact overlap not in abstract",
+        "abp_bp_quality_filtering": "motion robustness explicitly tested",
+        "target_dependent_calibration": "historical personal BP calibration is explicit",
+        "window_leakage": "within-subject personalization makes window independence less central but must be reported",
+        "subject_leakage": "not an unseen-subject model",
+        "notes": "风险重点不是隐藏校准，而是不要把个体化结果宣传成跨人泛化；5 分钟 BP 标注来源需在部署方案中明确。"
+      },
+      "notes": "2026-09-01 新近索引补录；PubMed 正式摘要已核验。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-01",
+      "dataset": [
+        "10 healthy young adults, multi-day activities",
+        "transfer cohort: 37 adults aged 18-88"
+      ],
+      "inference_inputs": [
+        "PPG timing features",
+        "demographics",
+        "stored personalized parameters",
+        "estimated cardiac output"
+      ],
+      "study_summary": {
+        "goal": "把 Windkessel 生理约束引入 PPG 个体化 BP 估计，同时输出外周阻力和动脉顺应性。",
+        "method": "10 人多日活动个体化训练，并在 37 人跨年龄自主神经挑战队列探索可转移性、运动噪声和校准效率。",
+        "results": "SBP/DBP 中位 MAE 7.2/3.9 mmHg；R/C 中位 MAE 0.13 mmHg·s/ml 和 0.19 ml/mmHg；约 5 分钟校准较实用。",
+        "conclusion": "PMB-NN 在精度相近时提供更强的生理可解释性，但仍是小样本个体化方案。",
+        "takeaway": "亮点是生理一致性，不是刷新最低 MAE；必须保留 subject-specific 和 5 分钟校准标签。",
+        "deployment": "需要 PPG 时序特征、人口学、Q 估计和个人参数；不能作为零校准模型部署。",
+        "leakage": "历史个人 BP 明确用于个体化，属于合理但必须披露的目标依赖；不可把 within-subject 结果外推到新用户。",
+        "evidence_status": "正式期刊摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-01",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "文章电子记录日期为 2026-06-04，卷期排至 2026-10；2026-09-01 为数据库补录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-074-heart-watch-multimodal-google-pixel-watch-dataset-across-physical-states",
+      "title": "HEART-Watch: A Multimodal Physiological Dataset From a Google Pixel Watch Across Different Physical States",
+      "year": 2026,
+      "first_reported_in_daily": "2026-09-01",
+      "record_type": "dataset",
+      "source": {
+        "venue": "PLOS Digital Health",
+        "doi": "10.1371/journal.pdig.0001647",
+        "url": "https://journals.plos.org/digitalhealth/article?id=10.1371/journal.pdig.0001647",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "PPG",
+        "smartwatch",
+        "dataset",
+        "motion",
+        "blood pressure"
+      ],
+      "datasets": [
+        "HEART-Watch: 40 healthy adults aged 19-75"
+      ],
+      "input_signals": [
+        "Google Pixel Watch PPG",
+        "watch ECG",
+        "accelerometer",
+        "reference chest ECG",
+        "intermittent cuff BP"
+      ],
+      "model_method": "公开真实消费级 Pixel Watch 多模态数据：40 名健康成人在坐、站、走三种状态下同步采集腕部 PPG/ECG/ACC 和胸部 ECG，并在状态转换间记录上臂 cuff BP；论文提供信号质量、形态和 BP 分布初步分析。",
+      "main_results": "数据覆盖 19-75 岁、不同种族和体型，包含真实运动、佩戴接触和信号饱和问题；论文未训练 PPG→BP 模型，定位是后续可穿戴算法开发与公平性评估资源。",
+      "calibration": {
+        "type": "not applicable",
+        "points": null,
+        "timing": "not applicable",
+        "notes": "数据集论文未提出 BP estimator；cuff BP 是间歇参考标签。"
+      },
+      "subject_split": {
+        "status": "not applicable",
+        "notes": "数据集论文未给训练/测试划分；后续使用者必须自行按受试者隔离。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "这是单一数据集资源，不是外部验证研究。"
+      },
+      "deployment": {
+        "level": "dataset-resource",
+        "judgment": "适合真实腕表噪声和公平性研究，不是可直接部署的 BP 模型",
+        "inference_inputs": [
+          "watch PPG",
+          "optional watch ECG/ACC/demographics"
+        ],
+        "current_reference_bp_required": "for training labels only",
+        "notes": "BP 为间歇 cuff 读数，不支持逐搏 BP ground truth；数据访问需研究申请与协议。"
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "not applicable",
+        "abp_bp_alignment": "intermittent cuff BP acquired with concurrent watch signals",
+        "abp_bp_windowing": "future users must define subject-disjoint windows",
+        "abp_bp_quality_filtering": "signal quality rules are documented",
+        "target_dependent_calibration": "not applicable to dataset paper",
+        "window_leakage": "not applicable until a model is trained",
+        "subject_leakage": "must be prevented by downstream users",
+        "notes": "主要限制是 BP 标签稀疏且非连续；后续模型不能把同一受试者片段拆到训练和测试。"
+      },
+      "notes": "2026-09-01 新近正式发表补录；PLOS 全文与 PubMed 元数据已核验。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-01",
+      "dataset": [
+        "HEART-Watch: 40 healthy adults aged 19-75"
+      ],
+      "inference_inputs": [
+        "watch PPG",
+        "optional watch ECG/ACC/demographics"
+      ],
+      "study_summary": {
+        "goal": "提供包含真实运动噪声、人口多样性和间歇 cuff BP 的消费级智能手表多模态数据。",
+        "method": "40 名成人在坐、站、走状态下同步采集 Pixel Watch PPG/ECG/ACC、胸部 ECG 和状态转换间 BP。",
+        "results": "数据覆盖 19-75 岁和多种族群，保留运动、接触不良与饱和等真实设备问题；论文未报告 BP 模型精度。",
+        "conclusion": "该数据集适合开发更贴近消费级硬件的心血管算法，并支持年龄、体型和公平性分析。",
+        "takeaway": "它是数据资源而非 BP estimator；稀疏 cuff 标签适合阶段性 BP 或多模态研究，不等于连续 ABP。",
+        "deployment": "可用于评估真实腕表输入和运动鲁棒性；数据访问需要申请，训练时必须按受试者划分。",
+        "leakage": "论文自身无模型泄露；下游最大风险是同一人的多状态窗口跨训练/测试以及把间歇 cuff 标签扩展成连续标签。",
+        "evidence_status": "正式期刊全文已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-01",
+        "basis": "PLOS Digital Health 正式全文与 PubMed DOI 元数据",
+        "note": "正式发表于 2026-08-25；2026-09-01 是数据库补录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-075-dynamic-beat-to-beat-bp-estimation-using-multimodal-wearable-deep-learning",
+      "title": "Dynamic Beat-to-Beat Blood Pressure Estimation Using a Multi-Modal Wearable Deep Learning Approach",
+      "year": 2026,
+      "first_reported_in_daily": "2026-09-01",
+      "record_type": "paper",
+      "source": {
+        "venue": "Physiological Measurement",
+        "doi": "10.1088/1361-6579/ae85b4",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13402944/",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "PPG",
+        "ECG",
+        "tonometry",
+        "beat-to-beat BP",
+        "deep learning"
+      ],
+      "datasets": [
+        "10 healthy volunteers; 29 isometric handgrip recordings"
+      ],
+      "input_signals": [
+        "superficial temporal artery tonometry",
+        "ECG",
+        "PPG",
+        "signal quality indices"
+      ],
+      "model_method": "自研可穿戴设备同步采集颞浅动脉张力、ECG 和 PPG，构造 HR、PTT、张力与信号质量特征，以 TCN 估计逐搏 BP；用 leave-one-subject-out 交叉验证。",
+      "main_results": "SBP/MBP/DBP mean absolute difference 分别为 5.58/4.39/4.34 mmHg，动态 BP 波动下显著优于 PTT 和 STAT-only 基线。",
+      "calibration": {
+        "type": "calibration-resilient multimodal",
+        "points": "not explicitly quantified",
+        "timing": "not reported",
+        "notes": "通过加入压力形态降低传统 PTT 校准漂移，但摘要未证明完全 calibration-free。"
+      },
+      "subject_split": {
+        "status": "leave-one-subject-out",
+        "notes": "10 名受试者 LOSO 验证，受试者级隔离明确；样本规模仍很小。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "单一自研设备健康志愿者队列，无独立外部验证。"
+      },
+      "deployment": {
+        "level": "prototype",
+        "judgment": "动态 BP 表现有价值，但需要额外颞动脉张力传感器",
+        "inference_inputs": [
+          "STAT",
+          "ECG",
+          "PPG",
+          "signal quality indices"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "不是常规 PPG-only 腕带；硬件复杂度和传感器定位影响部署。"
+      },
+      "leakage_audit": {
+        "risk_level": "low-medium",
+        "abp_bp_denormalization": "not reported",
+        "abp_bp_alignment": "multimodal signals synchronized with reference BP",
+        "abp_bp_windowing": "LOSO reduces cross-subject leakage; within-recording overlap requires full-text protocol",
+        "abp_bp_quality_filtering": "ECG/PPG/STAT quality indices are model features",
+        "target_dependent_calibration": "not reported",
+        "window_leakage": "limited by LOSO",
+        "subject_leakage": "controlled by LOSO",
+        "notes": "LOSO 是重要优点；仍需确认同一记录内窗口重叠只发生在训练侧，以及 SQI 不使用目标 BP。"
+      },
+      "notes": "2026-09-01 近期遗漏补录；PMC 正式全文与 PubMed DOI 元数据已核验。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-01",
+      "dataset": [
+        "10 healthy volunteers; 29 isometric handgrip recordings"
+      ],
+      "inference_inputs": [
+        "STAT",
+        "ECG",
+        "PPG",
+        "signal quality indices"
+      ],
+      "study_summary": {
+        "goal": "用颞动脉张力提供压力形态，弥补 PPG/PTT 的校准漂移并估计动态逐搏 BP。",
+        "method": "10 名健康志愿者等长握力试验，STAT+ECG+PPG 多模态特征输入 TCN，采用 LOSO 验证。",
+        "results": "SBP/MBP/DBP mean absolute difference 为 5.58/4.39/4.34 mmHg，动态变化时优于单模态基线。",
+        "conclusion": "压力形态与 PTT 融合能改善动态 BP，但需要更复杂的传感硬件和更大队列。",
+        "takeaway": "LOSO 设计可信度较好；代价是它不再是简单的 PPG-only 可穿戴方案。",
+        "deployment": "需要 STAT、ECG、PPG 和 SQI；当前参考 BP 未列为推理输入，传感器放置是产品难点。",
+        "leakage": "LOSO 控制 subject leakage；仍需核对训练窗口重叠和 SQI 计算细节。",
+        "evidence_status": "正式期刊全文已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-01",
+        "basis": "PMC 正式全文与 PubMed DOI 元数据",
+        "note": "正式发表于 2026-07-27；2026-09-01 是近期遗漏补录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-076-motion-artifact-reduction-in-ppg-and-nibp-wearable-monitoring",
+      "title": "Reduction of Motion Artifacts in Cardiorespiratory Vital Signs as Oxygen Saturation and Non-Invasive Blood Pressure Through Redundant Denoising and Adaptive Filtering Methods for Wearable Healthcare Monitoring Systems",
+      "year": 2026,
+      "first_reported_in_daily": "2026-09-01",
+      "record_type": "paper",
+      "source": {
+        "venue": "Cardiovascular Engineering and Technology",
+        "doi": "10.1007/s13239-026-00850-0",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42547737/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "NIBP",
+        "motion artifact",
+        "adaptive filtering",
+        "wearable monitoring"
+      ],
+      "datasets": [
+        "wearable multichannel experiment; cohort size not reported in abstract"
+      ],
+      "input_signals": [
+        "redundant PPG channels",
+        "ECG timing",
+        "inertial measurements",
+        "NIBP signals"
+      ],
+      "model_method": "结合冗余传感、惯性测量、ECG 时间同步、独立成分分析和递归最小二乘自适应滤波，对运动污染的 PPG 与 NIBP 信号降噪，并与 FIR 和 wavelet shrinkage 比较。",
+      "main_results": "红光 PPG SNR 和加权失真指标显著改善（WDA 0.48→0.73）；SpO2 与 NIBP 估计均改善，SBP 收益更明显，DBP 仍受残余运动失真影响。",
+      "calibration": {
+        "type": "not reported",
+        "points": null,
+        "timing": "not reported",
+        "notes": "研究重点是运动伪影抑制，不是新 BP 标定模型。"
+      },
+      "subject_split": {
+        "status": "not reported",
+        "notes": "摘要未提供队列规模或训练/测试划分；主要是信号处理比较。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "未见独立外部验证。"
+      },
+      "deployment": {
+        "level": "signal-processing component",
+        "judgment": "可作为运动鲁棒性前端，但传感器数量和同步要求较高",
+        "inference_inputs": [
+          "multichannel PPG",
+          "ECG",
+          "IMU",
+          "NIBP-related signal"
+        ],
+        "current_reference_bp_required": "not reported",
+        "notes": "对 SBP 帮助更明确，DBP 残余误差提示不能把降噪等同于临床 BP 准确性。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not reported",
+        "abp_bp_alignment": "ECG-guided synchrony is an input mechanism",
+        "abp_bp_windowing": "not reported",
+        "abp_bp_quality_filtering": "motion/reference channels explicitly drive denoising",
+        "target_dependent_calibration": "not reported",
+        "window_leakage": "not reported",
+        "subject_leakage": "not reported",
+        "notes": "需要全文确认 NIBP 参考信号是否只是评价标签，还是在滤波/重构路径中被使用；否则可能出现推理期不可用输入。"
+      },
+      "notes": "2026-09-01 近期遗漏补录；PubMed 正式摘要已核验，缺失数值不以推断补齐。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-01",
+      "dataset": [
+        "wearable multichannel experiment; cohort size not reported in abstract"
+      ],
+      "inference_inputs": [
+        "multichannel PPG",
+        "ECG",
+        "IMU",
+        "NIBP-related signal"
+      ],
+      "study_summary": {
+        "goal": "通过冗余传感和自适应滤波提高运动场景下 PPG、SpO2 与 NIBP 的可靠性。",
+        "method": "ICA+RLS 融合多通道 PPG、ECG 同步和 IMU，对比 FIR 与小波收缩方法。",
+        "results": "WDA 从 0.48 提升至 0.73，PPG SNR、SpO2 和 NIBP 均改善；DBP 仍受残余运动失真影响。",
+        "conclusion": "多传感器自适应前端能改善动态监测，但没有消除所有 BP 误差。",
+        "takeaway": "这是信号质量/运动鲁棒性组件，不应按独立 PPG→BP estimator 评价。",
+        "deployment": "需要多通道 PPG、ECG、IMU 和严格同步，硬件与功耗成本高于单 PPG。",
+        "leakage": "摘要未说明 NIBP 信号在算法链中的确切角色；必须确认推理时没有使用参考 BP/NIBP 作为滤波输入。",
+        "evidence_status": "正式期刊摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-01",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "正式发表于 2026-08-03；2026-09-01 是近期遗漏补录日期。"
       }
     }
   ]
