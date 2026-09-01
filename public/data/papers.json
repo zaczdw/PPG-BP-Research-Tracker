@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-01T23:38:00+08:00",
-  "record_count": 76,
-  "reviewed_count": 76,
+  "generated_at": "2026-09-01T23:58:00+08:00",
+  "record_count": 86,
+  "reviewed_count": 86,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -6959,6 +6959,949 @@
         "checked_on": "2026-09-01",
         "basis": "PubMed 正式期刊题录、DOI 与摘要",
         "note": "正式发表于 2026-08-03；2026-09-01 是近期遗漏补录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-077-estimating-changes-in-systolic-blood-pressure-based-on-pulse-wave-morpho",
+      "title": "Estimating Changes in Systolic Blood Pressure Based on Pulse Wave Morphology Using Paired Segment Comparison",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-30",
+      "record_type": "paper",
+      "source": {
+        "venue": "Physiological Measurement",
+        "doi": "10.1088/1361-6579/ae7fea",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42320511/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "delta SBP",
+        "pulse morphology",
+        "paired comparison",
+        "external dataset"
+      ],
+      "datasets": [
+        "VitalDB and MIMIC-III: 12,279 patients",
+        "held-out test: 2,457 patients"
+      ],
+      "input_signals": [
+        "paired 20-second PPG segments"
+      ],
+      "model_method": "将绝对 SBP 回归改写为两段 20 秒 PPG 之间的 ΔSBP 估计，在 VitalDB 和 MIMIC-III 的 12,279 名患者上开发并保留 2,457 名患者测试。",
+      "main_results": "VitalDB/MIMIC-III 的 ΔSBP RMSE 为 14.53/11.37 mmHg，r 为 0.79/0.65，Cohen's κ 为 0.57/0.44；最长分析覆盖 28 小时。",
+      "calibration": {
+        "type": "relative-change formulation",
+        "points": 1,
+        "timing": "需要一个基线 cuff SBP 才能恢复绝对值",
+        "notes": "模型直接输出 ΔSBP；绝对 SBP 仍依赖基线测量。"
+      },
+      "subject_split": {
+        "status": "held-out patient-level test",
+        "notes": "摘要明确 2,457 名患者为 held-out test；两个数据库分别报告。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "VitalDB and MIMIC-III",
+        "notes": "跨数据库结果均报告，但摘要未说明是否完全跨库训练后零微调测试。"
+      },
+      "deployment": {
+        "level": "conditional",
+        "judgment": "适合填补间歇袖带测量间的相对趋势，不是零校准绝对 BP",
+        "inference_inputs": [
+          "current PPG segment",
+          "comparison PPG segment"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "连续推理只需成对 PPG，但要显示绝对 SBP 必须保留基线 cuff 值；睡眠趋势监测较有价值。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "摘要未报告使用测试标签反归一化",
+        "abp_bp_alignment": "参考 BP 用作标签或临床比较；摘要未见其作为当前推理输入",
+        "abp_bp_windowing": "需全文核查窗口构建和同一受试者相邻片段分配",
+        "abp_bp_quality_filtering": "摘要未说明是否按参考 BP 或 ABP 质量筛选",
+        "target_dependent_calibration": "绝对值恢复依赖基线 SBP",
+        "window_leakage": "摘要称 patient-level held-out，风险较低",
+        "subject_leakage": "held-out patient test",
+        "notes": "主要审计点是配对片段是否跨越 train/test 边界；摘要的患者级保留测试降低了 subject leakage。"
+      },
+      "notes": "2026-09-01 为补齐 2026-08-30 日报而收录；正式摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-01",
+      "dataset": [
+        "VitalDB and MIMIC-III: 12,279 patients",
+        "held-out test: 2,457 patients"
+      ],
+      "inference_inputs": [
+        "current PPG segment",
+        "comparison PPG segment"
+      ],
+      "study_summary": {
+        "goal": "用 PPG 形态变化估计两时点 SBP 差值，以填补间歇袖带读数之间的空白。",
+        "method": "将绝对 SBP 回归改写为两段 20 秒 PPG 之间的 ΔSBP 估计，在 VitalDB 和 MIMIC-III 的 12,279 名患者上开发并保留 2,457 名患者测试。",
+        "results": "VitalDB/MIMIC-III 的 ΔSBP RMSE 为 14.53/11.37 mmHg，r 为 0.79/0.65，Cohen's κ 为 0.57/0.44；最长分析覆盖 28 小时。",
+        "conclusion": "相对 BP 比绝对 BP 更可泛化，但误差仍随数据库和形态变化强度而变。",
+        "takeaway": "这是 ΔSBP 模型；不能把其结果表述为免校准绝对血压。",
+        "deployment": "连续推理只需成对 PPG，但要显示绝对 SBP 必须保留基线 cuff 值；睡眠趋势监测较有价值。",
+        "leakage": "主要审计点是配对片段是否跨越 train/test 边界；摘要的患者级保留测试降低了 subject leakage。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-01",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "论文正式发表/在线发表日期为 2026-07-06；日报日期是本项目补录归档日期，不是论文首次发表日期。"
+      }
+    },
+    {
+      "id": "ppgbp-078-smartphone-based-blood-pressure-monitoring-via-the-oscillometric-finger-",
+      "title": "Smartphone-Based Blood Pressure Monitoring via the Oscillometric Finger Pressing Method: Investigation of the DC Component of PPG",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-30",
+      "record_type": "paper",
+      "source": {
+        "venue": "IEEE Transactions on Biomedical Engineering",
+        "doi": "10.1109/TBME.2025.3633555",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41247889/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "smartphone",
+        "finger pressing",
+        "PPG",
+        "oscillometry",
+        "systolic BP"
+      ],
+      "datasets": [
+        "18 volunteers"
+      ],
+      "input_signals": [
+        "finger PPG AC+DC",
+        "finger pressure",
+        "optional ECG during development"
+      ],
+      "model_method": "让用户按视觉提示逐渐增加手指压力，以 PPG-force 传感单元记录总 PPG 和压力；用动脉顺应性/组织压缩模型定位 DC PPG 弯折点估计臂部 SBP。",
+      "main_results": "对 18 名志愿者，估计 SBP 与 cuff SBP 的相关系数为 0.90，precision error 为 9.2 mmHg。",
+      "calibration": {
+        "type": "model-based mapping",
+        "points": null,
+        "timing": "摘要未报告个人校准",
+        "notes": "参考臂 cuff BP 用于验证；压力传感器是推理必需。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "N=18，摘要未说明严格受试者级训练/测试拆分。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "无独立外部队列。"
+      },
+      "deployment": {
+        "level": "early prototype",
+        "judgment": "证明手机手指按压路线可行，但样本小且精度尚不足",
+        "inference_inputs": [
+          "DC/AC PPG",
+          "finger pressure trajectory"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "需要 PPG 与力/压力传感、用户受控按压；尚非被动连续监测。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "摘要未报告使用测试标签反归一化",
+        "abp_bp_alignment": "参考 BP 用作标签或临床比较；摘要未见其作为当前推理输入",
+        "abp_bp_windowing": "需全文核查窗口构建和同一受试者相邻片段分配",
+        "abp_bp_quality_filtering": "摘要未说明是否按参考 BP 或 ABP 质量筛选",
+        "target_dependent_calibration": "摘要未见按测试目标 BP 校准",
+        "window_leakage": "样本量小且拆分未披露",
+        "subject_leakage": "unknown",
+        "notes": "未披露开发与测试如何隔离，相关系数不能代替误差分布和外部验证。"
+      },
+      "notes": "2026-09-01 为补齐 2026-08-30 日报而收录；正式摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-01",
+      "dataset": [
+        "18 volunteers"
+      ],
+      "inference_inputs": [
+        "DC/AC PPG",
+        "finger pressure trajectory"
+      ],
+      "study_summary": {
+        "goal": "研究 PPG 的非振荡 DC 分量能否把普通手机式手指按压变成 SBP 传感器。",
+        "method": "让用户按视觉提示逐渐增加手指压力，以 PPG-force 传感单元记录总 PPG 和压力；用动脉顺应性/组织压缩模型定位 DC PPG 弯折点估计臂部 SBP。",
+        "results": "对 18 名志愿者，估计 SBP 与 cuff SBP 的相关系数为 0.90，precision error 为 9.2 mmHg。",
+        "conclusion": "模型可解释并得到较强相关性，但 N=18、9.2 mmHg precision error 仍属早期验证。",
+        "takeaway": "这是主动按压式测量，不是仅靠相机 PPG 的无感连续 BP。",
+        "deployment": "需要 PPG 与力/压力传感、用户受控按压；尚非被动连续监测。",
+        "leakage": "未披露开发与测试如何隔离，相关系数不能代替误差分布和外部验证。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-01",
+        "basis": "PubMed 期刊题录、DOI 与正式摘要",
+        "note": "论文正式发表/在线发表日期为 2025-11 online / 2026 issue；日报日期是本项目补录归档日期，不是论文首次发表日期。"
+      }
+    },
+    {
+      "id": "ppgbp-079-interpretable-photoplethysmography-based-machine-learning-model-for-noni",
+      "title": "Interpretable Photoplethysmography-Based Machine-Learning Model for Noninvasive Assessment of Systolic Blood Pressure",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-30",
+      "record_type": "paper",
+      "source": {
+        "venue": "Frontiers in Physiology",
+        "doi": "10.3389/fphys.2026.1779262",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42305919/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "SBP screening",
+        "interpretable ML",
+        "SHAP",
+        "logistic regression"
+      ],
+      "datasets": [
+        "860 participants"
+      ],
+      "input_signals": [
+        "90-second fingertip PPG",
+        "age",
+        "BMI"
+      ],
+      "model_method": "从 90 秒指端 PPG 提取形态和频域特征，加年龄、BMI，用 LASSO logistic regression 与五折交叉验证分类 SBP 状态，并以 SHAP 解释。",
+      "main_results": "AUC 0.83（95% CI 0.79-0.87）、F1 0.83、Cohen's d 1.39；最终保留年龄、BMI、P1、波形尖锐度和 H2/H1。",
+      "calibration": {
+        "type": "none reported",
+        "points": 0,
+        "timing": "not applicable",
+        "notes": "输出 SBP 状态分类，不回归连续数值。"
+      },
+      "subject_split": {
+        "status": "five-fold cross-validation",
+        "notes": "摘要未明确折叠是否严格按受试者。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "无独立外部验证。"
+      },
+      "deployment": {
+        "level": "screening research",
+        "judgment": "可解释的升高 SBP 筛查，不替代数值血压测量",
+        "inference_inputs": [
+          "90-second fingertip PPG",
+          "age",
+          "BMI"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "单点 PPG 容易部署，但需要年龄和 BMI；输出是风险类别而非 SBP 数字。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "摘要未报告使用测试标签反归一化",
+        "abp_bp_alignment": "参考 BP 用作标签或临床比较；摘要未见其作为当前推理输入",
+        "abp_bp_windowing": "需全文核查窗口构建和同一受试者相邻片段分配",
+        "abp_bp_quality_filtering": "摘要未说明是否按参考 BP 或 ABP 质量筛选",
+        "target_dependent_calibration": "not applicable",
+        "window_leakage": "每人单次 90 秒记录时窗口泄露较小",
+        "subject_leakage": "交叉验证分组方式未在摘要说明",
+        "notes": "若同一人的窗口跨折会偏乐观；需全文确认受试者级交叉验证。"
+      },
+      "notes": "2026-09-01 为补齐 2026-08-30 日报而收录；正式摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-01",
+      "dataset": [
+        "860 participants"
+      ],
+      "inference_inputs": [
+        "90-second fingertip PPG",
+        "age",
+        "BMI"
+      ],
+      "study_summary": {
+        "goal": "用可解释单点 PPG 特征识别升高的 SBP 状态。",
+        "method": "从 90 秒指端 PPG 提取形态和频域特征，加年龄、BMI，用 LASSO logistic regression 与五折交叉验证分类 SBP 状态，并以 SHAP 解释。",
+        "results": "AUC 0.83（95% CI 0.79-0.87）、F1 0.83、Cohen's d 1.39；最终保留年龄、BMI、P1、波形尖锐度和 H2/H1。",
+        "conclusion": "简单可解释模型取得中等偏好的判别性能，但尚无外部验证。",
+        "takeaway": "AUC/F1 是分类指标，不能与 SBP/DBP MAE 直接比较。",
+        "deployment": "单点 PPG 容易部署，但需要年龄和 BMI；输出是风险类别而非 SBP 数字。",
+        "leakage": "若同一人的窗口跨折会偏乐观；需全文确认受试者级交叉验证。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-01",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "论文正式发表/在线发表日期为 2026-06-01；日报日期是本项目补录归档日期，不是论文首次发表日期。"
+      }
+    },
+    {
+      "id": "ppgbp-080-a-multimodal-learning-framework-for-detecting-systemic-hypertension-in-s",
+      "title": "A Multimodal Learning Framework for Detecting Systemic Hypertension in Sleep Apnea Patients Using ECG and PPG Signals",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-30",
+      "record_type": "paper",
+      "source": {
+        "venue": "IEEE Journal of Biomedical and Health Informatics",
+        "doi": "10.1109/JBHI.2026.3694833",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42154719/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "hypertension screening",
+        "sleep apnea",
+        "ECG",
+        "PPG",
+        "multiple instance learning"
+      ],
+      "datasets": [
+        "33 patients with clinically annotated sleep studies"
+      ],
+      "input_signals": [
+        "overnight ECG",
+        "overnight PPG",
+        "HRV/PRV",
+        "sleep stages",
+        "apnea events"
+      ],
+      "model_method": "FusionNet 以 multiple-instance learning 汇总整夜 PSG，门控融合 ECG/PPG，并加入 HRV/PRV、睡眠阶段和呼吸暂停事件；采用 leave-one-patient-out。",
+      "main_results": "AUROC 87.34%、准确率 79.03%、特异度 81.25%、MCC 0.5801。",
+      "calibration": {
+        "type": "none reported",
+        "points": 0,
+        "timing": "not applicable",
+        "notes": "输出既往/系统性高血压分类，不输出连续 BP。"
+      },
+      "subject_split": {
+        "status": "leave-one-patient-out cross-validation",
+        "notes": "明确 patient-independent。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "只有 33 人，未独立外部验证。"
+      },
+      "deployment": {
+        "level": "proof of concept",
+        "judgment": "可从常规睡眠监测筛查高血压，但队列太小",
+        "inference_inputs": [
+          "overnight ECG and PPG",
+          "sleep/apnea annotations",
+          "clinical context"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "依赖整夜 PSG 语境和事件标注，不等于普通腕带单 PPG 模型。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "摘要未报告使用测试标签反归一化",
+        "abp_bp_alignment": "参考 BP 用作标签或临床比较；摘要未见其作为当前推理输入",
+        "abp_bp_windowing": "需全文核查窗口构建和同一受试者相邻片段分配",
+        "abp_bp_quality_filtering": "摘要未说明是否按参考 BP 或 ABP 质量筛选",
+        "target_dependent_calibration": "not applicable",
+        "window_leakage": "MIL 实例在患者袋内；LOPO 防止跨患者泄露",
+        "subject_leakage": "low due to LOPO",
+        "notes": "LOPO 是优点；小样本下模型选择和超参数仍可能对整体队列过拟合。"
+      },
+      "notes": "2026-09-01 为补齐 2026-08-30 日报而收录；正式摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-01",
+      "dataset": [
+        "33 patients with clinically annotated sleep studies"
+      ],
+      "inference_inputs": [
+        "overnight ECG and PPG",
+        "sleep/apnea annotations",
+        "clinical context"
+      ],
+      "study_summary": {
+        "goal": "从 OSA 患者整夜 ECG/PPG 与 PSG 上下文自动筛查系统性高血压。",
+        "method": "FusionNet 以 multiple-instance learning 汇总整夜 PSG，门控融合 ECG/PPG，并加入 HRV/PRV、睡眠阶段和呼吸暂停事件；采用 leave-one-patient-out。",
+        "results": "AUROC 87.34%、准确率 79.03%、特异度 81.25%、MCC 0.5801。",
+        "conclusion": "LOPO 下判别良好，但 33 人仅能视作概念验证。",
+        "takeaway": "这是高血压分类，不是逐搏或连续 BP 估计。",
+        "deployment": "依赖整夜 PSG 语境和事件标注，不等于普通腕带单 PPG 模型。",
+        "leakage": "LOPO 是优点；小样本下模型选择和超参数仍可能对整体队列过拟合。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-01",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "论文正式发表/在线发表日期为 2026-05-19；日报日期是本项目补录归档日期，不是论文首次发表日期。"
+      }
+    },
+    {
+      "id": "ppgbp-081-ghc-net-a-gramian-angular-field-based-hybrid-cnn-for-cuffless-blood-pres",
+      "title": "GHC-Net: A Gramian Angular Field-Based Hybrid CNN for Cuffless Blood Pressure Classification Using PPG Signals",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-30",
+      "record_type": "paper",
+      "source": {
+        "venue": "Computers in Biology and Medicine",
+        "doi": "10.1016/j.compbiomed.2026.111622",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41833169/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "BP classification",
+        "Gramian angular field",
+        "CNN",
+        "hypertension screening"
+      ],
+      "datasets": [
+        "public PPG-BP dataset",
+        "private dataset"
+      ],
+      "input_signals": [
+        "PPG transformed to Gramian angular field images"
+      ],
+      "model_method": "把一维 PPG 编码为 GAF 二维矩阵，使用含 hybrid dilated convolution 和 channel attention 的 GHC-Net 做正常/高正常/高血压三分类。",
+      "main_results": "PPG-BP 公共集准确率 76.39%、F1 76.68%；私有集准确率 92.66%、F1 93.33%。",
+      "calibration": {
+        "type": "none reported",
+        "points": 0,
+        "timing": "not applicable",
+        "notes": "分类任务，不输出连续 BP。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "摘要未说明是否 subject-disjoint。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "public PPG-BP and private dataset",
+        "notes": "两个数据集均报告，但训练/外部测试关系不清楚，不能视为严格零微调外部验证。"
+      },
+      "deployment": {
+        "level": "research",
+        "judgment": "公共集表现中等，私有集高分需要警惕域内拆分",
+        "inference_inputs": [
+          "single-channel PPG"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "推理只需 PPG，适合风险分类；真实家庭场景和跨设备验证缺失。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "摘要未报告使用测试标签反归一化",
+        "abp_bp_alignment": "参考 BP 用作标签或临床比较；摘要未见其作为当前推理输入",
+        "abp_bp_windowing": "需全文核查窗口构建和同一受试者相邻片段分配",
+        "abp_bp_quality_filtering": "摘要未说明是否按参考 BP 或 ABP 质量筛选",
+        "target_dependent_calibration": "not applicable",
+        "window_leakage": "摘要未披露",
+        "subject_leakage": "unknown",
+        "notes": "私有集远高于公共集，必须核查是否随机窗口拆分、同人跨集合或预处理利用全数据。"
+      },
+      "notes": "2026-09-01 为补齐 2026-08-30 日报而收录；正式摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-01",
+      "dataset": [
+        "public PPG-BP dataset",
+        "private dataset"
+      ],
+      "inference_inputs": [
+        "single-channel PPG"
+      ],
+      "study_summary": {
+        "goal": "利用 GAF 图像编码和 CNN 从 PPG 进行三级 BP 状态分类。",
+        "method": "把一维 PPG 编码为 GAF 二维矩阵，使用含 hybrid dilated convolution 和 channel attention 的 GHC-Net 做正常/高正常/高血压三分类。",
+        "results": "PPG-BP 公共集准确率 76.39%、F1 76.68%；私有集准确率 92.66%、F1 93.33%。",
+        "conclusion": "模型在两个数据集均可分类，但跨域差异很大，泛化证据有限。",
+        "takeaway": "分类准确率不能当作 mmHg 精度；subject split 是首要复核点。",
+        "deployment": "推理只需 PPG，适合风险分类；真实家庭场景和跨设备验证缺失。",
+        "leakage": "私有集远高于公共集，必须核查是否随机窗口拆分、同人跨集合或预处理利用全数据。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-01",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "论文正式发表/在线发表日期为 2026-03-14 online / 2026-04-15 issue；日报日期是本项目补录归档日期，不是论文首次发表日期。"
+      }
+    },
+    {
+      "id": "ppgbp-082-non-invasive-bp-estimation-via-carotid-brachial-radial-coupling-a-physic",
+      "title": "Non-Invasive BP Estimation via Carotid-Brachial-Radial Coupling: A Physics-Informed Asymmetric Cycle Network Approach",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-31",
+      "record_type": "paper",
+      "source": {
+        "venue": "IEEE Transactions on Biomedical Engineering",
+        "doi": "10.1109/TBME.2026.3704348",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42329923/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "physics-informed learning",
+        "ultrasound",
+        "multi-site hemodynamics",
+        "BP estimation"
+      ],
+      "datasets": [
+        "synthetic dataset: N=4,374",
+        "in-house dataset: N=1,765"
+      ],
+      "input_signals": [
+        "peripheral PPG",
+        "carotid blood-flow velocity from ultrasound"
+      ],
+      "model_method": "PIAC-Net 融合颈动脉超声流速与外周 PPG，用 1D Navier-Stokes 和 0D Windkessel 物理损失约束隐式肱动脉波形，五折交叉验证。",
+      "main_results": "合成集 SBP/DBP MAE 1.82/1.51 mmHg；自建集 7.08/6.38 mmHg；加入颈动脉信息使误差下降超过 50%。",
+      "calibration": {
+        "type": "not clearly reported",
+        "points": null,
+        "timing": "摘要未说明个人校准",
+        "notes": "额外中心血流信号是关键输入，但不等于参考 BP。"
+      },
+      "subject_split": {
+        "status": "five-fold cross-validation",
+        "notes": "摘要未明确按受试者还是样本分折。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "合成和自建数据均报告，未见独立外部临床队列。"
+      },
+      "deployment": {
+        "level": "conditional",
+        "judgment": "物理可解释但需要颈动脉超声，不能视为 PPG-only 可穿戴方案",
+        "inference_inputs": [
+          "PPG",
+          "carotid ultrasound flow velocity"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "部署需要超声传感与多部位耦合，硬件门槛明显高于腕部 PPG。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "摘要未报告使用测试标签反归一化",
+        "abp_bp_alignment": "参考 BP 用作标签或临床比较；摘要未见其作为当前推理输入",
+        "abp_bp_windowing": "需全文核查窗口构建和同一受试者相邻片段分配",
+        "abp_bp_quality_filtering": "摘要未说明是否按参考 BP 或 ABP 质量筛选",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "five-fold grouping not specified",
+        "subject_leakage": "unknown",
+        "notes": "五折是否按受试者是关键；合成数据极低误差不能直接外推到真人。"
+      },
+      "notes": "2026-09-01 为补齐 2026-08-31 日报而收录；正式摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-01",
+      "dataset": [
+        "synthetic dataset: N=4,374",
+        "in-house dataset: N=1,765"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "carotid ultrasound flow velocity"
+      ],
+      "study_summary": {
+        "goal": "用中心动脉驱动信息和血流物理约束改善 PPG 无袖带 BP 的精度与可解释性。",
+        "method": "PIAC-Net 融合颈动脉超声流速与外周 PPG，用 1D Navier-Stokes 和 0D Windkessel 物理损失约束隐式肱动脉波形，五折交叉验证。",
+        "results": "合成集 SBP/DBP MAE 1.82/1.51 mmHg；自建集 7.08/6.38 mmHg；加入颈动脉信息使误差下降超过 50%。",
+        "conclusion": "真人数据仍有 6-7 mmHg MAE，中心超声贡献最大。",
+        "takeaway": "性能提升主要来自额外传感器，不是单 PPG 算法突破。",
+        "deployment": "部署需要超声传感与多部位耦合，硬件门槛明显高于腕部 PPG。",
+        "leakage": "五折是否按受试者是关键；合成数据极低误差不能直接外推到真人。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-01",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "论文正式发表/在线发表日期为 2026-08；日报日期是本项目补录归档日期，不是论文首次发表日期。"
+      }
+    },
+    {
+      "id": "ppgbp-083-skin-tone-and-diagnostic-equity-in-contactless-blood-pressure-screening-",
+      "title": "Skin Tone and Diagnostic Equity in Contactless Blood Pressure Screening: A Prospective Observational Field Evaluation of Remote Photoplethysmography in Nigeria",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-31",
+      "record_type": "paper",
+      "source": {
+        "venue": "BMJ Open",
+        "doi": "10.1136/bmjopen-2026-119311",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42331583/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "remote PPG",
+        "skin tone",
+        "equity",
+        "field validation",
+        "hypertension screening"
+      ],
+      "datasets": [
+        "306 adults in three Nigerian hospitals; 249 usable readings"
+      ],
+      "input_signals": [
+        "facial video rPPG",
+        "cloud/internet connection"
+      ],
+      "model_method": "在尼日利亚三家医院前瞻性评估 rPPG BP 筛查，对 Fitzpatrick V-VI 人群以自动袖带为参考，分析准确性、失败率、肤色和网络条件。",
+      "main_results": "可用率 81.4%；SBP/DBP MAE 15.4/10.9 mmHg，敏感度 0.04/0.10；Fitzpatrick VI 的 SBP 敏感度为 0，测量失败 odds ratio 5.08。",
+      "calibration": {
+        "type": "vendor/model calibration not disclosed",
+        "points": null,
+        "timing": "field use",
+        "notes": "袖带 BP 是同步参考；摘要呼吁针对肤色多样性重新校准。"
+      },
+      "subject_split": {
+        "status": "prospective field evaluation",
+        "notes": "这是外部现场评估而非模型训练。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "three hospitals in Kebbi State, Nigeria",
+        "notes": "真实世界、深肤色人群的前瞻性现场验证。"
+      },
+      "deployment": {
+        "level": "not ready",
+        "judgment": "深肤色人群敏感度极低，当前不可用于排除高血压",
+        "inference_inputs": [
+          "facial video",
+          "internet/cloud service"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "云依赖和低带宽显著降低成功率；需要肤色平衡数据与离线能力。"
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "摘要未报告使用测试标签反归一化",
+        "abp_bp_alignment": "参考 BP 用作标签或临床比较；摘要未见其作为当前推理输入",
+        "abp_bp_windowing": "需全文核查窗口构建和同一受试者相邻片段分配",
+        "abp_bp_quality_filtering": "摘要未说明是否按参考 BP 或 ABP 质量筛选",
+        "target_dependent_calibration": "evaluation used cuff reference but did not feed current cuff BP to rPPG inference",
+        "window_leakage": "not a train/test modeling paper",
+        "subject_leakage": "independent prospective cohort",
+        "notes": "现场外部评估降低传统泄露风险；主要问题是真实性能失败和公平性。"
+      },
+      "notes": "2026-09-01 为补齐 2026-08-31 日报而收录；正式摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-01",
+      "dataset": [
+        "306 adults in three Nigerian hospitals; 249 usable readings"
+      ],
+      "inference_inputs": [
+        "facial video",
+        "internet/cloud service"
+      ],
+      "study_summary": {
+        "goal": "检验接触式较少、面向深肤色人群的 rPPG BP 筛查是否公平且可用。",
+        "method": "在尼日利亚三家医院前瞻性评估 rPPG BP 筛查，对 Fitzpatrick V-VI 人群以自动袖带为参考，分析准确性、失败率、肤色和网络条件。",
+        "results": "可用率 81.4%；SBP/DBP MAE 15.4/10.9 mmHg，敏感度 0.04/0.10；Fitzpatrick VI 的 SBP 敏感度为 0，测量失败 odds ratio 5.08。",
+        "conclusion": "用户观感不错，但诊断性能不足，存在明显 perception-performance gap。",
+        "takeaway": "这是重要的负结果：高特异度不能弥补几乎为零的敏感度。",
+        "deployment": "云依赖和低带宽显著降低成功率；需要肤色平衡数据与离线能力。",
+        "leakage": "现场外部评估降低传统泄露风险；主要问题是真实性能失败和公平性。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-01",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "论文正式发表/在线发表日期为 2026-06-22；日报日期是本项目补录归档日期，不是论文首次发表日期。"
+      }
+    },
+    {
+      "id": "ppgbp-084-intrinsic-ppg-ecg-coupling-for-accurate-and-low-power-blood-pressure-mon",
+      "title": "Intrinsic PPG-ECG Coupling for Accurate and Low-Power Blood Pressure Monitoring",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-31",
+      "record_type": "paper",
+      "source": {
+        "venue": "Advanced Science",
+        "doi": "10.1002/advs.202520101",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41773080/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "ECG",
+        "pulse transit time",
+        "wearable patch",
+        "low power"
+      ],
+      "datasets": [
+        "multi-scenario device evaluation; cohort size not stated in abstract"
+      ],
+      "input_signals": [
+        "intrinsically coupled PPG-ECG waveform"
+      ],
+      "model_method": "把 PPG 与 ECG 在硬件/波形层耦合成统一信号，减少独立通道同步和特征点误差，并实现胸贴式 BP 监测。",
+      "main_results": "PTT 误差低于 15 ms、检测率超过 98%，系统功耗降低 43.75%；摘要报告多场景 ME≤5 mmHg、STD≤8 mmHg。",
+      "calibration": {
+        "type": "not reported in abstract",
+        "points": null,
+        "timing": "unknown",
+        "notes": "需全文确认是否采用个体 cuff 校准及其频率。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "队列规模和 subject split 未披露。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "无摘要级独立外部验证信息。"
+      },
+      "deployment": {
+        "level": "prototype",
+        "judgment": "硬件同步与功耗创新明确，但临床泛化证据不完整",
+        "inference_inputs": [
+          "coupled PPG-ECG wearable signal"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "需要专用胸贴硬件；摘要未说明校准和长期漂移。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "摘要未报告使用测试标签反归一化",
+        "abp_bp_alignment": "参考 BP 用作标签或临床比较；摘要未见其作为当前推理输入",
+        "abp_bp_windowing": "需全文核查窗口构建和同一受试者相邻片段分配",
+        "abp_bp_quality_filtering": "摘要未说明是否按参考 BP 或 ABP 质量筛选",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "ME/STD 达标声明缺少样本量、压力范围、拆分和校准细节，不能据此宣称临床通过。"
+      },
+      "notes": "2026-09-01 为补齐 2026-08-31 日报而收录；正式摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-01",
+      "dataset": [
+        "multi-scenario device evaluation; cohort size not stated in abstract"
+      ],
+      "inference_inputs": [
+        "coupled PPG-ECG wearable signal"
+      ],
+      "study_summary": {
+        "goal": "用内禀耦合信号同时改善 PTT 同步、BP 精度与穿戴功耗。",
+        "method": "把 PPG 与 ECG 在硬件/波形层耦合成统一信号，减少独立通道同步和特征点误差，并实现胸贴式 BP 监测。",
+        "results": "PTT 误差低于 15 ms、检测率超过 98%，系统功耗降低 43.75%；摘要报告多场景 ME≤5 mmHg、STD≤8 mmHg。",
+        "conclusion": "工程结果有吸引力，但临床验证细节需全文复核。",
+        "takeaway": "专用耦合硬件的优势不能外推给普通独立 PPG+ECG 设备。",
+        "deployment": "需要专用胸贴硬件；摘要未说明校准和长期漂移。",
+        "leakage": "ME/STD 达标声明缺少样本量、压力范围、拆分和校准细节，不能据此宣称临床通过。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-01",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "论文正式发表/在线发表日期为 2026-03-03 online / 2026-04 issue；日报日期是本项目补录归档日期，不是论文首次发表日期。"
+      }
+    },
+    {
+      "id": "ppgbp-085-enhancing-few-shot-personalized-cuffless-blood-pressure-estimation-with-",
+      "title": "Enhancing Few-Shot Personalized Cuffless Blood Pressure Estimation With Self-Supervised Learning",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-31",
+      "record_type": "paper",
+      "source": {
+        "venue": "Physiological Measurement",
+        "doi": "10.1088/1361-6579/ae52a1",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41839155/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "few-shot calibration",
+        "self-supervised learning",
+        "personalization",
+        "PulseDB"
+      ],
+      "datasets": [
+        "PulseDB",
+        "two additional smaller external datasets"
+      ],
+      "input_signals": [
+        "PPG only or PPG+ECG",
+        "five labeled personal calibration samples"
+      ],
+      "model_method": "先用自监督学习获得跨人共享编码器，再用每人 5 个有标签样本做 few-shot 个体化；比较 PPG-only 与 PPG+ECG。",
+      "main_results": "5-shot 下 PPG+ECG 的 SBP/DBP MAE 为 6.57±6.22/3.66±3.99 mmHg；PPG-only 为 6.77±6.43/3.80±3.92 mmHg，并在两个较小数据集验证。",
+      "calibration": {
+        "type": "subject-specific few-shot",
+        "points": 5,
+        "timing": "deployment enrollment",
+        "notes": "五个带参考 BP 的个人样本是性能成立的必要条件。"
+      },
+      "subject_split": {
+        "status": "personalized evaluation",
+        "notes": "摘要未详述个人校准样本与测试样本的时间隔离。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "two additional smaller datasets",
+        "notes": "摘要称验证泛化，但未给出外部集具体规模和误差。"
+      },
+      "deployment": {
+        "level": "conditional",
+        "judgment": "适合低样本个体化，不能称为免校准",
+        "inference_inputs": [
+          "PPG or PPG+ECG",
+          "stored personalized model"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "首次使用需要 5 个个人 PPG/ECG+参考 BP 样本；后续推理不需要当前参考 BP。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "摘要未报告使用测试标签反归一化",
+        "abp_bp_alignment": "参考 BP 用作标签或临床比较；摘要未见其作为当前推理输入",
+        "abp_bp_windowing": "需全文核查窗口构建和同一受试者相邻片段分配",
+        "abp_bp_quality_filtering": "摘要未说明是否按参考 BP 或 ABP 质量筛选",
+        "target_dependent_calibration": "five labeled personal samples",
+        "window_leakage": "需核查校准/测试时间相邻性",
+        "subject_leakage": "personalization is intentional; population pretraining split must be disjoint",
+        "notes": "不能把个人校准样本混入测试；还需排查 PulseDB 同源 MIMIC/VitalDB 记录跨集合。"
+      },
+      "notes": "2026-09-01 为补齐 2026-08-31 日报而收录；正式摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-01",
+      "dataset": [
+        "PulseDB",
+        "two additional smaller external datasets"
+      ],
+      "inference_inputs": [
+        "PPG or PPG+ECG",
+        "stored personalized model"
+      ],
+      "study_summary": {
+        "goal": "把群体自监督表示用极少个人标签适配为个体 BP 模型。",
+        "method": "先用自监督学习获得跨人共享编码器，再用每人 5 个有标签样本做 few-shot 个体化；比较 PPG-only 与 PPG+ECG。",
+        "results": "5-shot 下 PPG+ECG 的 SBP/DBP MAE 为 6.57±6.22/3.66±3.99 mmHg；PPG-only 为 6.77±6.43/3.80±3.92 mmHg，并在两个较小数据集验证。",
+        "conclusion": "5-shot 可降低个体差异影响，但 SBP 离散度仍大。",
+        "takeaway": "五个标签就是校准成本；与零校准模型比较时必须显式列出。",
+        "deployment": "首次使用需要 5 个个人 PPG/ECG+参考 BP 样本；后续推理不需要当前参考 BP。",
+        "leakage": "不能把个人校准样本混入测试；还需排查 PulseDB 同源 MIMIC/VitalDB 记录跨集合。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-01",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "论文正式发表/在线发表日期为 2026-03-24；日报日期是本项目补录归档日期，不是论文首次发表日期。"
+      }
+    },
+    {
+      "id": "ppgbp-086-event-level-nocturnal-blood-pressure-dynamics-in-obstructive-sleep-apnea",
+      "title": "Event-Level Nocturnal Blood Pressure Dynamics in Obstructive Sleep Apnea Assessed by Cuffless Monitoring",
+      "year": 2026,
+      "first_reported_in_daily": "2026-08-31",
+      "record_type": "paper",
+      "source": {
+        "venue": "Sleep",
+        "doi": "10.1093/sleep/zsag122",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42059638/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "cuffless BP",
+        "PPG ring",
+        "sleep apnea",
+        "nocturnal BP",
+        "clinical application"
+      ],
+      "datasets": [
+        "62 patients",
+        "12,724 respiratory events"
+      ],
+      "input_signals": [
+        "validated PPG-based ring BP",
+        "polysomnography event annotations",
+        "SpO2 and heart rate"
+      ],
+      "model_method": "前瞻性同步整夜 PSG 与经验证的 PPG 戒指连续 BP，围绕每个呼吸事件分析 BP/HR/SpO2 轨迹并用线性混合模型评估影响因素。",
+      "main_results": "12,724 个事件显示事件中 BP 下降、事件后反弹，峰值在事件后 11.4 秒；长事件、呼吸暂停和 REM 睡眠对应更大 BP 波动。",
+      "calibration": {
+        "type": "device-dependent",
+        "points": null,
+        "timing": "not reported in abstract",
+        "notes": "论文使用现成已验证戒指；其校准细节需追溯设备验证文献。"
+      },
+      "subject_split": {
+        "status": "prospective observational analysis",
+        "notes": "不是 BP estimator 训练/测试研究。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "单队列临床应用研究。"
+      },
+      "deployment": {
+        "level": "clinical research",
+        "judgment": "展示连续 cuffless BP 的事件级价值，但不独立验证设备绝对精度",
+        "inference_inputs": [
+          "PPG-based ring output",
+          "PSG respiratory event timing"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "适用于睡眠实验室/居家 OSA 动态研究；BP 可信度继承自戒指设备的既有验证和校准。"
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "摘要未报告使用测试标签反归一化",
+        "abp_bp_alignment": "参考 BP 用作标签或临床比较；摘要未见其作为当前推理输入",
+        "abp_bp_windowing": "需全文核查窗口构建和同一受试者相邻片段分配",
+        "abp_bp_quality_filtering": "摘要未说明是否按参考 BP 或 ABP 质量筛选",
+        "target_dependent_calibration": "not applicable to analysis model",
+        "window_leakage": "not a predictive train/test setting",
+        "subject_leakage": "mixed-effects analysis accounts for repeated events",
+        "notes": "12,724 是事件数而非独立受试者数；统计推断必须以 62 人的聚类结构理解。"
+      },
+      "notes": "2026-09-01 为补齐 2026-08-31 日报而收录；正式摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-01",
+      "dataset": [
+        "62 patients",
+        "12,724 respiratory events"
+      ],
+      "inference_inputs": [
+        "PPG-based ring output",
+        "PSG respiratory event timing"
+      ],
+      "study_summary": {
+        "goal": "观察 OSA 单个呼吸事件前后的连续 BP 动态，而非只看整夜均值。",
+        "method": "前瞻性同步整夜 PSG 与经验证的 PPG 戒指连续 BP，围绕每个呼吸事件分析 BP/HR/SpO2 轨迹并用线性混合模型评估影响因素。",
+        "results": "12,724 个事件显示事件中 BP 下降、事件后反弹，峰值在事件后 11.4 秒；长事件、呼吸暂停和 REM 睡眠对应更大 BP 波动。",
+        "conclusion": "PPG 戒指揭示事件后 BP 反弹与 HR、SpO2 的时间错位。",
+        "takeaway": "这是 cuffless BP 的临床应用证据，不是新的 PPG→BP 精度验证。",
+        "deployment": "适用于睡眠实验室/居家 OSA 动态研究；BP 可信度继承自戒指设备的既有验证和校准。",
+        "leakage": "12,724 是事件数而非独立受试者数；统计推断必须以 62 人的聚类结构理解。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-01",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "论文正式发表/在线发表日期为 2026 online；日报日期是本项目补录归档日期，不是论文首次发表日期。"
       }
     }
   ]
