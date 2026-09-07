@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-01T23:58:00+08:00",
-  "record_count": 86,
-  "reviewed_count": 86,
+  "generated_at": "2026-09-07T23:50:00+08:00",
+  "record_count": 91,
+  "reviewed_count": 91,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -7902,6 +7902,467 @@
         "checked_on": "2026-09-01",
         "basis": "PubMed 正式期刊题录、DOI 与摘要",
         "note": "论文正式发表/在线发表日期为 2026 online；日报日期是本项目补录归档日期，不是论文首次发表日期。"
+      }
+    },
+    {
+      "id": "ppgbp-087-employing-machine-learning-techniques-for-non-invasive-blood-pressure-cl",
+      "title": "Employing Machine Learning Techniques for Non-Invasive Blood Pressure Classification Using Photoplethysmography Signals",
+      "year": 2026,
+      "first_reported_in_daily": "2026-09-07",
+      "record_type": "paper",
+      "source": {
+        "venue": "Physical and Engineering Sciences in Medicine",
+        "doi": "10.1007/s13246-026-01782-8",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42560452/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "blood pressure classification",
+        "feature selection",
+        "machine learning",
+        "class imbalance"
+      ],
+      "datasets": [
+        "participants aged 21-86; cohort size not stated in abstract"
+      ],
+      "input_signals": [
+        "PPG-derived handcrafted features"
+      ],
+      "model_method": "对 PPG 预处理并提取特征，比较 4 种特征选择方法和 5 种机器学习分类器，以 k-fold cross-validation 区分 4 个 BP 类别，并进一步处理训练集类别不平衡。",
+      "main_results": "Extra Trees + SelectFromModel 初始测试准确率 91.13%；平衡训练数据后准确率 93.25%，四类 F1 为 95.34%、90.80%、94.00%、91.11%。",
+      "calibration": {
+        "type": "not applicable to continuous BP regression",
+        "points": 0,
+        "timing": "not reported",
+        "notes": "输出 BP 类别，不是 SBP/DBP 数值。"
+      },
+      "subject_split": {
+        "status": "k-fold cross-validation plus test set",
+        "notes": "摘要未说明 k-fold 和测试集是否严格按受试者拆分。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "未报告独立外部数据集。"
+      },
+      "deployment": {
+        "level": "research",
+        "judgment": "分类结果较高，但缺少 subject-disjoint 与外部验证细节",
+        "inference_inputs": [
+          "PPG-derived features"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "单 PPG 特征推理成本低；类别定义、跨设备泛化和受试者级拆分仍需全文核实。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "not applicable to category classification",
+        "abp_bp_alignment": "BP labels define four categories",
+        "abp_bp_windowing": "摘要未披露窗口构建",
+        "abp_bp_quality_filtering": "摘要未说明是否按 BP 或信号质量筛选",
+        "target_dependent_calibration": "not reported",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "若同一受试者的多个 PPG 窗口跨折或跨测试集，93.25% 可能显著偏乐观；这是最重要的全文审计点。"
+      },
+      "notes": "2026-09-07 新发现补录；PubMed 正式期刊题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-07",
+      "dataset": [
+        "participants aged 21-86; cohort size not stated in abstract"
+      ],
+      "inference_inputs": [
+        "PPG-derived features"
+      ],
+      "study_summary": {
+        "goal": "用可解释的特征筛选和传统机器学习从 PPG 区分四个 BP 等级。",
+        "method": "对 PPG 预处理并提取特征，比较 4 种特征选择方法和 5 种机器学习分类器，以 k-fold cross-validation 区分 4 个 BP 类别，并进一步处理训练集类别不平衡。",
+        "results": "Extra Trees + SelectFromModel 初始测试准确率 91.13%；平衡训练数据后准确率 93.25%，四类 F1 为 95.34%、90.80%、94.00%、91.11%。",
+        "conclusion": "类别平衡提高了结果，但摘要证据不足以证明跨受试者泛化。",
+        "takeaway": "分类准确率不能转换为 mmHg 误差，也不能据此宣称连续 BP 达标。",
+        "deployment": "单 PPG 特征推理成本低；类别定义、跨设备泛化和受试者级拆分仍需全文核实。",
+        "leakage": "若同一受试者的多个 PPG 窗口跨折或跨测试集，93.25% 可能显著偏乐观；这是最重要的全文审计点。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-07",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2026-08-06；2026-09-07 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-088-dual-path-cuffless-ppg-based-blood-pressure-estimation-using-conformer-a",
+      "title": "Dual-Path Cuffless PPG-Based Blood Pressure Estimation Using Conformer and Swin Transformer",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-07",
+      "record_type": "paper",
+      "source": {
+        "venue": "IEEE Journal of Biomedical and Health Informatics",
+        "doi": "10.1109/JBHI.2025.3621132",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41359694/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "ABP waveform reconstruction",
+        "Conformer",
+        "Swin Transformer",
+        "cuffless BP"
+      ],
+      "datasets": [
+        "two public datasets; names and cohort sizes not stated in abstract"
+      ],
+      "input_signals": [
+        "PPG waveform"
+      ],
+      "model_method": "双路径框架分别以 Conformer-Transformer 和 1D Swin Transformer 建模 PPG 形态及节律，重建 ABP 波形并从中估计 SBP/DBP。",
+      "main_results": "Conformer 的 SBP/DBP MAE 为 2.979/1.603 mmHg，Swin 为 3.034/1.714 mmHg；论文称两者满足 BHS A 级和 AAMI 数值标准。",
+      "calibration": {
+        "type": "not reported in abstract",
+        "points": null,
+        "timing": "unknown",
+        "notes": "摘要未说明是否使用个体参考 BP 或标签分布做归一化。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "两个公共数据集的 subject split 未披露。"
+      },
+      "external_validation": {
+        "status": null,
+        "dataset_or_cohort": "two public datasets",
+        "notes": "未说明跨库零微调外部测试，不能仅凭两个数据集认定 external validation。"
+      },
+      "deployment": {
+        "level": "research",
+        "judgment": "误差很低但验证设计和校准信息不足",
+        "inference_inputs": [
+          "PPG waveform"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "理论上单 PPG 推理；部署前必须复核训练/测试受试者隔离、校准方式、BP 范围和跨设备性能。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "unknown; ABP reconstruction may require label-derived scaling",
+        "abp_bp_alignment": "PPG and ABP are synchronized for supervised reconstruction",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "ABP 重建论文常因随机窗口拆分、同人跨集合或按目标 ABP 反归一化产生异常低误差；摘要没有排除这些风险。"
+      },
+      "notes": "2026-09-07 新发现补录；PubMed 正式期刊题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-07",
+      "dataset": [
+        "two public datasets; names and cohort sizes not stated in abstract"
+      ],
+      "inference_inputs": [
+        "PPG waveform"
+      ],
+      "study_summary": {
+        "goal": "用两种 Transformer 路径从 PPG 重建 ABP，并估计 SBP/DBP。",
+        "method": "双路径框架分别以 Conformer-Transformer 和 1D Swin Transformer 建模 PPG 形态及节律，重建 ABP 波形并从中估计 SBP/DBP。",
+        "results": "Conformer 的 SBP/DBP MAE 为 2.979/1.603 mmHg，Swin 为 3.034/1.714 mmHg；论文称两者满足 BHS A 级和 AAMI 数值标准。",
+        "conclusion": "摘要报告的域内误差很低，但缺少足以判断临床泛化的拆分与校准细节。",
+        "takeaway": "不能把 BHS/AAMI 数值门槛声明等同于按标准完成独立临床验证。",
+        "deployment": "理论上单 PPG 推理；部署前必须复核训练/测试受试者隔离、校准方式、BP 范围和跨设备性能。",
+        "leakage": "ABP 重建论文常因随机窗口拆分、同人跨集合或按目标 ABP 反归一化产生异常低误差；摘要没有排除这些风险。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-07",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-12 issue；2026-09-07 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-089-generalizable-deep-learning-for-photoplethysmography-based-blood-pressur",
+      "title": "Generalizable Deep Learning for Photoplethysmography-Based Blood Pressure Estimation: A Benchmarking Study",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-07",
+      "record_type": "paper",
+      "source": {
+        "venue": "Machine Learning: Health",
+        "doi": "10.1088/3049-477X/ae01a8",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40959521/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "benchmark",
+        "out-of-distribution",
+        "calibration",
+        "domain adaptation"
+      ],
+      "datasets": [
+        "PulseDB",
+        "several external datasets"
+      ],
+      "input_signals": [
+        "raw PPG waveform",
+        "optional subject-specific BP calibration"
+      ],
+      "model_method": "在 PulseDB 统一训练 5 个深度模型，比较域内测试与多个外部数据集的 OOD 表现，并分析受试者校准、BP 分布差异和样本级域适配。",
+      "main_results": "最佳 XResNet1d101 在 PulseDB 有校准时 SBP/DBP MAE 9.0/5.8 mmHg，无校准为 13.9/8.5；外部无校准范围为 10.0-18.6/5.9-10.3 mmHg。",
+      "calibration": {
+        "type": "subject-specific, evaluated separately",
+        "points": null,
+        "timing": "before personalized inference",
+        "notes": "论文明确分别报告有校准与无校准结果。"
+      },
+      "subject_split": {
+        "status": "in-distribution benchmark plus out-of-distribution tests",
+        "notes": "强调外部数据泛化；具体 subject split 需全文查阅。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "multiple external datasets",
+        "notes": "在外部数据上无校准测试，结果明显劣于部分域内报道。"
+      },
+      "deployment": {
+        "level": "evidence benchmark",
+        "judgment": "真实揭示 PPG-BP 的跨库泛化缺口",
+        "inference_inputs": [
+          "PPG waveform",
+          "optional stored subject calibration"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "无校准部署误差较高；若采用个体校准，必须把 cuff BP 采集成本与重校准周期写入产品要求。"
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "benchmark explicitly separates calibration settings; exact scaling requires full-text check",
+        "abp_bp_alignment": "reference ABP/BP used as labels",
+        "abp_bp_windowing": "benchmark design focuses on ID versus OOD",
+        "abp_bp_quality_filtering": "BP distribution shift is explicitly analyzed",
+        "target_dependent_calibration": "subject-specific calibration is explicit, not hidden",
+        "window_leakage": "lower risk due to external datasets",
+        "subject_leakage": "external datasets are distinct",
+        "notes": "这是对泛化偏差的审计型研究；仍需注意 PulseDB 与外部库是否共享 MIMIC/VitalDB 来源记录，但 OOD 结果没有被包装成免校准高精度。"
+      },
+      "notes": "2026-09-07 新发现补录；PubMed 正式期刊题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-07",
+      "dataset": [
+        "PulseDB",
+        "several external datasets"
+      ],
+      "inference_inputs": [
+        "PPG waveform",
+        "optional stored subject calibration"
+      ],
+      "study_summary": {
+        "goal": "用统一基准检验 PPG 深度模型离开训练分布后是否仍能准确估计 BP。",
+        "method": "在 PulseDB 统一训练 5 个深度模型，比较域内测试与多个外部数据集的 OOD 表现，并分析受试者校准、BP 分布差异和样本级域适配。",
+        "results": "最佳 XResNet1d101 在 PulseDB 有校准时 SBP/DBP MAE 9.0/5.8 mmHg，无校准为 13.9/8.5；外部无校准范围为 10.0-18.6/5.9-10.3 mmHg。",
+        "conclusion": "跨库误差显著扩大，数据集 BP 分布差异比模型小改动更关键。",
+        "takeaway": "这是本期最有价值的负向证据：域内低误差不能代表真实部署。",
+        "deployment": "无校准部署误差较高；若采用个体校准，必须把 cuff BP 采集成本与重校准周期写入产品要求。",
+        "leakage": "这是对泛化偏差的审计型研究；仍需注意 PulseDB 与外部库是否共享 MIMIC/VitalDB 来源记录，但 OOD 结果没有被包装成免校准高精度。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-07",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-09-15 online / 2025-12-01 issue；2026-09-07 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-090-a-multiwavelength-photoplethysmography-dataset-with-blood-pressure-and-h",
+      "title": "A Multiwavelength Photoplethysmography Dataset With Blood Pressure and Heart Rate Reference Measurements",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-07",
+      "record_type": "paper",
+      "source": {
+        "venue": "Data in Brief",
+        "doi": "10.1016/j.dib.2025.112284",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41362339/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG dataset",
+        "multiwavelength",
+        "blood pressure reference",
+        "wearable sensing",
+        "red infrared"
+      ],
+      "datasets": [
+        "127 seated subjects",
+        "red and infrared PPG at 100 Hz",
+        "intermittent cuff SBP/DBP and heart rate"
+      ],
+      "input_signals": [
+        "red PPG",
+        "infrared PPG"
+      ],
+      "model_method": "按伦理审批的标准化静坐流程，以 MAX86150EVSYS 同步采集红光和红外 PPG（100 Hz），并用商用血压计记录 SBP/DBP 和心率参考值。",
+      "main_results": "发布 127 名受试者的双波长 PPG 与参考 SBP/DBP/HR；采集时尽量减少运动以提供高质量建模数据。",
+      "calibration": {
+        "type": "not applicable; dataset paper",
+        "points": null,
+        "timing": "intermittent reference collection",
+        "notes": "袖带读数是数据标签，不是一个已验证 estimator。"
+      },
+      "subject_split": {
+        "status": "not predefined",
+        "notes": "数据集论文未规定训练/测试拆分；使用者必须自己建立 subject-disjoint split。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "这是单中心数据资源。"
+      },
+      "deployment": {
+        "level": "dataset",
+        "judgment": "适合双波长方法开发，不足以支持连续逐搏 BP 标签",
+        "inference_inputs": [
+          "red and infrared PPG"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "数据来自受控静坐、低运动环境；不能直接代表日常可穿戴动态场景。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not applicable until downstream modeling",
+        "abp_bp_alignment": "intermittent cuff BP paired with PPG recordings",
+        "abp_bp_windowing": "downstream users must not split windows from one subject across sets",
+        "abp_bp_quality_filtering": "collection minimizes motion, narrowing deployment domain",
+        "target_dependent_calibration": "not applicable",
+        "window_leakage": "depends on downstream use",
+        "subject_leakage": "must be prevented by downstream subject-level split",
+        "notes": "关键风险是把一次袖带值复制为大量 PPG 窗口标签并随机拆分，造成标签扩增和同人泄露；数据集本身不提供连续 ABP。"
+      },
+      "notes": "2026-09-07 新发现补录；PubMed 正式期刊题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-07",
+      "dataset": [
+        "127 seated subjects",
+        "red and infrared PPG at 100 Hz",
+        "intermittent cuff SBP/DBP and heart rate"
+      ],
+      "inference_inputs": [
+        "red and infrared PPG"
+      ],
+      "study_summary": {
+        "goal": "提供带 cuff BP 参考的红光/红外双波长 PPG 数据资源。",
+        "method": "按伦理审批的标准化静坐流程，以 MAX86150EVSYS 同步采集红光和红外 PPG（100 Hz），并用商用血压计记录 SBP/DBP 和心率参考值。",
+        "results": "发布 127 名受试者的双波长 PPG 与参考 SBP/DBP/HR；采集时尽量减少运动以提供高质量建模数据。",
+        "conclusion": "资源对波长比较有用，但规模、静态条件和稀疏 BP 标签限制了外推。",
+        "takeaway": "这是数据集，不是模型；127 人不能因切成许多窗口而被称作大样本。",
+        "deployment": "数据来自受控静坐、低运动环境；不能直接代表日常可穿戴动态场景。",
+        "leakage": "关键风险是把一次袖带值复制为大量 PPG 窗口标签并随机拆分，造成标签扩增和同人泄露；数据集本身不提供连续 ABP。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-07",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-11-14 online / 2025-12 issue；2026-09-07 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-091-clinical-validation-of-comprehensive-time-and-frequency-domain-photoplet",
+      "title": "Clinical Validation of Comprehensive Time- and Frequency-Domain Photoplethysmography Features From a Single-Sensor System for Non-Invasive Assessment of Vascular Load and Systolic Blood Pressure",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-07",
+      "record_type": "paper",
+      "source": {
+        "venue": "Frontiers in Physiology",
+        "doi": "10.3389/fphys.2025.1695391",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41234693/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "SBP screening",
+        "vascular load",
+        "harmonic features",
+        "single sensor"
+      ],
+      "datasets": [
+        "590 cardiology outpatients"
+      ],
+      "input_signals": [
+        "90-second fingertip PPG",
+        "19 morphology, HRV, and harmonic features"
+      ],
+      "model_method": "在 590 名心脏科门诊成人中采集 90 秒、500 Hz 指端 PPG，按 cuff SBP 分为四组，比较 19 个时域、形态、HRV 与频域谐波特征的组间差异和效应量。",
+      "main_results": "波形尖锐度和 H2/H1、H3/H1、H4/H1 随 SBP 升高而下降；收缩期延长、舒张期缩短，效应量总体为小到中等。",
+      "calibration": {
+        "type": "not applicable; association study",
+        "points": null,
+        "timing": "same-session cuff reference",
+        "notes": "研究分析特征与 SBP 分组关联，并未给出连续 BP 回归器。"
+      },
+      "subject_split": {
+        "status": "not applicable to predictive model",
+        "notes": "统计组间比较；没有训练/测试模型。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "单队列，无外部验证。"
+      },
+      "deployment": {
+        "level": "screening evidence",
+        "judgment": "支持 PPG 形态/频谱与血管负荷相关，但不是 BP estimator 验证",
+        "inference_inputs": [
+          "90-second fingertip PPG"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "单传感器采集简单，但目前只证明组间关联；需要前瞻性模型和独立验证才能转为筛查工具。"
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "not applicable",
+        "abp_bp_alignment": "cuff SBP defines four analysis groups",
+        "abp_bp_windowing": "one 90-second acquisition per participant is implied",
+        "abp_bp_quality_filtering": "artifact rejection applied; thresholds not in abstract",
+        "target_dependent_calibration": "not applicable",
+        "window_leakage": "not a predictive split",
+        "subject_leakage": "not applicable",
+        "notes": "没有异常低回归误差或随机窗口测试；主要风险是把关联性结果误述成预测性能。"
+      },
+      "notes": "2026-09-07 新发现补录；PubMed 正式期刊题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-07",
+      "dataset": [
+        "590 cardiology outpatients"
+      ],
+      "inference_inputs": [
+        "90-second fingertip PPG"
+      ],
+      "study_summary": {
+        "goal": "验证单指 PPG 的时域与频域特征是否反映 SBP 分级和血管负荷。",
+        "method": "在 590 名心脏科门诊成人中采集 90 秒、500 Hz 指端 PPG，按 cuff SBP 分为四组，比较 19 个时域、形态、HRV 与频域谐波特征的组间差异和效应量。",
+        "results": "波形尖锐度和 H2/H1、H3/H1、H4/H1 随 SBP 升高而下降；收缩期延长、舒张期缩短，效应量总体为小到中等。",
+        "conclusion": "多个形态和谐波指标随 SBP 升高呈系统变化，但效应量有限。",
+        "takeaway": "这是生理关联和特征验证，不是连续 SBP 数值预测。",
+        "deployment": "单传感器采集简单，但目前只证明组间关联；需要前瞻性模型和独立验证才能转为筛查工具。",
+        "leakage": "没有异常低回归误差或随机窗口测试；主要风险是把关联性结果误述成预测性能。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-07",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-10-29；2026-09-07 是数据库收录日期。"
       }
     }
   ]
