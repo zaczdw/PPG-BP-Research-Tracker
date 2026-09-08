@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-07T23:50:00+08:00",
-  "record_count": 91,
-  "reviewed_count": 91,
+  "generated_at": "2026-09-08T21:00:00+08:00",
+  "record_count": 96,
+  "reviewed_count": 96,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -8363,6 +8363,472 @@
         "checked_on": "2026-09-07",
         "basis": "PubMed 正式期刊题录、DOI 与摘要",
         "note": "首次在线/正式发表时间为 2025-10-29；2026-09-07 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-092-conformal-prediction-quantifies-wearable-cuffless-blood-pressure-with-ce",
+      "title": "Conformal Prediction Quantifies Wearable Cuffless Blood Pressure With Certainty",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-08",
+      "record_type": "paper",
+      "source": {
+        "venue": "Scientific Reports",
+        "doi": "10.1038/s41598-025-09580-0",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40695893/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "ECG",
+        "conformal prediction",
+        "uncertainty",
+        "ambulatory BP"
+      ],
+      "datasets": [
+        "Aurora-BP: 483 participants, 24-hour ambulatory recordings"
+      ],
+      "input_signals": [
+        "wearable ECG",
+        "wearable PPG"
+      ],
+      "model_method": "以 quantile-loss GBRT 从可穿戴 ECG/PPG 估计 24 小时 BP 和模型不确定性，再用 conformal prediction 校准置信区间，使参考 BP 获得保证覆盖率。",
+      "main_results": "日间 SBP/DBP MAD 为 14.32/9.53 mmHg，夜间为 14.22/10.13 mmHg；核心贡献是带覆盖保证的区间，而非降低点估计误差。",
+      "calibration": {
+        "type": "conformal uncertainty calibration",
+        "points": null,
+        "timing": "calibration set before test",
+        "notes": "这里的 calibration 是区间覆盖校准；摘要未说明是否还需个人 cuff BP 校准。"
+      },
+      "subject_split": {
+        "status": "model/calibration/test separation implied",
+        "notes": "conformal 方法需要独立校准集，但摘要未给出受试者级拆分细节。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "仅 Aurora-BP 单数据集验证。"
+      },
+      "deployment": {
+        "level": "research",
+        "judgment": "误差仍高，但能显式表达单次读数不确定性",
+        "inference_inputs": [
+          "ECG",
+          "PPG",
+          "trained conformal interval model"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "适合把不可靠点预测改为带区间的风险提示；区间宽度、跨设备覆盖和个人校准要求仍需核实。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not stated in abstract",
+        "abp_bp_alignment": "ambulatory reference BP used for supervised targets and interval coverage",
+        "abp_bp_windowing": "24-hour windows/epochs; construction not detailed",
+        "abp_bp_quality_filtering": "not stated",
+        "target_dependent_calibration": "conformal calibration uses held-out labeled reference values, not current test BP",
+        "window_leakage": "depends on calibration/test separation",
+        "subject_leakage": "not stated in abstract",
+        "notes": "若同一受试者相邻窗口分布在 conformal calibration 与测试中，覆盖率可能偏乐观；需全文确认 subject-disjoint。"
+      },
+      "notes": "2026-09-08 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-08",
+      "dataset": [
+        "Aurora-BP: 483 participants, 24-hour ambulatory recordings"
+      ],
+      "inference_inputs": [
+        "ECG",
+        "PPG",
+        "trained conformal interval model"
+      ],
+      "study_summary": {
+        "goal": "为 24 小时可穿戴 BP 预测提供有统计覆盖保证的不确定性区间。",
+        "method": "以 quantile-loss GBRT 从可穿戴 ECG/PPG 估计 24 小时 BP 和模型不确定性，再用 conformal prediction 校准置信区间，使参考 BP 获得保证覆盖率。",
+        "results": "日间 SBP/DBP MAD 为 14.32/9.53 mmHg，夜间为 14.22/10.13 mmHg；核心贡献是带覆盖保证的区间，而非降低点估计误差。",
+        "conclusion": "区间估计提高可解释性，但 14 mmHg 级 SBP 点误差显示技术仍不够精确。",
+        "takeaway": "这篇论文的亮点是可靠区间，不是高精度 BP 数值。",
+        "deployment": "适合把不可靠点预测改为带区间的风险提示；区间宽度、跨设备覆盖和个人校准要求仍需核实。",
+        "leakage": "若同一受试者相邻窗口分布在 conformal calibration 与测试中，覆盖率可能偏乐观；需全文确认 subject-disjoint。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-08",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-07-23；2026-09-08 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-093-integrating-transfer-learning-with-scalogram-analysis-for-blood-pressure",
+      "title": "Integrating Transfer Learning With Scalogram Analysis for Blood Pressure Estimation From PPG Signals",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-08",
+      "record_type": "paper",
+      "source": {
+        "venue": "Scientific Reports",
+        "doi": "10.1038/s41598-025-23350-y",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41224941/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "scalogram",
+        "transfer learning",
+        "random forest",
+        "MIMIC-II"
+      ],
+      "datasets": [
+        "MIMIC-II; cohort size not stated in abstract"
+      ],
+      "input_signals": [
+        "PPG transformed by continuous wavelet transform"
+      ],
+      "model_method": "用 CWT 把 PPG 转为 scalogram，分别由 VGG16、ResNet50、InceptionV3、NASNetLarge、InceptionResNetV2 和 ConvNeXtTiny 提取深层特征，再由随机森林回归 BP。",
+      "main_results": "ConvNeXtTiny 的 SBP MAE/SD 为 2.95/4.11 mmHg，DBP 为 1.66/2.60 mmHg；摘要称达到 AAMI 与 BHS 要求。",
+      "calibration": {
+        "type": "not reported in abstract",
+        "points": null,
+        "timing": "unknown",
+        "notes": "未说明个人校准、全局归一化或目标尺度恢复方式。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "MIMIC-II 的患者级拆分没有在摘要说明。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "单22仅单一数据库域内结果。"
+      },
+      "deployment": {
+        "level": "research",
+        "judgment": "低域内误差需要严格复核拆分与目标泄露",
+        "inference_inputs": [
+          "PPG scalogram"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "单 PPG 输入但图像化和大型视觉骨干计算较重；无跨设备或外部数据验证。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "PPG synchronized to MIMIC-II BP labels",
+        "abp_bp_windowing": "unknown; random window split is a material risk",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "MIMIC-II 上异常低 MAE 若没有 patient-disjoint split，可能主要来自同一患者和相邻窗口泄露；AAMI/BHS 声明不能替代标准临床验证。"
+      },
+      "notes": "2026-09-08 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-08",
+      "dataset": [
+        "MIMIC-II; cohort size not stated in abstract"
+      ],
+      "inference_inputs": [
+        "PPG scalogram"
+      ],
+      "study_summary": {
+        "goal": "检验图像迁移学习特征能否提升 PPG 到 BP 的回归。",
+        "method": "用 CWT 把 PPG 转为 scalogram，分别由 VGG16、ResNet50、InceptionV3、NASNetLarge、InceptionResNetV2 和 ConvNeXtTiny 提取深层特征，再由随机森林回归 BP。",
+        "results": "ConvNeXtTiny 的 SBP MAE/SD 为 2.95/4.11 mmHg，DBP 为 1.66/2.60 mmHg；摘要称达到 AAMI 与 BHS 要求。",
+        "conclusion": "ConvNeXtTiny 域内结果最好，但摘要没有给出泛化审计所需信息。",
+        "takeaway": "低 MAE 暂不能作为部署证据，必须先确认 subject split、归一化和外部验证。",
+        "deployment": "单 PPG 输入但图像化和大型视觉骨干计算较重；无跨设备或外部数据验证。",
+        "leakage": "MIMIC-II 上异常低 MAE 若没有 patient-disjoint split，可能主要来自同一患者和相邻窗口泄露；AAMI/BHS 声明不能替代标准临床验证。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-08",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-11-12；2026-09-08 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-094-bpinet-synchronous-blood-pressure-estimation-and-user-authentication-bas",
+      "title": "BPINet: Synchronous Blood Pressure Estimation and User Authentication Based on ECG and PPG Signal With Multi-Task Learning",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-08",
+      "record_type": "paper",
+      "source": {
+        "venue": "Artificial Intelligence in Medicine",
+        "doi": "10.1016/j.artmed.2025.103277",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41027107/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "ECG",
+        "PPG",
+        "blood pressure estimation",
+        "user authentication",
+        "multi-task learning"
+      ],
+      "datasets": [
+        "University of Queensland Vital Signs dataset",
+        "custom multi-family ECG/PPG dataset"
+      ],
+      "input_signals": [
+        "ECG",
+        "PPG"
+      ],
+      "model_method": "BPINet 用 CNN-BiLSTM 提取 ECG/PPG 特征，并以 Multi-gate Mixture-of-Experts 同时执行 BP 回归和用户身份识别。",
+      "main_results": "UQVS 身份识别 97.54%，SBP MAE±SD 3.317±5.771、DBP 2.444±4.147 mmHg；自建集身份识别 94.30%，SBP 2.940±4.753 mmHg。",
+      "calibration": {
+        "type": "identity-aware multitask personalization",
+        "points": null,
+        "timing": "not explicitly reported",
+        "notes": "身份任务可能使模型利用个人 BP 基线；摘要未说明新用户校准流程。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "必须确认同一用户是否跨 train/test；身份识别任务让这一点尤其关键。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "UQVS and custom family dataset",
+        "notes": "在两个数据来源上报告，但摘要未说明跨库训练后零微调验证。"
+      },
+      "deployment": {
+        "level": "conditional",
+        "judgment": "适合已注册家庭成员，但新用户泛化证据不足",
+        "inference_inputs": [
+          "ECG",
+          "PPG",
+          "learned user identity representation"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "需要双信号和用户注册；若身份特征承载长期 BP 均值，换用户或病情变化时可能失准。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "not stated",
+        "abp_bp_alignment": "ECG/PPG paired with BP targets",
+        "abp_bp_windowing": "not stated",
+        "abp_bp_quality_filtering": "not stated",
+        "target_dependent_calibration": "implicit identity-specific baseline may act as calibration",
+        "window_leakage": "unknown",
+        "subject_leakage": "critical and not reported in abstract",
+        "notes": "若同一用户出现在训练和测试中，身份识别会直接帮助记忆其 BP 基线；低误差不能代表 unseen-subject 泛化。"
+      },
+      "notes": "2026-09-08 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-08",
+      "dataset": [
+        "University of Queensland Vital Signs dataset",
+        "custom multi-family ECG/PPG dataset"
+      ],
+      "inference_inputs": [
+        "ECG",
+        "PPG",
+        "learned user identity representation"
+      ],
+      "study_summary": {
+        "goal": "一次推理同时估计 BP 并识别家庭用户，以自动归档个体健康记录。",
+        "method": "BPINet 用 CNN-BiLSTM 提取 ECG/PPG 特征，并以 Multi-gate Mixture-of-Experts 同时执行 BP 回归和用户身份识别。",
+        "results": "UQVS 身份识别 97.54%，SBP MAE±SD 3.317±5.771、DBP 2.444±4.147 mmHg；自建集身份识别 94.30%，SBP 2.940±4.753 mmHg。",
+        "conclusion": "多任务结果亮眼，但模型可能通过身份记忆获得个体化优势。",
+        "takeaway": "应把它视为已知用户个体化系统，不应直接称为跨人通用模型。",
+        "deployment": "需要双信号和用户注册；若身份特征承载长期 BP 均值，换用户或病情变化时可能失准。",
+        "leakage": "若同一用户出现在训练和测试中，身份识别会直接帮助记忆其 BP 基线；低误差不能代表 unseen-subject 泛化。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-08",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-09-25 online / 2025-12 issue；2026-09-08 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-095-development-of-an-improved-stacked-u-net-model-for-cuffless-blood-pressu",
+      "title": "Development of an Improved Stacked U-Net Model for Cuffless Blood Pressure Estimation Based on PPG Signals",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-08",
+      "record_type": "paper",
+      "source": {
+        "venue": "IEEE Open Journal of Engineering in Medicine and Biology",
+        "doi": "10.1109/OJEMB.2025.3624566",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41221440/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "U-Net",
+        "velocity plethysmogram",
+        "attention",
+        "cuffless BP"
+      ],
+      "datasets": [
+        "dataset and cohort size not stated in abstract"
+      ],
+      "input_signals": [
+        "PPG",
+        "velocity plethysmogram derivative"
+      ],
+      "model_method": "改进 stacked U-Net，在 PPG 基础上加入 velocity plethysmogram，并用空间与通道注意力改善特征提取和 decoder mismatch。",
+      "main_results": "SBP/DBP MAE 为 3.921/2.441 mmHg；论文称达到 BHS Grade A 与 AAMI 数值要求，并接近 PPG+ECG 的 SE-LSTM。",
+      "calibration": {
+        "type": "not reported in abstract",
+        "points": null,
+        "timing": "unknown",
+        "notes": "未披露个人 BP 校准或归一化。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "数据集、样本量和 subject split 均未在摘要给出。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "未报告独立外部验证。"
+      },
+      "deployment": {
+        "level": "research",
+        "judgment": "架构改进合理，但验证信息不足以支持临床声称",
+        "inference_inputs": [
+          "PPG and its first derivative"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "输入可由单 PPG 导出，硬件成本低；但需先证明跨受试者、跨设备和无需当前参考 BP。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "supervised BP/ABP labels implied",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "摘要缺失数据集和拆分是重大审计缺口；3-4 mmHg 级 MAE 在证实 subject-disjoint 前不宜用于比较。"
+      },
+      "notes": "2026-09-08 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-08",
+      "dataset": [
+        "dataset and cohort size not stated in abstract"
+      ],
+      "inference_inputs": [
+        "PPG and its first derivative"
+      ],
+      "study_summary": {
+        "goal": "以 VPG 和双注意力改进 PPG-only stacked U-Net 的 SBP/DBP 估计。",
+        "method": "改进 stacked U-Net，在 PPG 基础上加入 velocity plethysmogram，并用空间与通道注意力改善特征提取和 decoder mismatch。",
+        "results": "SBP/DBP MAE 为 3.921/2.441 mmHg；论文称达到 BHS Grade A 与 AAMI 数值要求，并接近 PPG+ECG 的 SE-LSTM。",
+        "conclusion": "模型在作者实验中优于若干基线，但泛化与校准条件没有摘要级证据。",
+        "takeaway": "不要把达到数值阈值写成通过标准化临床验证。",
+        "deployment": "输入可由单 PPG 导出，硬件成本低；但需先证明跨受试者、跨设备和无需当前参考 BP。",
+        "leakage": "摘要缺失数据集和拆分是重大审计缺口；3-4 mmHg 级 MAE 在证实 subject-disjoint 前不宜用于比较。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-08",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-10-23；2026-09-08 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-096-deep-learning-based-arterial-blood-pressure-waveform-generation-using-ph",
+      "title": "Deep Learning-Based Arterial Blood Pressure Waveform Generation Using Photoplethysmography for Non-Invasive Hemodynamic Monitoring",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-08",
+      "record_type": "paper",
+      "source": {
+        "venue": "Studies in Health Technology and Informatics",
+        "doi": "10.3233/SHTI251277",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40776294/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "ABP waveform reconstruction",
+        "ResUNet",
+        "periodic calibration",
+        "intraoperative"
+      ],
+      "datasets": [
+        "4,687 surgical cases at Seoul National University Hospital"
+      ],
+      "input_signals": [
+        "PPG",
+        "periodic reference BP calibration every 2.5 minutes"
+      ],
+      "model_method": "在 4,687 例手术数据上训练 ResUNet 从 PPG 生成 ABP 波形，并每 2.5 分钟注入一次校准值；与无校准模型比较。",
+      "main_results": "周期校准模型 MAE 5.69、SD 3.76 mmHg，无校准模型 MAE 9.47、SD 5.52；摘要称 SBP 达 BHS B 级、DBP 达 A 级。",
+      "calibration": {
+        "type": "periodic reference BP",
+        "points": null,
+        "timing": "every 2.5 minutes",
+        "notes": "高性能明确依赖非常频繁的参考 BP 校准。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "4,687 例的患者级拆分未披露。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "单院术中数据，无外部验证。"
+      },
+      "deployment": {
+        "level": "not autonomous",
+        "judgment": "频繁校准显著改善误差，但削弱无袖带连续监测价值",
+        "inference_inputs": [
+          "PPG",
+          "reference BP value refreshed every 2.5 minutes"
+        ],
+        "current_reference_bp_required": true,
+        "notes": "每 2.5 分钟需要参考 BP，接近持续依赖传统测量；只适合有参考设备的辅助重建场景。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "periodic calibration value directly influences output scale",
+        "abp_bp_alignment": "PPG and invasive ABP synchronized in surgery",
+        "abp_bp_windowing": "not stated",
+        "abp_bp_quality_filtering": "not stated",
+        "target_dependent_calibration": "explicit every 2.5 minutes",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "周期参考 BP 不是隐蔽泄露，但必须视为推理输入；若宣传为独立 cuffless BP 会严重误导。还需核查患者级拆分。"
+      },
+      "notes": "2026-09-08 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-08",
+      "dataset": [
+        "4,687 surgical cases at Seoul National University Hospital"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "reference BP value refreshed every 2.5 minutes"
+      ],
+      "study_summary": {
+        "goal": "用 PPG 重建术中 ABP 波形，并量化频繁参考值校准的收益。",
+        "method": "在 4,687 例手术数据上训练 ResUNet 从 PPG 生成 ABP 波形，并每 2.5 分钟注入一次校准值；与无校准模型比较。",
+        "results": "周期校准模型 MAE 5.69、SD 3.76 mmHg，无校准模型 MAE 9.47、SD 5.52；摘要称 SBP 达 BHS B 级、DBP 达 A 级。",
+        "conclusion": "校准把总体 MAE 从 9.47 降到 5.69 mmHg，但代价是每 2.5 分钟依赖参考 BP。",
+        "takeaway": "这不是自主无袖带方案；当前参考 BP 是部署链路的一部分。",
+        "deployment": "每 2.5 分钟需要参考 BP，接近持续依赖传统测量；只适合有参考设备的辅助重建场景。",
+        "leakage": "周期参考 BP 不是隐蔽泄露，但必须视为推理输入；若宣传为独立 cuffless BP 会严重误导。还需核查患者级拆分。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-08",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-08-07；2026-09-08 是数据库收录日期。"
       }
     }
   ]
