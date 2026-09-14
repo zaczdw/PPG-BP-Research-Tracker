@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-08T21:00:00+08:00",
-  "record_count": 96,
-  "reviewed_count": 96,
+  "generated_at": "2026-09-14T23:27:00+08:00",
+  "record_count": 101,
+  "reviewed_count": 101,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -8829,6 +8829,487 @@
         "checked_on": "2026-09-08",
         "basis": "PubMed 正式期刊题录、DOI 与摘要",
         "note": "首次在线/正式发表时间为 2025-08-07；2026-09-08 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-097-unraveling-blood-pressure-estimation-with-a-deep-learning-approach-using",
+      "title": "Unraveling Blood Pressure Estimation With a Deep Learning Approach Using Multiple Embeddings",
+      "year": 2026,
+      "first_reported_in_daily": "2026-09-14",
+      "record_type": "paper",
+      "source": {
+        "venue": "Computers in Biology and Medicine",
+        "doi": "10.1016/j.compbiomed.2025.111377",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41365110/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "ECG",
+        "pulse arrival time",
+        "attention CNN",
+        "calibration-free"
+      ],
+      "datasets": [
+        "Cabrini Hospital",
+        "PTT PPG",
+        "MIMIC-II"
+      ],
+      "input_signals": [
+        "ECG R peak",
+        "PPG P peak",
+        "PAT",
+        "Euclidean and Manhattan similarity matrices"
+      ],
+      "model_method": "由 ECG R 峰和 PPG P 峰计算 PAT，再把样本间欧氏/曼哈顿距离矩阵作为多重嵌入，输入 attention-guided CNN 回归 SBP/DBP。",
+      "main_results": "Cabrini、PTT PPG、MIMIC-II 的 SBP MAE 分别为 6.45、1.31、2.12 mmHg，DBP 为 2.92、0.98、1.14 mmHg；R² 约 0.89-0.95。",
+      "calibration": {
+        "type": "claimed calibration-free",
+        "points": 0,
+        "timing": "none",
+        "notes": "摘要宣称无受试者特定校准，但未说明全局标准化和 BP 尺度恢复。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "三个数据集的受试者级拆分未披露。"
+      },
+      "external_validation": {
+        "status": null,
+        "dataset_or_cohort": "three datasets",
+        "notes": "多数据集均报告，但是否跨库零微调外测不明确。"
+      },
+      "deployment": {
+        "level": "research",
+        "judgment": "跨三库结果有吸引力，但极低误差需先排除拆分和嵌入泄露",
+        "inference_inputs": [
+          "ECG",
+          "PPG",
+          "derived PAT and similarity embedding"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "需要同步 ECG+PPG；similarity embedding 在实时新样本上的参照集合与计算流程需明确。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "ECG/PPG synchronized with reference BP",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "claimed absent",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "距离矩阵若同时利用训练与测试样本构建，会形成跨集合信息泄露；还需确认三库均为 subject-disjoint。"
+      },
+      "notes": "2026-09-14 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-14",
+      "dataset": [
+        "Cabrini Hospital",
+        "PTT PPG",
+        "MIMIC-II"
+      ],
+      "inference_inputs": [
+        "ECG",
+        "PPG",
+        "derived PAT and similarity embedding"
+      ],
+      "study_summary": {
+        "goal": "用 PAT 和样本相似度嵌入实现免个体校准 BP 估计。",
+        "method": "由 ECG R 峰和 PPG P 峰计算 PAT，再把样本间欧氏/曼哈顿距离矩阵作为多重嵌入，输入 attention-guided CNN 回归 SBP/DBP。",
+        "results": "Cabrini、PTT PPG、MIMIC-II 的 SBP MAE 分别为 6.45、1.31、2.12 mmHg，DBP 为 2.92、0.98、1.14 mmHg；R² 约 0.89-0.95。",
+        "conclusion": "不同库性能差异大，最好的 1 mmHg 级结果不能在缺少拆分细节时视为泛化。",
+        "takeaway": "‘calibration-free’不等于‘leakage-free’，相似度矩阵的构建范围是关键。",
+        "deployment": "需要同步 ECG+PPG；similarity embedding 在实时新样本上的参照集合与计算流程需明确。",
+        "leakage": "距离矩阵若同时利用训练与测试样本构建，会形成跨集合信息泄露；还需确认三库均为 subject-disjoint。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-14",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-12-08 online / 2026-01-01 issue；2026-09-14 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-098-performance-of-a-cuffless-photoplethysmography-based-device-for-continuo",
+      "title": "Performance of a Cuffless Photoplethysmography-Based Device for Continuous Monitoring of Blood Pressure After Cardiac Surgery: A Preliminary Validation Study",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-14",
+      "record_type": "paper",
+      "source": {
+        "venue": "Journal of Human Hypertension",
+        "doi": "10.1038/s41371-025-01082-w",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41109863/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "chest patch",
+        "cardiac surgery",
+        "invasive arterial pressure",
+        "clinical validation"
+      ],
+      "datasets": [
+        "96 post-cardiac-surgery patients",
+        "average 25.6 hours",
+        "78,659 SBP and 78,818 DBP readings"
+      ],
+      "input_signals": [
+        "commercial PPG chest patch"
+      ],
+      "model_method": "单中心前瞻性研究，在心脏术后患者中将商用 PPG 胸贴的连续 BP 与侵入式动脉压并行比较，使用 Bland-Altman 与相关分析。",
+      "main_results": "SBP/DBP/MAP 相关系数 0.959/0.973/0.966；bias±SD 为 0.1±4.8、0.4±2.1、0.26±2.6 mmHg；95% SBP 和 99.9% DBP 在参考值 10 mmHg 内。",
+      "calibration": {
+        "type": "device-specific; not reported in abstract",
+        "points": null,
+        "timing": "unknown",
+        "notes": "商用设备校准流程未披露。"
+      },
+      "subject_split": {
+        "status": "prospective paired validation",
+        "notes": "不是模型训练/测试论文；96 名患者均为临床比较队列。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "post-cardiac-surgery prospective cohort",
+        "notes": "真实临床并行 IAP 比较，但单中心。"
+      },
+      "deployment": {
+        "level": "promising clinical prototype",
+        "judgment": "术后静态准确性较好，但尚未正式评估稳定性和 BP 变化追踪",
+        "inference_inputs": [
+          "PPG chest patch",
+          "stored device calibration if any"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "适用于术后监护；研究明确没有正式评估稳定性和动态 BP 变化，不能外推到自由活动人群。"
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "commercial algorithm undisclosed",
+        "abp_bp_alignment": "simultaneous invasive arterial pressure reference",
+        "abp_bp_windowing": "repeated readings clustered within 96 patients",
+        "abp_bp_quality_filtering": "not reported",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "not a train/test study",
+        "subject_leakage": "not applicable to prospective comparison",
+        "notes": "78,000 多读数不是独立样本；统计可信度应以 96 名患者及重复测量结构理解。设备算法和校准仍是黑箱。"
+      },
+      "notes": "2026-09-14 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-14",
+      "dataset": [
+        "96 post-cardiac-surgery patients",
+        "average 25.6 hours",
+        "78,659 SBP and 78,818 DBP readings"
+      ],
+      "inference_inputs": [
+        "PPG chest patch",
+        "stored device calibration if any"
+      ],
+      "study_summary": {
+        "goal": "验证商用 PPG 胸贴在心脏术后能否替代部分侵入式连续 BP 监测。",
+        "method": "单中心前瞻性研究，在心脏术后患者中将商用 PPG 胸贴的连续 BP 与侵入式动脉压并行比较，使用 Bland-Altman 与相关分析。",
+        "results": "SBP/DBP/MAP 相关系数 0.959/0.973/0.966；bias±SD 为 0.1±4.8、0.4±2.1、0.26±2.6 mmHg；95% SBP 和 99.9% DBP 在参考值 10 mmHg 内。",
+        "conclusion": "并行 IAP 一致性良好，但证据仍是单中心 preliminary validation。",
+        "takeaway": "临床样本比窗口数重要；动态变化未评估是主要缺口。",
+        "deployment": "适用于术后监护；研究明确没有正式评估稳定性和动态 BP 变化，不能外推到自由活动人群。",
+        "leakage": "78,000 多读数不是独立样本；统计可信度应以 96 名患者及重复测量结构理解。设备算法和校准仍是黑箱。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-14",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-10-18 online / 2025-12 issue；2026-09-14 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-099-mufubp-net-a-multimodal-fusion-network-for-cuffless-blood-pressure-estim",
+      "title": "MuFuBP-Net: A Multimodal Fusion Network for Cuffless Blood Pressure Estimation Using Dual-Feature Pipeline With Probabilistic Feature Encoder",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-14",
+      "record_type": "paper",
+      "source": {
+        "venue": "IEEE Journal of Biomedical and Health Informatics",
+        "doi": "10.1109/JBHI.2025.3563852",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40266859/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "ECG",
+        "PPG",
+        "multimodal fusion",
+        "probabilistic encoder",
+        "cuffless BP"
+      ],
+      "datasets": [
+        "MIMIC-II",
+        "MIMIC-III"
+      ],
+      "input_signals": [
+        "ECG",
+        "PPG"
+      ],
+      "model_method": "双特征流水线分别提取 ECG/PPG 层级与模态特征，用 CCFE、序列上下文网络和概率特征编码器融合并回归 BP。",
+      "main_results": "MIMIC-II 的 SBP/DBP MAE±SDE 为 2.99±4.37/2.63±4.19 mmHg，MIMIC-III 为 2.27±4.15/1.63±2.96 mmHg。",
+      "calibration": {
+        "type": "not reported in abstract",
+        "points": null,
+        "timing": "unknown",
+        "notes": "未说明个人校准或标签尺度处理。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "MIMIC-II/III 的 subject split 未披露。"
+      },
+      "external_validation": {
+        "status": null,
+        "dataset_or_cohort": "MIMIC-II and MIMIC-III",
+        "notes": "两个库均有结果，但是否真正跨库外测不明确。"
+      },
+      "deployment": {
+        "level": "research",
+        "judgment": "低误差但泛化设计缺失，不能直接支持临床级声明",
+        "inference_inputs": [
+          "ECG",
+          "PPG"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "需要双传感器同步；无真实可穿戴、跨设备或动态场景证据。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "ECG/PPG paired with invasive BP labels",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "MIMIC 窗口研究中随机切片、同患者跨集合和目标 ABP 反归一化都可能产生 1-3 mmHg 级结果；摘要未排除。"
+      },
+      "notes": "2026-09-14 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-14",
+      "dataset": [
+        "MIMIC-II",
+        "MIMIC-III"
+      ],
+      "inference_inputs": [
+        "ECG",
+        "PPG"
+      ],
+      "study_summary": {
+        "goal": "通过双路径概率融合充分提取 ECG/PPG 的 BP 信息。",
+        "method": "双特征流水线分别提取 ECG/PPG 层级与模态特征，用 CCFE、序列上下文网络和概率特征编码器融合并回归 BP。",
+        "results": "MIMIC-II 的 SBP/DBP MAE±SDE 为 2.99±4.37/2.63±4.19 mmHg，MIMIC-III 为 2.27±4.15/1.63±2.96 mmHg。",
+        "conclusion": "域内结果优异，但缺少拆分、校准和外部验证证据。",
+        "takeaway": "先审计 subject split，再讨论是否达到 AAMI/BHS/IEEE。",
+        "deployment": "需要双传感器同步；无真实可穿戴、跨设备或动态场景证据。",
+        "leakage": "MIMIC 窗口研究中随机切片、同患者跨集合和目标 ABP 反归一化都可能产生 1-3 mmHg 级结果；摘要未排除。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-14",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-10 issue；2026-09-14 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-100-multi-datasets-transfer-multitask-learning-for-simultaneous-blood-glucos",
+      "title": "Multi-Datasets Transfer Multitask Learning for Simultaneous Blood Glucose and Blood Pressure Monitoring Using Common PPG Features",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-14",
+      "record_type": "paper",
+      "source": {
+        "venue": "Computers in Biology and Medicine",
+        "doi": "10.1016/j.compbiomed.2025.110434",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40554060/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "blood pressure",
+        "blood glucose",
+        "transfer learning",
+        "multitask learning"
+      ],
+      "datasets": [
+        "one source DM/HTN classification dataset",
+        "separate BP and blood-glucose target datasets"
+      ],
+      "input_signals": [
+        "shared handcrafted PPG features"
+      ],
+      "model_method": "跨三个不同时含双标签的数据集选取共同 PPG 特征，比较多数据集迁移学习、双任务学习和两者结合的 MD-TL-MTL，并用 SHAP/置换重要性解释。",
+      "main_results": "最终 MD-TL-MTL 的 SBP/DBP MAE±SD 为 2.53±3.73/1.47±1.84，血糖 MAE 1.36；Clarke error grid 99.86% 位于 A 区。",
+      "calibration": {
+        "type": "not reported in abstract",
+        "points": null,
+        "timing": "unknown",
+        "notes": "未报告个人 BP 校准；不同数据集的尺度对齐方法需全文核实。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "三个数据集的 subject split 和迁移边界未披露。"
+      },
+      "external_validation": {
+        "status": null,
+        "dataset_or_cohort": "three datasets with different tasks",
+        "notes": "属于跨数据集学习，但不是同一 BP 任务的独立外部验证。"
+      },
+      "deployment": {
+        "level": "research",
+        "judgment": "多任务想法新颖，但跨库标签与拆分可能带来混杂",
+        "inference_inputs": [
+          "PPG-derived common feature set"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "单 PPG 特征可部署，但 BP 与血糖的不同数据来源、设备和人群偏差可能被模型当作任务线索。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "BP and glucose labels come from separate target datasets",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "多数据集任务中数据源身份可能与标签强相关；需审计归一化是否按全库、不同库是否共享受试者，以及报告的 BP 误差是否 patient-disjoint。"
+      },
+      "notes": "2026-09-14 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-14",
+      "dataset": [
+        "one source DM/HTN classification dataset",
+        "separate BP and blood-glucose target datasets"
+      ],
+      "inference_inputs": [
+        "PPG-derived common feature set"
+      ],
+      "study_summary": {
+        "goal": "利用 PPG 的共同生理特征和跨数据集迁移同时估计 BP 与血糖。",
+        "method": "跨三个不同时含双标签的数据集选取共同 PPG 特征，比较多数据集迁移学习、双任务学习和两者结合的 MD-TL-MTL，并用 SHAP/置换重要性解释。",
+        "results": "最终 MD-TL-MTL 的 SBP/DBP MAE±SD 为 2.53±3.73/1.47±1.84，血糖 MAE 1.36；Clarke error grid 99.86% 位于 A 区。",
+        "conclusion": "多任务优于基线，但并未解决真实同一人双标签缺失。",
+        "takeaway": "跨库多任务性能可能混入数据源差异，不能等同于同一设备联合监测。",
+        "deployment": "单 PPG 特征可部署，但 BP 与血糖的不同数据来源、设备和人群偏差可能被模型当作任务线索。",
+        "leakage": "多数据集任务中数据源身份可能与标签强相关；需审计归一化是否按全库、不同库是否共享受试者，以及报告的 BP 误差是否 patient-disjoint。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-14",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-06-18 online / 2025-09 issue；2026-09-14 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-101-an-ensemble-based-ai-approach-for-continuous-blood-pressure-estimation-i",
+      "title": "An Ensemble-Based AI Approach for Continuous Blood Pressure Estimation in Health Monitoring Applications",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-14",
+      "record_type": "paper",
+      "source": {
+        "venue": "Sensors",
+        "doi": "10.3390/s25154574",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40807740/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "ensemble learning",
+        "demographics",
+        "Tab-Transformer",
+        "continuous BP"
+      ],
+      "datasets": [
+        "1,000 subjects"
+      ],
+      "input_signals": [
+        "PPG arterial pulse waveform features",
+        "age",
+        "sex",
+        "height",
+        "weight",
+        "BMI"
+      ],
+      "model_method": "从 PPG 脉搏波提取速率、上升/下降时间、宽度、斜率、强度和面积，加人口统计学变量，经 Tab-Transformer 嵌入后由 CatBoost、XGBoost、LightGBM 集成回归 BP。",
+      "main_results": "1,000 名受试者上 SBP/DBP MAE 为 3.87/2.50 mmHg；摘要声称达到 BHS A 级和 AAMI 数值标准。",
+      "calibration": {
+        "type": "demographic conditioning; personal BP calibration not reported",
+        "points": null,
+        "timing": "unknown",
+        "notes": "年龄、身高、体重和 BMI 为推理输入，可能编码人群 BP 先验。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "受试者级 train/test split 未披露。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "无独立外部数据集。"
+      },
+      "deployment": {
+        "level": "research",
+        "judgment": "特征模型易解释，但低误差和连续监测声称缺乏外部验证",
+        "inference_inputs": [
+          "PPG features",
+          "demographics and anthropometrics"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "需要可靠 PPG 特征点和个人资料；运动、压力、姿势、睡眠虽然被背景提及，摘要未证明模型在这些状态下验证。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "PPG paired with BP labels",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "not reported",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "人口统计变量可能使模型学习平均 BP；若同人窗口跨集合则误差更低。摘要未说明 subject-disjoint 或动态验证。"
+      },
+      "notes": "2026-09-14 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-14",
+      "dataset": [
+        "1,000 subjects"
+      ],
+      "inference_inputs": [
+        "PPG features",
+        "demographics and anthropometrics"
+      ],
+      "study_summary": {
+        "goal": "融合 PPG 工程特征和人口统计信息，构建可解释的集成 BP 回归器。",
+        "method": "从 PPG 脉搏波提取速率、上升/下降时间、宽度、斜率、强度和面积，加人口统计学变量，经 Tab-Transformer 嵌入后由 CatBoost、XGBoost、LightGBM 集成回归 BP。",
+        "results": "1,000 名受试者上 SBP/DBP MAE 为 3.87/2.50 mmHg；摘要声称达到 BHS A 级和 AAMI 数值标准。",
+        "conclusion": "域内 MAE 较低，但不能从摘要证明连续动态场景有效。",
+        "takeaway": "把‘连续监测应用’与‘在动态状态验证过’区分开。",
+        "deployment": "需要可靠 PPG 特征点和个人资料；运动、压力、姿势、睡眠虽然被背景提及，摘要未证明模型在这些状态下验证。",
+        "leakage": "人口统计变量可能使模型学习平均 BP；若同人窗口跨集合则误差更低。摘要未说明 subject-disjoint 或动态验证。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-14",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-07-24；2026-09-14 是数据库收录日期。"
       }
     }
   ]
