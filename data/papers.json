@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-14T23:27:00+08:00",
-  "record_count": 101,
-  "reviewed_count": 101,
+  "generated_at": "2026-09-15T21:02:00+08:00",
+  "record_count": 106,
+  "reviewed_count": 106,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -9310,6 +9310,475 @@
         "checked_on": "2026-09-14",
         "basis": "PubMed 正式期刊题录、DOI 与摘要",
         "note": "首次在线/正式发表时间为 2025-07-24；2026-09-14 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-102-a-non-contact-blood-pressure-measurement-method-based-on-face-video",
+      "title": "A Non-Contact Blood Pressure Measurement Method Based on Face Video",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-15",
+      "record_type": "paper",
+      "source": {
+        "venue": "Physical and Engineering Sciences in Medicine",
+        "doi": "10.1007/s13246-025-01645-8",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41114895/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "remote PPG",
+        "face video",
+        "XGBoost",
+        "non-contact BP"
+      ],
+      "datasets": [
+        "face-video cohort; sample size not stated in abstract"
+      ],
+      "input_signals": [
+        "camera face video",
+        "filtered facial rPPG features"
+      ],
+      "model_method": "从相机人脸视频提取 rPPG，经多级滤波增强信号，再以 XGBoost 回归 SBP/DBP。",
+      "main_results": "SBP 误差 4.8893±6.6237 mmHg，DBP 4.0805±5.5821 mmHg；摘要称达到 AAMI 数值要求和 BHS A 级。",
+      "calibration": {
+        "type": "not reported in abstract",
+        "points": null,
+        "timing": "unknown",
+        "notes": "未说明个人校准、肤色校准和目标归一化。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "样本量与受试者级拆分均未给出。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "无独立外部验证。"
+      },
+      "deployment": {
+        "level": "research",
+        "judgment": "非接触路线方便，但验证信息不足且肤色/光照泛化未知",
+        "inference_inputs": [
+          "face video"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "需要稳定光照、相机和人脸 ROI；未验证深肤色、运动、跨设备和自由生活场景。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "rPPG paired with reference BP labels",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "multiple filters used; rejection criteria not in abstract",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "没有 cohort size 和 subject split，4-5 mmHg 结果可能受同人视频片段跨集合影响；需核查肤色与环境偏差。"
+      },
+      "notes": "2026-09-15 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-15",
+      "dataset": [
+        "face-video cohort; sample size not stated in abstract"
+      ],
+      "inference_inputs": [
+        "face video"
+      ],
+      "study_summary": {
+        "goal": "用普通人脸视频的 rPPG 实现无接触 BP 估计。",
+        "method": "从相机人脸视频提取 rPPG，经多级滤波增强信号，再以 XGBoost 回归 SBP/DBP。",
+        "results": "SBP 误差 4.8893±6.6237 mmHg，DBP 4.0805±5.5821 mmHg；摘要称达到 AAMI 数值要求和 BHS A 级。",
+        "conclusion": "摘要报告较低误差，但不足以证明跨人群和跨场景临床适用。",
+        "takeaway": "先确认 subject-disjoint、肤色覆盖和光照外测，再接受 AAMI/BHS 声称。",
+        "deployment": "需要稳定光照、相机和人脸 ROI；未验证深肤色、运动、跨设备和自由生活场景。",
+        "leakage": "没有 cohort size 和 subject split，4-5 mmHg 结果可能受同人视频片段跨集合影响；需核查肤色与环境偏差。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-15",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-10-20 online / 2025-12 issue；2026-09-15 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-103-a-pilot-human-study-on-dual-photoplethysmography-for-continuously-monito",
+      "title": "A Pilot Human Study on Dual Photoplethysmography for Continuously Monitoring Pulse Wave Velocity and Blood Pressure",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-15",
+      "record_type": "paper",
+      "source": {
+        "venue": "IEEE Journal on Flexible Electronics",
+        "doi": "10.1109/jflex.2025.3614515",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41522493/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "dual PPG",
+        "pulse wave velocity",
+        "wearable",
+        "pilot study",
+        "blood pressure"
+      ],
+      "datasets": [
+        "25 participants, predominantly young"
+      ],
+      "input_signals": [
+        "two infrared PPG channels",
+        "derived pulse wave velocity",
+        "physiological measurements"
+      ],
+      "model_method": "用两个现成红外 PPG 传感器计算 PWV，并融合 PPG 与生理测量，由机器学习估计 SBP/DBP/MAP，与 Vicorder 比较。",
+      "main_results": "25 人初步试验的 SBP/DBP/MAP 平均差为 1.1、-0.9、-0.2 mmHg。",
+      "calibration": {
+        "type": "not reported in abstract",
+        "points": null,
+        "timing": "unknown",
+        "notes": "未给出个人校准或设备间距校准细节。"
+      },
+      "subject_split": {
+        "status": "pilot paired comparison",
+        "notes": "N=25，摘要未描述训练/测试拆分。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "无外部队列。"
+      },
+      "deployment": {
+        "level": "early pilot",
+        "judgment": "双 PPG/PWV 思路合理，但 25 名年轻受试者远不足以支持通用监测",
+        "inference_inputs": [
+          "dual-site infrared PPG",
+          "sensor distance/PWV context"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "需要两处传感器精确同步和距离信息；真实活动、老年和高血压人群尚未验证。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "dual PPG compared with Vicorder BP/PWV",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "平均差接近零不代表个体误差小；摘要未给 SD、LoA、受试者拆分或校准流程。"
+      },
+      "notes": "2026-09-15 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-15",
+      "dataset": [
+        "25 participants, predominantly young"
+      ],
+      "inference_inputs": [
+        "dual-site infrared PPG",
+        "sensor distance/PWV context"
+      ],
+      "study_summary": {
+        "goal": "以双 PPG 计算 PWV 并同时连续估计 BP。",
+        "method": "用两个现成红外 PPG 传感器计算 PWV，并融合 PPG 与生理测量，由机器学习估计 SBP/DBP/MAP，与 Vicorder 比较。",
+        "results": "25 人初步试验的 SBP/DBP/MAP 平均差为 1.1、-0.9、-0.2 mmHg。",
+        "conclusion": "初步均值偏差小，但样本极小且人群单一。",
+        "takeaway": "不能只看 mean difference；必须同时报告离散度和 Bland-Altman limits。",
+        "deployment": "需要两处传感器精确同步和距离信息；真实活动、老年和高血压人群尚未验证。",
+        "leakage": "平均差接近零不代表个体误差小；摘要未给 SD、LoA、受试者拆分或校准流程。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-15",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-09-25 online / 2025-11 issue；2026-09-15 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-104-detecting-rapid-elevations-in-blood-pressure-using-a-novel-pulse-arrival",
+      "title": "Detecting Rapid Elevations in Blood Pressure Using a Novel Pulse Arrival Time and Machine Learning Technique",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-15",
+      "record_type": "paper",
+      "source": {
+        "venue": "American Journal of Physiology - Heart and Circulatory Physiology",
+        "doi": "10.1152/ajpheart.00513.2025",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40912894/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "ECG",
+        "pulse arrival time",
+        "acute hypertension",
+        "wearable alert"
+      ],
+      "datasets": [
+        "42 healthy young participants"
+      ],
+      "input_signals": [
+        "ECG",
+        "PPG",
+        "standardized PAT z-score"
+      ],
+      "model_method": "42 名健康青年在血流限制等长握力中升高 BP；由 ECG+PPG 计算 PAT 并标准化为 z-score，用 logistic regression 与 k-fold CV 检测超过个体基线 3 SD 的 BP 升高。",
+      "main_results": "运动使 BP 升高 18.8±15.1 mmHg、PAT 缩短 5.6±5.7 ms；PR-AUC 0.68，最佳 PAT z 阈值 -3.87，未见性别差异。",
+      "calibration": {
+        "type": "personal baseline standardization",
+        "points": null,
+        "timing": "baseline rest",
+        "notes": "使用个体 PAT 基线 z-score；输出相对急性升高报警。"
+      },
+      "subject_split": {
+        "status": "k-fold cross-validation",
+        "notes": "摘要未说明折叠是否按受试者。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "无外部队列；仅实验室模拟。"
+      },
+      "deployment": {
+        "level": "proof of concept",
+        "judgment": "适合趋势报警而非绝对 BP 测量",
+        "inference_inputs": [
+          "ECG",
+          "PPG",
+          "personal PAT baseline"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "需要双信号、稳定个体基线；只在健康青年和模拟升压条件验证。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not applicable to binary event detection",
+        "abp_bp_alignment": "continuous BP defines +3 SD event labels",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "personal PAT baseline, not current BP",
+        "window_leakage": "unknown under k-fold",
+        "subject_leakage": "fold grouping not stated",
+        "notes": "若同人窗口跨折，PR-AUC 会受个体基线记忆影响；但结果并未被包装成绝对 BP。"
+      },
+      "notes": "2026-09-15 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-15",
+      "dataset": [
+        "42 healthy young participants"
+      ],
+      "inference_inputs": [
+        "ECG",
+        "PPG",
+        "personal PAT baseline"
+      ],
+      "study_summary": {
+        "goal": "快速识别恶性高血压危象式的急性 BP 上升。",
+        "method": "42 名健康青年在血流限制等长握力中升高 BP；由 ECG+PPG 计算 PAT 并标准化为 z-score，用 logistic regression 与 k-fold CV 检测超过个体基线 3 SD 的 BP 升高。",
+        "results": "运动使 BP 升高 18.8±15.1 mmHg、PAT 缩短 5.6±5.7 ms；PR-AUC 0.68，最佳 PAT z 阈值 -3.87，未见性别差异。",
+        "conclusion": "PAT 可检测实验室升压，但 PR-AUC 0.68 仍属中等。",
+        "takeaway": "这是相对异常检测器，不输出 SBP/DBP；健康青年结果不能外推临床危象。",
+        "deployment": "需要双信号、稳定个体基线；只在健康青年和模拟升压条件验证。",
+        "leakage": "若同人窗口跨折，PR-AUC 会受个体基线记忆影响；但结果并未被包装成绝对 BP。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-15",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-09-05 online / 2025-10-01 issue；2026-09-15 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-105-machine-learning-prediction-of-mean-arterial-pressure-from-the-photoplet",
+      "title": "Machine Learning Prediction of Mean Arterial Pressure From the Photoplethysmography Waveform During Hemorrhagic Shock and Fluid Resuscitation",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-15",
+      "record_type": "paper",
+      "source": {
+        "venue": "Sensors",
+        "doi": "10.3390/s25165035",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40871899/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "mean arterial pressure",
+        "hemorrhagic shock",
+        "resuscitation",
+        "animal study"
+      ],
+      "datasets": [
+        "large-animal hemorrhage and resuscitation experiments; size not stated in abstract"
+      ],
+      "input_signals": [
+        "non-invasive PPG waveform",
+        "engineered waveform features"
+      ],
+      "model_method": "在大型动物失血与液体复苏数据中比较手工特征、机器学习和深度学习组合，实时预测 MAP；最佳为手工特征输入 LSTM。",
+      "main_results": "多种组合可追踪失血和复苏过程中的 MAP，手工特征+LSTM 最佳；摘要未提供 MAE、样本量和外部验证数值。",
+      "calibration": {
+        "type": "not reported in abstract",
+        "points": null,
+        "timing": "unknown",
+        "notes": "未说明个体基线或参考 MAP 校准。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "大型动物实验的个体级拆分未披露。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "仅动物数据。"
+      },
+      "deployment": {
+        "level": "preclinical",
+        "judgment": "证明 PPG 能跟踪极端血流动力学变化，但不能直接外推人体",
+        "inference_inputs": [
+          "PPG waveform and engineered features"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "适用于休克早期研究；需要人体、跨动物和独立设备验证。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "PPG synchronized with invasive/reference MAP during experiments",
+        "abp_bp_windowing": "unknown",
+        "abp_bp_quality_filtering": "unknown",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "animal-level grouping unknown",
+        "notes": "若同一动物的连续时间窗跨 train/test，会严重夸大实时追踪能力；摘要未给拆分。"
+      },
+      "notes": "2026-09-15 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-15",
+      "dataset": [
+        "large-animal hemorrhage and resuscitation experiments; size not stated in abstract"
+      ],
+      "inference_inputs": [
+        "PPG waveform and engineered features"
+      ],
+      "study_summary": {
+        "goal": "评估非侵入 PPG 在快速失血与复苏中预测 MAP 的可行性。",
+        "method": "在大型动物失血与液体复苏数据中比较手工特征、机器学习和深度学习组合，实时预测 MAP；最佳为手工特征输入 LSTM。",
+        "results": "多种组合可追踪失血和复苏过程中的 MAP，手工特征+LSTM 最佳；摘要未提供 MAE、样本量和外部验证数值。",
+        "conclusion": "手工特征+LSTM 最优，但只提供定性摘要结论。",
+        "takeaway": "动物 proof-of-concept 不是临床 BP estimator；缺失数值不应自行补齐。",
+        "deployment": "适用于休克早期研究；需要人体、跨动物和独立设备验证。",
+        "leakage": "若同一动物的连续时间窗跨 train/test，会严重夸大实时追踪能力；摘要未给拆分。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-15",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-08-13；2026-09-15 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-106-speckle-contrast-optical-spectroscopy-for-cuffless-blood-pressure-estima",
+      "title": "Speckle Contrast Optical Spectroscopy for Cuffless Blood Pressure Estimation Based on Microvascular Blood Flow and Volume Oscillations",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-15",
+      "record_type": "paper",
+      "source": {
+        "venue": "Biomedical Optics Express",
+        "doi": "10.1364/BOE.560022",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40809974/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "speckle contrast optical spectroscopy",
+        "microvascular flow",
+        "subject-specific model",
+        "cuffless BP"
+      ],
+      "datasets": [
+        "multi-site wrist/finger cohort; size not stated in abstract",
+        "remeasured subgroup several weeks later"
+      ],
+      "input_signals": [
+        "390 Hz SCOS",
+        "two wavelengths",
+        "wrist reflectance",
+        "finger transmission",
+        "PPG volume and speckle-derived flow"
+      ],
+      "model_method": "以 390 Hz SCOS 同时测量腕部/指端双波长微血管血流与容积（PPG）振荡，提取时域、形态、频域及跨信号关系特征，训练 subject-specific BP 模型。",
+      "main_results": "相对 PPG-only，加入 SCOS 血流使 SBP 估计改善 31%；SBP/DBP error 为 0.06±2.88/0.09±2.14 mmHg，SBP 范围 89-284 mmHg；数周后重测子群仍保持改善。",
+      "calibration": {
+        "type": "subject-specific",
+        "points": null,
+        "timing": "initial personal data; exact protocol not in abstract",
+        "notes": "极低误差明确来自个体模型，不能视为跨人免校准。"
+      },
+      "subject_split": {
+        "status": "within-subject evaluation",
+        "notes": "摘要未说明个人训练与测试时间隔离；有数周后重测子群。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "重测是时间验证，不是独立人群外部验证。"
+      },
+      "deployment": {
+        "level": "specialized prototype",
+        "judgment": "血流+容积比 PPG-only 更强，但硬件复杂且依赖个体化",
+        "inference_inputs": [
+          "multi-site multiwavelength SCOS/PPG",
+          "stored subject-specific model"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "需要高速散斑相机/光学系统、多部位采集和个人训练；不等同普通手表 PPG。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "optical signals paired with reference BP",
+        "abp_bp_windowing": "within-subject temporal samples",
+        "abp_bp_quality_filtering": "stochastic and instrument noise removed",
+        "target_dependent_calibration": "explicit subject-specific modeling",
+        "window_leakage": "must verify temporal separation",
+        "subject_leakage": "personalization is intentional",
+        "notes": "主要风险是个人训练/测试片段相邻造成时间泄露；数周重测降低但未消除。极低误差不能外推 unseen subjects。"
+      },
+      "notes": "2026-09-15 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-15",
+      "dataset": [
+        "multi-site wrist/finger cohort; size not stated in abstract",
+        "remeasured subgroup several weeks later"
+      ],
+      "inference_inputs": [
+        "multi-site multiwavelength SCOS/PPG",
+        "stored subject-specific model"
+      ],
+      "study_summary": {
+        "goal": "测试微血管血流信息能否在 PPG 容积之外提升 BP 估计。",
+        "method": "以 390 Hz SCOS 同时测量腕部/指端双波长微血管血流与容积（PPG）振荡，提取时域、形态、频域及跨信号关系特征，训练 subject-specific BP 模型。",
+        "results": "相对 PPG-only，加入 SCOS 血流使 SBP 估计改善 31%；SBP/DBP error 为 0.06±2.88/0.09±2.14 mmHg，SBP 范围 89-284 mmHg；数周后重测子群仍保持改善。",
+        "conclusion": "SCOS 显著改善个体模型，但牺牲硬件简洁性和跨人泛化。",
+        "takeaway": "这是额外光学血流传感的个体化成果，不是 PPG-only 通用模型。",
+        "deployment": "需要高速散斑相机/光学系统、多部位采集和个人训练；不等同普通手表 PPG。",
+        "leakage": "主要风险是个人训练/测试片段相邻造成时间泄露；数周重测降低但未消除。极低误差不能外推 unseen subjects。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-15",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-07-02 online / 2025-08-01 issue；2026-09-15 是数据库收录日期。"
       }
     }
   ]
