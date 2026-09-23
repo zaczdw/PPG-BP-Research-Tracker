@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-15T21:02:00+08:00",
-  "record_count": 106,
-  "reviewed_count": 106,
+  "generated_at": "2026-09-23T20:34:00+08:00",
+  "record_count": 111,
+  "reviewed_count": 111,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -9779,6 +9779,491 @@
         "checked_on": "2026-09-15",
         "basis": "PubMed 正式期刊题录、DOI 与摘要",
         "note": "首次在线/正式发表时间为 2025-07-02 online / 2025-08-01 issue；2026-09-15 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-107-filmamba-a-film-conditioned-mamba-architecture-with-an-energy-efficient-",
+      "title": "FiLMamba: A FiLM-Conditioned Mamba Architecture With an Energy-Efficient FPGA Accelerator for Generalizable Cuffless Blood Pressure Estimation",
+      "year": 2026,
+      "first_reported_in_daily": "2026-09-23",
+      "record_type": "paper",
+      "source": {
+        "venue": "IEEE Transactions on Biomedical Circuits and Systems",
+        "doi": "10.1109/TBCAS.2026.3736710",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42771630/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "Mamba",
+        "cross-dataset transfer",
+        "FPGA",
+        "cuffless BP"
+      ],
+      "datasets": [
+        "MIMIC-BP: 1,524 patients",
+        "UCI-BP external transfer"
+      ],
+      "input_signals": [
+        "PPG",
+        "4-D hemodynamic state vector",
+        "unlabeled target batch for BN recalibration"
+      ],
+      "model_method": "FiLMamba 用 4 维血流动力学状态经 FiLM 调制 Mamba，并用 CDHA 将跨库偏移分为无标签 batch-normalization 重校准与每校准单元偏置修正；另实现 FPGA 加速器。",
+      "main_results": "MIMIC-BP 的 SBP/DBP SDE 为 6.45/4.96 mmHg；training-free 转移到 UCI-BP 为 4.29/3.24 mmHg。FPGA 动态功耗 0.514 W、每样本 8.23 μJ。",
+      "calibration": {
+        "type": "cross-domain unlabeled BN and additive bias correction",
+        "points": null,
+        "timing": "target-domain adaptation",
+        "notes": "称为 training-free 不等于完全零校准；CDHA 仍使用目标域无标签批次和 calibration-unit 偏置。"
+      },
+      "subject_split": {
+        "status": "cross-corpus evaluation",
+        "notes": "MIMIC-BP 1,524 人；摘要未列出具体 subject split，但 UCI-BP 为跨库转移。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "UCI-BP",
+        "notes": "跨数据集且不重新训练主模型，但使用目标域无标签 BN 重校准/偏置修正。"
+      },
+      "deployment": {
+        "level": "promising research",
+        "judgment": "首次把跨库泛化和低功耗硬件结合，但目标域适配条件要明确",
+        "inference_inputs": [
+          "PPG",
+          "hemodynamic conditioning",
+          "stored target-domain recalibration"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "FPGA 能耗低，适合边缘端；4-D 状态向量如何获得及目标域重校准成本需全文确认。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not stated in abstract",
+        "abp_bp_alignment": "PPG trained against BP labels",
+        "abp_bp_windowing": "not stated",
+        "abp_bp_quality_filtering": "not stated",
+        "target_dependent_calibration": "unlabeled target-domain recalibration plus additive bias correction",
+        "window_leakage": "unknown",
+        "subject_leakage": "cross-dataset reduces direct subject overlap risk",
+        "notes": "跨库结果是优点，但如果 UCI-BP 与 MIMIC 派生数据共享来源记录仍需排重；偏置修正是否利用任何参考 BP 是全文审计重点。"
+      },
+      "notes": "2026-09-23 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-23",
+      "dataset": [
+        "MIMIC-BP: 1,524 patients",
+        "UCI-BP external transfer"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "hemodynamic conditioning",
+        "stored target-domain recalibration"
+      ],
+      "study_summary": {
+        "goal": "解决相似 PPG 在不同人上对应不同 BP 的形态歧义，并实现低功耗部署。",
+        "method": "FiLMamba 用 4 维血流动力学状态经 FiLM 调制 Mamba，并用 CDHA 将跨库偏移分为无标签 batch-normalization 重校准与每校准单元偏置修正；另实现 FPGA 加速器。",
+        "results": "MIMIC-BP 的 SBP/DBP SDE 为 6.45/4.96 mmHg；training-free 转移到 UCI-BP 为 4.29/3.24 mmHg。FPGA 动态功耗 0.514 W、每样本 8.23 μJ。",
+        "conclusion": "跨库 SDE 与 FPGA 能耗均有竞争力，但不是无条件零校准。",
+        "takeaway": "区分 training-free 与 calibration-free；目标域 BN 和 bias correction 都属于适配。",
+        "deployment": "FPGA 能耗低，适合边缘端；4-D 状态向量如何获得及目标域重校准成本需全文确认。",
+        "leakage": "跨库结果是优点，但如果 UCI-BP 与 MIMIC 派生数据共享来源记录仍需排重；偏置修正是否利用任何参考 BP 是全文审计重点。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-23",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2026-09-22；2026-09-23 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-108-nocturnal-blood-pressure-dipping-in-adults-a-comparison-between-cuffless",
+      "title": "Nocturnal Blood Pressure Dipping in Adults: A Comparison Between Cuffless and Ambulatory Blood Pressure Monitoring",
+      "year": 2026,
+      "first_reported_in_daily": "2026-09-23",
+      "record_type": "paper",
+      "source": {
+        "venue": "American Journal of Hypertension",
+        "doi": "10.1093/ajh/hpag115",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42768439/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "nocturnal BP dipping",
+        "ABPM",
+        "cuffless device",
+        "clinical comparison"
+      ],
+      "datasets": [
+        "50 adults aged 18-80, 24-hour paired monitoring"
+      ],
+      "input_signals": [
+        "upper-arm PPG cuffless device",
+        "awake/asleep labels"
+      ],
+      "model_method": "50 名成人同时佩戴非优势臂 PPG 无袖带设备和优势臂验证过的袖带 ABPM，比较清醒-睡眠 BP 变化，分析遵循 ESH Awake/Asleep test 但有方法偏离。",
+      "main_results": "清醒-睡眠变化的 SBP/DBP 平均差为 1.6/1.2 mmHg，95% LoA 为 [-8.0,11.2]/[-6.7,9.1]；相关 r=0.75/0.74。",
+      "calibration": {
+        "type": "device-specific; not stated",
+        "points": null,
+        "timing": "unknown",
+        "notes": "只使用与参考设备同步取得的 cuffless 值。"
+      },
+      "subject_split": {
+        "status": "prospective paired comparison",
+        "notes": "不是模型训练论文；50 人均为比较队列。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "24-hour paired ABPM cohort",
+        "notes": "真实 24 小时比较，但样本偏正常/低 BP。"
+      },
+      "deployment": {
+        "level": "conditional",
+        "judgment": "能追踪夜间下降趋势，但尚未完成全标准临床验证",
+        "inference_inputs": [
+          "PPG device output",
+          "awake/asleep timing"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "研究只分析同步参考时刻，未证明所有连续 cuffless 输出；人群 BP 偏低。"
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "commercial/device algorithm not described",
+        "abp_bp_alignment": "simultaneous cuff ABPM reference",
+        "abp_bp_windowing": "awake/asleep aggregate per participant",
+        "abp_bp_quality_filtering": "only simultaneous readings retained",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "not a train/test setting",
+        "subject_leakage": "not applicable",
+        "notes": "选择仅有同步参考的读数可能高估完整 24 小时可用性；但统计单位按参与者聚合，传统窗口泄露风险低。"
+      },
+      "notes": "2026-09-23 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-23",
+      "dataset": [
+        "50 adults aged 18-80, 24-hour paired monitoring"
+      ],
+      "inference_inputs": [
+        "PPG device output",
+        "awake/asleep timing"
+      ],
+      "study_summary": {
+        "goal": "验证 PPG 无袖带设备能否复现夜间 BP dipping。",
+        "method": "50 名成人同时佩戴非优势臂 PPG 无袖带设备和优势臂验证过的袖带 ABPM，比较清醒-睡眠 BP 变化，分析遵循 ESH Awake/Asleep test 但有方法偏离。",
+        "results": "清醒-睡眠变化的 SBP/DBP 平均差为 1.6/1.2 mmHg，95% LoA 为 [-8.0,11.2]/[-6.7,9.1]；相关 r=0.75/0.74。",
+        "conclusion": "趋势一致性尚可，但 LoA 较宽且方法偏离 ESH 推荐。",
+        "takeaway": "这证明的是 awake-asleep 变化，不是每个夜间读数都准确。",
+        "deployment": "研究只分析同步参考时刻，未证明所有连续 cuffless 输出；人群 BP 偏低。",
+        "leakage": "选择仅有同步参考的读数可能高估完整 24 小时可用性；但统计单位按参与者聚合，传统窗口泄露风险低。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-23",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2026-09-21；2026-09-23 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-109-a-center-of-pressure-guided-finger-press-sensor-for-cuffless-blood-press",
+      "title": "A Center-of-Pressure Guided Finger-Press Sensor for Cuffless Blood Pressure Estimation",
+      "year": 2026,
+      "first_reported_in_daily": "2026-09-23",
+      "record_type": "paper",
+      "source": {
+        "venue": "Sensors",
+        "doi": "10.3390/s26175563",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42740183/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "finger pressing",
+        "PPG",
+        "center of pressure",
+        "force sensors",
+        "cuffless BP"
+      ],
+      "datasets": [
+        "48 healthy participants",
+        "1,274 recordings"
+      ],
+      "input_signals": [
+        "PPG",
+        "three force sensors",
+        "center-of-pressure feedback"
+      ],
+      "model_method": "研究原型用三个力传感器与 PPG 量化手指接触，以加权质心反馈指导居中，Hybrid Ridge Regression 估计总接触力，并比较加压/减压按压。",
+      "main_results": "力估计 MAE 1.2 g，50 天零载漂移 -0.29%；最佳单次记录校准模型的 SBP/DBP MAE 为 5.55/5.20 mmHg，ME±SD 为 0.50±7.25/1.19±6.47。",
+      "calibration": {
+        "type": "single-recording personal calibration",
+        "points": 1,
+        "timing": "before/at measurement",
+        "notes": "最佳 BP 结果明确依赖单次记录校准。"
+      },
+      "subject_split": {
+        "status": "pilot; not fully stated",
+        "notes": "48 名健康者、1,274 记录；摘要未说明受试者级拆分。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "无外部验证。"
+      },
+      "deployment": {
+        "level": "preclinical prototype",
+        "judgment": "CoP 可改善交互一致性，但不是被动连续监测",
+        "inference_inputs": [
+          "PPG",
+          "three-point force",
+          "personal calibration"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "需要用户主动按压、视觉/触觉反馈和专用力传感器；作者明确非临床验证设备。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "not stated",
+        "abp_bp_alignment": "finger-press PPG/force paired with reference BP",
+        "abp_bp_windowing": "1,274 recordings from 48 participants",
+        "abp_bp_quality_filtering": "not stated",
+        "target_dependent_calibration": "single-recording calibrated model",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "记录数远大于受试者数，若同人记录跨集合会偏乐观；最佳结果还依赖单次记录校准。"
+      },
+      "notes": "2026-09-23 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-23",
+      "dataset": [
+        "48 healthy participants",
+        "1,274 recordings"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "three-point force",
+        "personal calibration"
+      ],
+      "study_summary": {
+        "goal": "用 CoP 反馈降低手指偏心和接触力不一致对按压式 BP 的影响。",
+        "method": "研究原型用三个力传感器与 PPG 量化手指接触，以加权质心反馈指导居中，Hybrid Ridge Regression 估计总接触力，并比较加压/减压按压。",
+        "results": "力估计 MAE 1.2 g，50 天零载漂移 -0.29%；最佳单次记录校准模型的 SBP/DBP MAE 为 5.55/5.20 mmHg，ME±SD 为 0.50±7.25/1.19±6.47。",
+        "conclusion": "工程可行性明确，但仍是小样本、需校准的主动测量原型。",
+        "takeaway": "不要把 1,274 条记录当作 1,274 个独立样本。",
+        "deployment": "需要用户主动按压、视觉/触觉反馈和专用力传感器；作者明确非临床验证设备。",
+        "leakage": "记录数远大于受试者数，若同人记录跨集合会偏乐观；最佳结果还依赖单次记录校准。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-23",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2026-09-01；2026-09-23 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-110-non-invasive-blood-pressure-estimation-enhanced-by-capillary-refill-time",
+      "title": "Non-Invasive Blood Pressure Estimation Enhanced by Capillary Refill Time Modulation of PPG Signals",
+      "year": 2026,
+      "first_reported_in_daily": "2026-09-23",
+      "record_type": "paper",
+      "source": {
+        "venue": "Sensors",
+        "doi": "10.3390/s26010345",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41516778/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "capillary refill time",
+        "pressure modulation",
+        "LOSO",
+        "continuous BP"
+      ],
+      "datasets": [
+        "21 healthy participants",
+        "252 paired 30-second intervals"
+      ],
+      "input_signals": [
+        "standard PPG",
+        "PPG after 9 N pressure for 15 seconds"
+      ],
+      "model_method": "在 21 名健康者中以 9 N 压力持续 15 秒诱导 CRT，形成 252 对调制/标准 30 秒 PPG，比较 ResNetCNN、LSTM、Transformer 的 LOSO 与非 LOSO。",
+      "main_results": "CRT 调制使各模型提升；ResNetCNN MAE 最多降低 35.6%、MAPE 最多降低 40.6%；摘要称全部模型达到 AAMI 的 ME/SD 数值条件。",
+      "calibration": {
+        "type": "active physiological modulation",
+        "points": null,
+        "timing": "15-second 9 N press before segment",
+        "notes": "这不是 cuff BP 数值校准，但需要主动加压改变 PPG。"
+      },
+      "subject_split": {
+        "status": "LOSO and non-LOSO both evaluated",
+        "notes": "LOSO 是较可信主结果框架；具体绝对 MAE 未在摘要给出。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "无独立外部队列。"
+      },
+      "deployment": {
+        "level": "early research",
+        "judgment": "主动 CRT 调制提供额外信息，但样本极小且交互负担高",
+        "inference_inputs": [
+          "baseline PPG",
+          "pressure-modulated PPG"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "需要可控 9 N 压力和 15 秒操作，不适合真正无感连续监测。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not stated",
+        "abp_bp_alignment": "PPG paired with BP labels",
+        "abp_bp_windowing": "252 paired segments from 21 people",
+        "abp_bp_quality_filtering": "not stated",
+        "target_dependent_calibration": "no explicit BP calibration; physiological perturbation required",
+        "window_leakage": "LOSO lowers risk",
+        "subject_leakage": "low for LOSO results",
+        "notes": "非 LOSO 结果可能受同人泄露；应优先引用 LOSO。AAMI 数值条件不等于完成正式设备验证。"
+      },
+      "notes": "2026-09-23 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-23",
+      "dataset": [
+        "21 healthy participants",
+        "252 paired 30-second intervals"
+      ],
+      "inference_inputs": [
+        "baseline PPG",
+        "pressure-modulated PPG"
+      ],
+      "study_summary": {
+        "goal": "用 CRT 诱导的血管反应增强 PPG 中的 BP 信息。",
+        "method": "在 21 名健康者中以 9 N 压力持续 15 秒诱导 CRT，形成 252 对调制/标准 30 秒 PPG，比较 ResNetCNN、LSTM、Transformer 的 LOSO 与非 LOSO。",
+        "results": "CRT 调制使各模型提升；ResNetCNN MAE 最多降低 35.6%、MAPE 最多降低 40.6%；摘要称全部模型达到 AAMI 的 ME/SD 数值条件。",
+        "conclusion": "调制显著改善模型，但证据只来自 21 名健康人。",
+        "takeaway": "这是主动加压增强，而不是普通静态 PPG 的性能。",
+        "deployment": "需要可控 9 N 压力和 15 秒操作，不适合真正无感连续监测。",
+        "leakage": "非 LOSO 结果可能受同人泄露；应优先引用 LOSO。AAMI 数值条件不等于完成正式设备验证。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-09-23",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2026-01-05；2026-09-23 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-111-multi-signal-acquisition-system-for-continuous-blood-pressure-monitoring",
+      "title": "Multi-Signal Acquisition System for Continuous Blood Pressure Monitoring",
+      "year": 2025,
+      "first_reported_in_daily": "2026-09-23",
+      "record_type": "paper",
+      "source": {
+        "venue": "Sensors",
+        "doi": "10.3390/s25185910",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41013148/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "ECG",
+        "PPG",
+        "impedance cardiography",
+        "XGBoost",
+        "continuous BP"
+      ],
+      "datasets": [
+        "40 healthy subjects",
+        "400 minutes",
+        "4,390 records"
+      ],
+      "input_signals": [
+        "ECG",
+        "PPG",
+        "ICG",
+        "pulse-wave-analysis features"
+      ],
+      "model_method": "开发同步采集 ECG、PPG、ICG 的紧凑系统，ECG/ICG 共用电极；在 40 名健康者上比较多信号特征与模型，最佳为 pulse-wave analysis 特征+XGBoost。",
+      "main_results": "SBP/DBP MAE 为 3.76±3.98/2.71±2.57 mmHg，摘要称达到 BHS A 级。",
+      "calibration": {
+        "type": "not reported in abstract",
+        "points": null,
+        "timing": "unknown",
+        "notes": "未说明个人校准或 BP 尺度恢复。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "4,390 条记录来自 40 人；subject split 未说明。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "无外部验证。"
+      },
+      "deployment": {
+        "level": "research prototype",
+        "judgment": "硬件集成有价值，但结果很可能受小样本和记录级拆分影响",
+        "inference_inputs": [
+          "ECG",
+          "PPG",
+          "ICG"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "共用电极降低复杂度，但仍是三信号系统，穿戴负担高于单 PPG。"
+      },
+      "leakage_audit": {
+        "risk_level": "high",
+        "abp_bp_denormalization": "unknown",
+        "abp_bp_alignment": "multi-signal recordings paired with reference BP",
+        "abp_bp_windowing": "4,390 records derived from 40 subjects",
+        "abp_bp_quality_filtering": "not stated",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "high unless subject-disjoint",
+        "subject_leakage": "unknown",
+        "notes": "记录/受试者比超过 100；若随机记录拆分，3 mmHg 级 MAE 可能主要来自同人泄露。"
+      },
+      "notes": "2026-09-23 新发现补录；PubMed 正式题录、DOI 与摘要已核验，摘要未披露的信息不作推断。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-09-23",
+      "dataset": [
+        "40 healthy subjects",
+        "400 minutes",
+        "4,390 records"
+      ],
+      "inference_inputs": [
+        "ECG",
+        "PPG",
+        "ICG"
+      ],
+      "study_summary": {
+        "goal": "以同步 ECG/PPG/ICG 和紧凑电路提高连续 BP 估计。",
+        "method": "开发同步采集 ECG、PPG、ICG 的紧凑系统，ECG/ICG 共用电极；在 40 名健康者上比较多信号特征与模型，最佳为 pulse-wave analysis 特征+XGBoost。",
+        "results": "SBP/DBP MAE 为 3.76±3.98/2.71±2.57 mmHg，摘要称达到 BHS A 级。",
+        "conclusion": "多信号结果较低，但只有 40 名健康受试者且拆分不明。",
+        "takeaway": "4,390 records 不能替代 40-subject 外部验证。",
+        "deployment": "共用电极降低复杂度，但仍是三信号系统，穿戴负担高于单 PPG。",
+        "leakage": "记录/受试者比超过 100；若随机记录拆分，3 mmHg 级 MAE 可能主要来自同人泄露。",
+        "evidence_status": "正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2025,
+        "display_year": "2025",
+        "checked_on": "2026-09-23",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "首次在线/正式发表时间为 2025-09-21；2026-09-23 是数据库收录日期。"
       }
     }
   ]
