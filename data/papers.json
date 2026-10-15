@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-23T20:34:00+08:00",
-  "record_count": 111,
-  "reviewed_count": 111,
+  "generated_at": "2026-10-15T22:43:00+08:00",
+  "record_count": 116,
+  "reviewed_count": 116,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -10264,6 +10264,471 @@
         "checked_on": "2026-09-23",
         "basis": "PubMed 正式期刊题录、DOI 与摘要",
         "note": "首次在线/正式发表时间为 2025-09-21；2026-09-23 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-112-tpf-bp-a-three-stage-physiology-guided-self-supervised-transfer-learning",
+      "title": "TPF-BP: A Three-Stage Physiology-Guided Self-Supervised Transfer Learning Framework for Personalized Blood Pressure Measurement",
+      "year": 2026,
+      "first_reported_in_daily": "2026-10-15",
+      "record_type": "paper",
+      "source": {
+        "venue": "IEEE Journal of Biomedical and Health Informatics",
+        "doi": "10.1109/JBHI.2026.3740802",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42848570/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "self-supervised learning",
+        "personalization",
+        "few-shot calibration",
+        "wearable BP"
+      ],
+      "datasets": [
+        "three public datasets",
+        "CRHE multi-wavelength dual-24h PPG-BP dataset"
+      ],
+      "input_signals": [
+        "PPG waveform and derivatives",
+        "personal labeled BP samples for fine-tuning"
+      ],
+      "model_method": "先以生理先验引导的 masked autoencoder 对 PPG 及其导数做自监督预训练，再以三分支模型进行监督预训练和少样本个体微调；并公开带昼夜节律标注的 CRHE 双 24 小时数据集。",
+      "main_results": "四种基础模型在少样本迁移场景中的 SBP/DBP MAE 平均下降 7.66%/5.78%；摘要未报告最终绝对 MAE 与受试者数量。",
+      "calibration": {
+        "type": "subject-specific few-shot fine-tuning",
+        "points": null,
+        "timing": "before personalized inference",
+        "notes": "性能改善依赖带参考 BP 的个人微调样本；摘要未说明具体样本数。"
+      },
+      "subject_split": {
+        "status": "cross-dataset few-shot experiments",
+        "notes": "摘要未详述预训练、个人校准与测试受试者/时间片段的隔离。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "three public datasets plus CRHE",
+        "notes": "跨多个数据集评估；是否零微调外测不适用，因为方案明确做个人微调。"
+      },
+      "deployment": {
+        "level": "conditional",
+        "judgment": "为个人化和长期 PPG 研究提供方法与公开数据，效果需结合校准成本解释",
+        "inference_inputs": [
+          "PPG waveform and derivatives",
+          "stored personalized model"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "上线前要采集个人 PPG 与参考 BP 做少样本微调；后续预测使用保存的个人模型。"
+      },
+      "leakage_audit": {
+        "risk_level": "medium",
+        "abp_bp_denormalization": "not reported in abstract",
+        "abp_bp_alignment": "PPG 与动态血压计参考读数配对",
+        "abp_bp_windowing": "双 24 小时记录可能切成高度相关的片段",
+        "abp_bp_quality_filtering": "not reported in abstract",
+        "target_dependent_calibration": "explicit few-shot personal BP calibration",
+        "window_leakage": "个人校准与测试相邻片段需要全文核查",
+        "subject_leakage": "跨库预训练来源与个人测试重叠需要全文核查",
+        "notes": "个人校准是显式设计；应检查校准与测试的时间间隔，以及公开数据集是否与预训练来源共享受试者。"
+      },
+      "notes": "2026-10-15 收录；按 PubMed 正式题录与摘要审读，未在摘要披露的设计细节保留为 unknown。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-10-15",
+      "dataset": [
+        "three public datasets",
+        "CRHE multi-wavelength dual-24h PPG-BP dataset"
+      ],
+      "inference_inputs": [
+        "PPG waveform and derivatives",
+        "stored personalized model"
+      ],
+      "study_summary": {
+        "goal": "减少新用户 PPG 血压估计所需的标注数据，并提供长期可穿戴研究数据。",
+        "method": "先以生理先验引导的 masked autoencoder 对 PPG 及其导数做自监督预训练，再以三分支模型进行监督预训练和少样本个体微调；并公开带昼夜节律标注的 CRHE 双 24 小时数据集。",
+        "results": "四种基础模型在少样本迁移场景中的 SBP/DBP MAE 平均下降 7.66%/5.78%；摘要未报告最终绝对 MAE 与受试者数量。",
+        "conclusion": "少样本迁移带来相对误差改善，但摘要缺少绝对误差和校准量，暂不能判断临床精度。",
+        "takeaway": "本研究明确需要个人微调；7.66%/5.78% 是相对改善，不是 mmHg 误差。",
+        "deployment": "上线前要采集个人 PPG 与参考 BP 做少样本微调；后续预测使用保存的个人模型。",
+        "leakage": "个人校准是显式设计；应检查校准与测试的时间间隔，以及公开数据集是否与预训练来源共享受试者。",
+        "evidence_status": "PubMed 正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-10-15",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "在线发表日期为 2026-10-08；2026-10-15 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-113-a-physiology-and-measurement-informed-framework-for-evaluating-ppg-featu",
+      "title": "A Physiology- and Measurement-Informed Framework for Evaluating PPG Features in Cuffless Blood Pressure Estimation",
+      "year": 2026,
+      "first_reported_in_daily": "2026-10-15",
+      "record_type": "paper",
+      "source": {
+        "venue": "Physiological Measurement",
+        "doi": "10.1088/1361-6579/aeb063",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42833254/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "feature interpretation",
+        "measurement confounding",
+        "cuffless BP",
+        "review"
+      ],
+      "datasets": [
+        "qualitative synthesis of 87 studies"
+      ],
+      "input_signals": [
+        "published PPG features and representations"
+      ],
+      "model_method": "按 PRISMA 引导的 87 项研究定性综述，将 PPG 描述符映射至心脏泵血、动脉顺应性、波反射、外周血管调节和复合表征，并逐一审视其可观测性、混杂、校准依赖及生理证据。",
+      "main_results": "文献对 PPG 形态与具体 BP 机制的验证不均衡且常为间接证据；心率、温度、接触压力、测量部位及反射式可穿戴 PPG 的形态标志缺失均会影响解释。",
+      "calibration": {
+        "type": "review of calibration dependence",
+        "points": null,
+        "timing": "not applicable",
+        "notes": "方法学框架，不训练 BP estimator。"
+      },
+      "subject_split": {
+        "status": "not applicable; qualitative review",
+        "notes": "无模型训练/测试划分。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "并非独立模型外部验证研究。"
+      },
+      "deployment": {
+        "level": "research framework",
+        "judgment": "可作为后续 PPG-BP 特征和泄露审计的判读框架",
+        "inference_inputs": [
+          "not applicable"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "用于评估候选特征的机制特异性和测量条件；本研究未提供可直接部署的 BP 模型。"
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "not applicable",
+        "abp_bp_alignment": "汇总文献中的 PPG 与参考 BP 关联证据",
+        "abp_bp_windowing": "not applicable",
+        "abp_bp_quality_filtering": "研究选择遵循定性综述流程",
+        "target_dependent_calibration": "not applicable",
+        "window_leakage": "not applicable",
+        "subject_leakage": "not applicable",
+        "notes": "这是一项审计框架而非预测模型；提醒不能把高预测分数直接解释为学到了特定血流动力学机制。"
+      },
+      "notes": "2026-10-15 收录；按 PubMed 正式题录与摘要审读，未在摘要披露的设计细节保留为 unknown。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-10-15",
+      "dataset": [
+        "qualitative synthesis of 87 studies"
+      ],
+      "inference_inputs": [
+        "not applicable"
+      ],
+      "study_summary": {
+        "goal": "建立更严谨的 PPG 特征生理解释和测量误差评估框架。",
+        "method": "按 PRISMA 引导的 87 项研究定性综述，将 PPG 描述符映射至心脏泵血、动脉顺应性、波反射、外周血管调节和复合表征，并逐一审视其可观测性、混杂、校准依赖及生理证据。",
+        "results": "文献对 PPG 形态与具体 BP 机制的验证不均衡且常为间接证据；心率、温度、接触压力、测量部位及反射式可穿戴 PPG 的形态标志缺失均会影响解释。",
+        "conclusion": "PPG 的多因素敏感性使单个形态特征难以作为特定 BP 机制的直接测量。",
+        "takeaway": "这是方法学综述；收录用于提高数据库研究审计质量，不计作一个新的数值预测器。",
+        "deployment": "用于评估候选特征的机制特异性和测量条件；本研究未提供可直接部署的 BP 模型。",
+        "leakage": "这是一项审计框架而非预测模型；提醒不能把高预测分数直接解释为学到了特定血流动力学机制。",
+        "evidence_status": "PubMed 正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-10-15",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "在线发表日期为 2026-10-05；2026-10-15 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-114-exploratory-data-analysis-of-tonometry-and-ptt-pir-signals-for-cuffless-",
+      "title": "Exploratory Data Analysis of Tonometry and PTT/PIR Signals for Cuffless Blood Pressure Monitoring: Dynamic Responsiveness Versus Baseline Stability",
+      "year": 2026,
+      "first_reported_in_daily": "2026-10-15",
+      "record_type": "paper",
+      "source": {
+        "venue": "Physiological Measurement",
+        "doi": "10.1088/1361-6579/aeab62",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42775664/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "PTT",
+        "PIR",
+        "tonometry",
+        "dynamic BP"
+      ],
+      "datasets": [
+        "9 healthy participants",
+        "28 rest and handgrip sessions"
+      ],
+      "input_signals": [
+        "ECG",
+        "PPG",
+        "superficial temporal artery tonometry"
+      ],
+      "model_method": "在静息和握力升压中同步采集 ECG、PPG 和浅颞动脉张力波，以 Finapres 连续 BP 为参考；比较 PTT/PIR 与张力法在稳定、动态阶段的线性/非线性关联。",
+      "main_results": "PTT/PIR 与 SBP 线性相关约 r=0.37–0.41；张力法的非线性关联较强，SBP/DBP 的 φk 约 0.68/0.71。动态阶段张力法追踪较好，稳定阶段 PTT/PIR 相对较好。",
+      "calibration": {
+        "type": "baseline/phase-dependent association",
+        "points": null,
+        "timing": "not specified",
+        "notes": "探索性关联分析，不提供经过临床验证的个人 BP 校准方案。"
+      },
+      "subject_split": {
+        "status": "participant-level exploratory analysis",
+        "notes": "无独立训练/测试，按参与者报告关联。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "仅 9 名健康人、28 次会话。"
+      },
+      "deployment": {
+        "level": "exploratory",
+        "judgment": "提示稳定基线和快速变化可能需要不同传感信息",
+        "inference_inputs": [
+          "ECG",
+          "PPG",
+          "temporal artery tonometry"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "需要额外张力传感器；样本量小，Finapres 参考也不能当作侵入式 ABP。"
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "not applicable to model regression",
+        "abp_bp_alignment": "多模态信号与 Finapres BP 时间同步",
+        "abp_bp_windowing": "按稳定/动态阶段和参与者分析",
+        "abp_bp_quality_filtering": "not reported in abstract",
+        "target_dependent_calibration": "not established",
+        "window_leakage": "not a predictive train/test setting",
+        "subject_leakage": "not applicable",
+        "notes": "没有宣称独立测试精度；核心风险是把会话级相关性误作模型误差，或把 Finapres 视为侵入式金标准。"
+      },
+      "notes": "2026-10-15 收录；按 PubMed 正式题录与摘要审读，未在摘要披露的设计细节保留为 unknown。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-10-15",
+      "dataset": [
+        "9 healthy participants",
+        "28 rest and handgrip sessions"
+      ],
+      "inference_inputs": [
+        "ECG",
+        "PPG",
+        "temporal artery tonometry"
+      ],
+      "study_summary": {
+        "goal": "区分不同无袖带信号对基线血压与快速血压变化的敏感性。",
+        "method": "在静息和握力升压中同步采集 ECG、PPG 和浅颞动脉张力波，以 Finapres 连续 BP 为参考；比较 PTT/PIR 与张力法在稳定、动态阶段的线性/非线性关联。",
+        "results": "PTT/PIR 与 SBP 线性相关约 r=0.37–0.41；张力法的非线性关联较强，SBP/DBP 的 φk 约 0.68/0.71。动态阶段张力法追踪较好，稳定阶段 PTT/PIR 相对较好。",
+        "conclusion": "张力法与 PTT/PIR 提供互补信息，但只形成融合假设，尚未验证预测模型。",
+        "takeaway": "这是 9 人的信号关联研究；相关系数和 φk 不是 mmHg 精度。",
+        "deployment": "需要额外张力传感器；样本量小，Finapres 参考也不能当作侵入式 ABP。",
+        "leakage": "没有宣称独立测试精度；核心风险是把会话级相关性误作模型误差，或把 Finapres 视为侵入式金标准。",
+        "evidence_status": "PubMed 正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-10-15",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "在线发表日期为 2026-09-23；2026-10-15 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-115-continual-cuffless-blood-pressure-monitoring-in-children-agreement-and-f",
+      "title": "Continual Cuffless Blood Pressure Monitoring in Children: Agreement and Feasibility Compared With Ambulatory Blood Pressure Monitoring",
+      "year": 2026,
+      "first_reported_in_daily": "2026-10-15",
+      "record_type": "paper",
+      "source": {
+        "venue": "Journal of Hypertension",
+        "doi": "10.1097/HJH.0000000000004445",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42725447/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "pediatric BP",
+        "ambulatory comparison",
+        "wearable",
+        "nocturnal dipping"
+      ],
+      "datasets": [
+        "21 children with well-controlled type 1 diabetes and normal office BP"
+      ],
+      "input_signals": [
+        "Aktiia wrist optical cuffless BP device"
+      ],
+      "model_method": "21 名儿童同时进行 24 小时腕式光学无袖带监测与常规 ABPM，比较全天、日间和夜间平均 SBP/DBP，并使用预设探索性 ±10 mmHg 等效界限和 Bland–Altman 一致性分析。",
+      "main_results": "24 小时平均 SBP/DBP 的设备差为 -4.5/-0.8 mmHg；全天和夜间 SBP 及所有时段 DBP 的 90% CI 在探索性 ±10 mmHg 界限内，日间 SBP 未达到；个体一致性范围较宽，夜间 dipping 被减弱。",
+      "calibration": {
+        "type": "commercial device protocol",
+        "points": null,
+        "timing": "not reported in abstract",
+        "notes": "设备校准流程未在摘要交代。"
+      },
+      "subject_split": {
+        "status": "prospective paired device comparison",
+        "notes": "不是新模型训练/测试研究。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "prospective pediatric ABPM comparison",
+        "notes": "儿科特定人群现场比较，但只有 21 人且选择性强。"
+      },
+      "deployment": {
+        "level": "not ready for individual decisions",
+        "judgment": "可行性和群体均值接近，但个体决策及夜间 dipping 不能替代 ABPM",
+        "inference_inputs": [
+          "commercial wrist optical device output"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "现有数据仅覆盖正常诊室 BP、糖尿病控制良好的儿童；需扩大儿科 BP 范围和样本。"
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "commercial algorithm undisclosed",
+        "abp_bp_alignment": "同步 24 小时 ABPM 作为比较参考",
+        "abp_bp_windowing": "按每名儿童的全天/日夜平均值比较",
+        "abp_bp_quality_filtering": "not reported in abstract",
+        "target_dependent_calibration": "device protocol undisclosed",
+        "window_leakage": "not a train/test study",
+        "subject_leakage": "not applicable",
+        "notes": "21 人是独立统计单位，不能把频繁光学读数当成更多独立受试者；主要限制是群体选择和设备黑箱。"
+      },
+      "notes": "2026-10-15 收录；按 PubMed 正式题录与摘要审读，未在摘要披露的设计细节保留为 unknown。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-10-15",
+      "dataset": [
+        "21 children with well-controlled type 1 diabetes and normal office BP"
+      ],
+      "inference_inputs": [
+        "commercial wrist optical device output"
+      ],
+      "study_summary": {
+        "goal": "检验腕式光学 BP 在儿童 24 小时监测中的可行性与 ABPM 一致性。",
+        "method": "21 名儿童同时进行 24 小时腕式光学无袖带监测与常规 ABPM，比较全天、日间和夜间平均 SBP/DBP，并使用预设探索性 ±10 mmHg 等效界限和 Bland–Altman 一致性分析。",
+        "results": "24 小时平均 SBP/DBP 的设备差为 -4.5/-0.8 mmHg；全天和夜间 SBP 及所有时段 DBP 的 90% CI 在探索性 ±10 mmHg 界限内，日间 SBP 未达到；个体一致性范围较宽，夜间 dipping 被减弱。",
+        "conclusion": "群体平均值有一定可比性，个体误差和夜间 dipping 差异阻碍临床互换。",
+        "takeaway": "本研究直接提醒儿科应用不能只看平均偏差。",
+        "deployment": "现有数据仅覆盖正常诊室 BP、糖尿病控制良好的儿童；需扩大儿科 BP 范围和样本。",
+        "leakage": "21 人是独立统计单位，不能把频繁光学读数当成更多独立受试者；主要限制是群体选择和设备黑箱。",
+        "evidence_status": "PubMed 正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-10-15",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "在线发表日期为 2026-09-11；2026-10-15 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-116-long-term-stability-and-blood-pressure-change-tracking-with-a-cuffless-w",
+      "title": "Long-Term Stability and Blood Pressure Change Tracking With a Cuffless Wearable Device in Hypertensive Patients",
+      "year": 2026,
+      "first_reported_in_daily": "2026-10-15",
+      "record_type": "paper",
+      "source": {
+        "venue": "Blood Pressure",
+        "doi": "10.1080/08037051.2026.2707794",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42775845/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "hypertension",
+        "long-term stability",
+        "delta BP",
+        "wearable validation"
+      ],
+      "datasets": [
+        "30 hypertensive patients",
+        "four visits over six weeks"
+      ],
+      "input_signals": [
+        "CSEM wearable PPG cuffless BP device"
+      ],
+      "model_method": "30 名高血压患者 6 周内完成四次访视，每次各用袖带和 PPG 设备测量 5–7 次并取中位数；比较访视之间的 ΔSBP/ΔDBP、时间漂移及显著变化方向一致率。",
+      "main_results": "两设备 ΔSBP/ΔDBP 差为 0.2±12.8/-0.1±7.4 mmHg；六周未见明显漂移；超过 15/10 mmHg 的显著 SBP/DBP 变化方向一致率为 83%/86%。",
+      "calibration": {
+        "type": "commercial device protocol",
+        "points": null,
+        "timing": "not reported in abstract",
+        "notes": "未说明是否需初始或重复袖带校准。"
+      },
+      "subject_split": {
+        "status": "longitudinal method comparison",
+        "notes": "不是模型训练研究；按患者多访视比较。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "hypertensive patients under therapy",
+        "notes": "前瞻性纵向比较，非独立金标准验证。"
+      },
+      "deployment": {
+        "level": "feasibility",
+        "judgment": "六周趋势无明显漂移，但个体 ΔSBP 误差较大",
+        "inference_inputs": [
+          "wearable PPG device output"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "可能用于治疗期间趋势跟踪；样本小、袖带参考本身有变异，需更大样本和更强参考。"
+      },
+      "leakage_audit": {
+        "risk_level": "low",
+        "abp_bp_denormalization": "commercial device algorithm undisclosed",
+        "abp_bp_alignment": "每次访视与 Microlife 袖带读数比较",
+        "abp_bp_windowing": "每次 5–7 次读数取中位数，再计算访视间差值",
+        "abp_bp_quality_filtering": "not reported in abstract",
+        "target_dependent_calibration": "device protocol undisclosed",
+        "window_leakage": "not a train/test setting",
+        "subject_leakage": "not applicable",
+        "notes": "研究按 30 名患者而非数百次读数理解；未知设备校准方式与袖带参考变异限制结论。"
+      },
+      "notes": "2026-10-15 收录；按 PubMed 正式题录与摘要审读，未在摘要披露的设计细节保留为 unknown。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-10-15",
+      "dataset": [
+        "30 hypertensive patients",
+        "four visits over six weeks"
+      ],
+      "inference_inputs": [
+        "wearable PPG device output"
+      ],
+      "study_summary": {
+        "goal": "检验 PPG 设备在高血压治疗期间的六周稳定性和 BP 变化跟踪。",
+        "method": "30 名高血压患者 6 周内完成四次访视，每次各用袖带和 PPG 设备测量 5–7 次并取中位数；比较访视之间的 ΔSBP/ΔDBP、时间漂移及显著变化方向一致率。",
+        "results": "两设备 ΔSBP/ΔDBP 差为 0.2±12.8/-0.1±7.4 mmHg；六周未见明显漂移；超过 15/10 mmHg 的显著 SBP/DBP 变化方向一致率为 83%/86%。",
+        "conclusion": "总体没有时间漂移，变化方向大致一致，但 ΔSBP 差的 SD 达 12.8 mmHg。",
+        "takeaway": "方向一致率不能替代每次读数的绝对精度。",
+        "deployment": "可能用于治疗期间趋势跟踪；样本小、袖带参考本身有变异，需更大样本和更强参考。",
+        "leakage": "研究按 30 名患者而非数百次读数理解；未知设备校准方式与袖带参考变异限制结论。",
+        "evidence_status": "PubMed 正式期刊题录与摘要已核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-10-15",
+        "basis": "PubMed 正式期刊题录、DOI 与摘要",
+        "note": "在线发表日期为 2026-09-25 online; 2026-12 issue；2026-10-15 是数据库收录日期。"
       }
     }
   ]
