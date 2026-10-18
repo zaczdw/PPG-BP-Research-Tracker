@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-15T22:43:00+08:00",
-  "record_count": 116,
-  "reviewed_count": 116,
+  "generated_at": "2026-10-18T13:13:55.668Z",
+  "record_count": 117,
+  "reviewed_count": 117,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -10729,6 +10729,98 @@
         "checked_on": "2026-10-15",
         "basis": "PubMed 正式期刊题录、DOI 与摘要",
         "note": "在线发表日期为 2026-09-25 online; 2026-12 issue；2026-10-15 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-117-demographic-subgroup-aware-analysis-of-blood-pressure-predictive-models",
+      "title": "Demographic Subgroup-Aware Analysis of Blood Pressure Predictive Models",
+      "year": 2026,
+      "first_reported_in_daily": "2026-10-18",
+      "record_type": "paper",
+      "source": {
+        "venue": "PLOS Digital Health",
+        "doi": "10.1371/journal.pdig.0001687",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42879504/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "blood pressure estimation",
+        "demographic subgroup",
+        "signal quality",
+        "fairness"
+      ],
+      "datasets": [
+        "dataset and cohort size not stated in abstract"
+      ],
+      "input_signals": [
+        "PPG waveform-derived features"
+      ],
+      "model_method": "训练三种传统机器学习 BP 回归模型，按单个人口统计变量及其交叉分组分析误差，并比较特征提取前加入 PPG 信号质量评估的影响。摘要未列明三个模型名称。",
+      "main_results": "加入信号质量评估后，模型 SBP/DBP MAE 为 3.36/1.76 mmHg；摘要未给出各人口统计子组的误差、样本量或外部验证结果。",
+      "calibration": {
+        "type": "not reported in abstract",
+        "points": null,
+        "timing": "unknown",
+        "notes": "未说明是否使用个人参考 BP 校准或人口统计变量作为推理输入；分组分析本身不等于校准。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "受试者级拆分、窗口构建及交叉验证方式均需全文核实。"
+      },
+      "external_validation": {
+        "status": null,
+        "dataset_or_cohort": null,
+        "notes": "摘要未报告外部验证，不能据此认定有或没有独立测试。"
+      },
+      "deployment": {
+        "level": "research",
+        "judgment": "提供人口统计子组与信号质量审计思路，摘要信息不足以判断跨人泛化",
+        "inference_inputs": [
+          "PPG features",
+          "signal-quality assessment"
+        ],
+        "current_reference_bp_required": null,
+        "notes": "推理至少需要可评估质量的 PPG；筛选后覆盖率、不同肤色/年龄的失败率、个人校准和模型输入需全文确认。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "not reported in abstract",
+        "abp_bp_alignment": "reference BP used as supervised labels; timing not stated",
+        "abp_bp_windowing": "not reported in abstract",
+        "abp_bp_quality_filtering": "PPG signal-quality assessment precedes feature extraction; whether reference BP influences rejection is not stated",
+        "target_dependent_calibration": "unknown",
+        "window_leakage": "unknown",
+        "subject_leakage": "unknown",
+        "notes": "3.36/1.76 mmHg 是摘要报告值。需核查 subject-disjoint、归一化是否仅拟合训练集，以及信号质量门限是否使用目标 BP。还需同时报告保留比例，避免只在容易样本上评价。"
+      },
+      "notes": "2026-10-18 新发现收录；PubMed 正式题录与摘要已核验。本期只收录 1 篇，未以邻近但不直接使用 PPG 的研究补足数量。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-10-18",
+      "dataset": [
+        "dataset and cohort size not stated in abstract"
+      ],
+      "inference_inputs": [
+        "PPG features",
+        "signal-quality assessment"
+      ],
+      "study_summary": {
+        "goal": "评估 PPG 血压模型在单一及交叉人口统计子组间的性能差异，并研究信号质量评估的收益。",
+        "method": "三种传统 ML 回归器结合 PPG 特征，进行人口统计子组分析和信号质量流程比较。",
+        "results": "加入信号质量评估后，SBP/DBP MAE 3.36/1.76 mmHg；摘要没有子组误差明细。",
+        "conclusion": "人口统计因素与质量筛选值得共同评估；摘要不足以判断每个子组的公平性和跨受试者精度。",
+        "takeaway": "质量筛选后的平均低误差应结合保留率、子组误差与受试者隔离解释。",
+        "deployment": "需要 PPG 质量评估；模型输入、个人校准、样本覆盖和外部验证条件仍待全文核实。",
+        "leakage": "拆分、归一化、参考 BP 是否参与质量筛选均未在摘要说明，风险标为 unknown。",
+        "evidence_status": "PubMed 正式题录与摘要已核验；未声称已审读全文"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-10-18",
+        "basis": "PubMed PMID 42879504 正式题录、DOI 与摘要",
+        "note": "在线发表日期 2026-10-15；2026-10-18 是数据库收录日期。"
       }
     }
   ]
