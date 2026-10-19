@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-18T13:13:55.668Z",
-  "record_count": 117,
-  "reviewed_count": 117,
+  "generated_at": "2026-10-19T13:06:41.485Z",
+  "record_count": 118,
+  "reviewed_count": 118,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -10821,6 +10821,99 @@
         "checked_on": "2026-10-18",
         "basis": "PubMed PMID 42879504 正式题录、DOI 与摘要",
         "note": "在线发表日期 2026-10-15；2026-10-18 是数据库收录日期。"
+      }
+    },
+    {
+      "id": "ppgbp-118-hippt-physiology-grounded-wearable-ppg-representation-learning",
+      "title": "HiPPT: Physiology-Grounded Wearable PPG Representation Learning via Multi-Scope Text Alignment",
+      "year": 2026,
+      "first_reported_in_daily": "2026-10-19",
+      "record_type": "paper",
+      "source": {
+        "venue": "arXiv preprint",
+        "doi": "10.48550/arXiv.2610.14489",
+        "url": "https://arxiv.org/abs/2610.14489",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "PPG",
+        "representation learning",
+        "blood pressure",
+        "text alignment",
+        "preprint"
+      ],
+      "datasets": [
+        "pretraining: >4M records, ~202K users",
+        "HBPM-X: ~90K pairs, 303 users"
+      ],
+      "input_signals": [
+        "wrist PPG"
+      ],
+      "model_method": "以形态和人口统计文本监督 PPG Transformer，再冻结编码器训练 BP 线性输出。",
+      "main_results": "HBPM-X：SBP/DBP MAE 11.67±0.48/6.57±0.11 mmHg；该预印本尚未同行评审。",
+      "calibration": {
+        "type": "supervised linear probe",
+        "points": null,
+        "timing": "population training",
+        "notes": "未描述个人 BP 校准。"
+      },
+      "subject_split": {
+        "status": "five-fold; grouping unclear for BP",
+        "notes": "预训练与 BP 队列无用户重叠；BP 五折是否按人分组未明确，仍需核实。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": null,
+        "notes": "外部心率迁移不构成 BP 外部验证。"
+      },
+      "deployment": {
+        "level": "research preprint",
+        "judgment": "表征可迁移，BP 精度仍有限",
+        "inference_inputs": [
+          "PPG",
+          "trained linear head"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "需要经过 BP 标注训练的输出层。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "未见依赖当前目标值",
+        "abp_bp_alignment": "袖带配对标签",
+        "abp_bp_windowing": "BP 记录级评价",
+        "abp_bp_quality_filtering": "基于 PPG 脉搏质量",
+        "target_dependent_calibration": "未描述",
+        "window_leakage": "未排除",
+        "subject_leakage": "BP 折内分组不明确",
+        "notes": "预训练与 BP 队列无用户重叠；BP 五折是否按人分组未明确，仍需核实。"
+      },
+      "notes": "首次提交 2026-10-10；本期新增 1 篇。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-10-19",
+      "dataset": [
+        "HBPM-X: 303 users"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "trained linear head"
+      ],
+      "study_summary": {
+        "goal": "学习可用于 BP 的腕部 PPG 表征。",
+        "method": "以形态和人口统计文本监督 PPG Transformer，再冻结编码器训练 BP 线性输出。",
+        "results": "HBPM-X：SBP/DBP MAE 11.67±0.48/6.57±0.11 mmHg；该预印本尚未同行评审。",
+        "conclusion": "SBP 误差仍高。",
+        "takeaway": "明确为预印本。",
+        "deployment": "需 BP 输出层。",
+        "leakage": "预训练与 BP 队列无用户重叠；BP 五折是否按人分组未明确，仍需核实。",
+        "evidence_status": "原始页面及全文方法/评价章节核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-10-19",
+        "basis": "arXiv v1 原始页面",
+        "note": "2026-10-10 首次提交，2026-10-19 收录。"
       }
     }
   ]
