@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-19T13:06:41.485Z",
-  "record_count": 118,
-  "reviewed_count": 118,
+  "generated_at": "2026-10-21T13:28:41.753Z",
+  "record_count": 119,
+  "reviewed_count": 119,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -10914,6 +10914,102 @@
         "checked_on": "2026-10-19",
         "basis": "arXiv v1 原始页面",
         "note": "2026-10-10 首次提交，2026-10-19 收录。"
+      }
+    },
+    {
+      "id": "ppgbp-119-graph-based-signal-relationships",
+      "title": "Novel approach to blood pressure estimation using graph-based signal relationships",
+      "year": 2026,
+      "first_reported_in_daily": "2026-10-21",
+      "record_type": "paper",
+      "source": {
+        "venue": "Biomedical Signal Processing and Control",
+        "doi": "10.1016/j.bspc.2026.110659",
+        "url": "https://www.sciencedirect.com/science/article/pii/S1746809426012139",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "ECG",
+        "BCG",
+        "graph convolutional network",
+        "blood pressure estimation"
+      ],
+      "datasets": [
+        "多通道生理信号；可见摘要未给出样本量及数据集名称"
+      ],
+      "input_signals": [
+        "ECG",
+        "PPG",
+        "two-channel BCG"
+      ],
+      "model_method": "以 ECG、PPG 和双通道 BCG 构建图卷积网络，对比欧氏距离、偏定向相干及峰间隔邻接矩阵。",
+      "main_results": "摘要报告跨受试者 SBP/DBP MAE 5.579/9.599；同受试者 1.933/2.674。摘要 RMSE 小于 MAE，统计口径需核实，不能直接据此认定临床达标。",
+      "calibration": {
+        "type": "not reported in accessible abstract",
+        "points": null,
+        "timing": "未明确",
+        "notes": "不能认定为免校准。"
+      },
+      "subject_split": {
+        "status": "intra-subject and inter-subject reported; implementation unverified",
+        "notes": "仅核验摘要与出版社可见章节；人数、分组实现、校准及目标 BP 参与预处理情况未明确，不将 inter-subject 字样等同于已证实严格按人隔离。"
+      },
+      "external_validation": {
+        "status": null,
+        "dataset_or_cohort": null,
+        "notes": "可见材料未明确独立外部队列。"
+      },
+      "deployment": {
+        "level": "research",
+        "judgment": "多模态研究模型，非仅 PPG 可穿戴方案",
+        "inference_inputs": [
+          "ECG",
+          "PPG",
+          "two-channel BCG"
+        ],
+        "current_reference_bp_required": null,
+        "notes": "需同步多传感器；个人 BP 校准需求未明确。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "未明确",
+        "abp_bp_alignment": "未明确",
+        "abp_bp_windowing": "未明确",
+        "abp_bp_quality_filtering": "未明确",
+        "target_dependent_calibration": "未明确",
+        "window_leakage": "需核查窗口重叠",
+        "subject_leakage": "需核查跨人划分实现",
+        "notes": "仅核验摘要与出版社可见章节；人数、分组实现、校准及目标 BP 参与预处理情况未明确，不将 inter-subject 字样等同于已证实严格按人隔离。"
+      },
+      "notes": "2026-06-05 首次在线；2026-10-01 卷期；2026-10-21 新发现补录，非今日发表。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-10-21",
+      "dataset": [
+        "多通道 ECG/PPG/BCG 队列，规模待核实"
+      ],
+      "inference_inputs": [
+        "ECG",
+        "PPG",
+        "two-channel BCG"
+      ],
+      "study_summary": {
+        "goal": "利用信号间关系预测血压。",
+        "method": "以 ECG、PPG 和双通道 BCG 构建图卷积网络，对比欧氏距离、偏定向相干及峰间隔邻接矩阵。",
+        "results": "摘要报告跨受试者 SBP/DBP MAE 5.579/9.599；同受试者 1.933/2.674。摘要 RMSE 小于 MAE，统计口径需核实，不能直接据此认定临床达标。",
+        "conclusion": "跨人误差高于个体内评价。",
+        "takeaway": "关注邻接关系，但须核实误差统计。",
+        "deployment": "依赖多通道传感器。",
+        "leakage": "仅核验摘要与出版社可见章节；人数、分组实现、校准及目标 BP 参与预处理情况未明确，不将 inter-subject 字样等同于已证实严格按人隔离。",
+        "evidence_status": "出版社摘要及可见章节、作者机构原始题录核验；非全文审核"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-10-21",
+        "basis": "出版社卷期及 Coventry 作者机构题录",
+        "note": "首次在线 2026-06-05；卷期 2026-10-01；收录 2026-10-21。"
       }
     }
   ]
