@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-21T13:28:41.753Z",
-  "record_count": 119,
-  "reviewed_count": 119,
+  "generated_at": "2026-10-22T13:09:29.222Z",
+  "record_count": 120,
+  "reviewed_count": 120,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -11010,6 +11010,97 @@
         "checked_on": "2026-10-21",
         "basis": "出版社卷期及 Coventry 作者机构题录",
         "note": "首次在线 2026-06-05；卷期 2026-10-01；收录 2026-10-21。"
+      }
+    },
+    {
+      "id": "ppgbp-120-real-world-ring-type-cuffless-bp",
+      "title": "Real-world performance of a ring-type cuffless blood pressure device compared with ambulatory blood pressure monitoring",
+      "year": 2026,
+      "first_reported_in_daily": "2026-10-22",
+      "record_type": "paper",
+      "source": {
+        "venue": "Clinical Hypertension",
+        "doi": "10.5646/ch.2026.32.e41",
+        "url": "https://www.clinicalhypertension.org/DOIx.php?id=10.5646/ch.2026.32.e41",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "ring wearable",
+        "real-world validation"
+      ],
+      "datasets": [
+        "韩国两中心：168入组、154分析"
+      ],
+      "input_signals": [
+        "finger PPG"
+      ],
+      "model_method": "韩国两中心154人，比较 CART BP pro 与袖带 ABPM 的24小时、日间及夜间汇总；非逐点同步精度验证。",
+      "main_results": "24小时 SBP 偏差−7.14±10.56 mmHg，仅33.1%受试者差值≤5 mmHg；夜间 DBP 偏差+4.80 mmHg。",
+      "calibration": {
+        "type": "baseline cuff calibration",
+        "points": 2,
+        "timing": "24小时监测前",
+        "notes": "此后不再校准。"
+      },
+      "subject_split": {
+        "status": "observational device evaluation; training split undisclosed",
+        "notes": "非模型训练划分研究，设备训练人群重叠未知。"
+      },
+      "external_validation": {
+        "status": null,
+        "dataset_or_cohort": "韩国同一大学系统两中心154人",
+        "notes": "真实世界评价；与训练集是否独立未披露。"
+      },
+      "deployment": {
+        "level": "clinical observational evaluation",
+        "judgment": "不能据此认定可替代 ABPM",
+        "inference_inputs": [
+          "finger PPG",
+          "stored cuff calibration"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "使用前需袖带校准；专有算法与非逐点比较限制判断。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "专有流程未知",
+        "abp_bp_alignment": "非逐点同步",
+        "abp_bp_windowing": "各时段独立汇总",
+        "abp_bp_quality_filtering": "参考袖带 BP 极值被排除",
+        "target_dependent_calibration": "两次基线 BP；非当前逐点标签",
+        "window_leakage": "非窗口模型评价",
+        "subject_leakage": "训练集独立性未知",
+        "notes": "两次基线袖带 BP 校准，非免校准；参考 BP 极值筛选和异步汇总影响可比性。专有算法未公开，无法完整排除目标依赖。"
+      },
+      "notes": "2026-10-01在线，2026-10-22补录。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-10-22",
+      "dataset": [
+        "154 adults; two centers"
+      ],
+      "inference_inputs": [
+        "finger PPG",
+        "stored cuff calibration"
+      ],
+      "study_summary": {
+        "goal": "评估戒指 PPG 血压的真实世界一致性。",
+        "method": "韩国两中心154人，比较 CART BP pro 与袖带 ABPM 的24小时、日间及夜间汇总；非逐点同步精度验证。",
+        "results": "24小时 SBP 偏差−7.14±10.56 mmHg，仅33.1%受试者差值≤5 mmHg；夜间 DBP 偏差+4.80 mmHg。",
+        "conclusion": "时段汇总差异不能等同逐点设备误差。",
+        "takeaway": "勿将小夜间偏差视为正式验证通过。",
+        "deployment": "需基线袖带校准。",
+        "leakage": "两次基线袖带 BP 校准，非免校准；参考 BP 极值筛选和异步汇总影响可比性。专有算法未公开，无法完整排除目标依赖。",
+        "evidence_status": "出版社全文方法及局限核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-10-22",
+        "basis": "出版社原始页面",
+        "note": "首次在线2026-10-01，非今日发表。"
       }
     }
   ]
