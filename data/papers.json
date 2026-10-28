@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-22T13:09:29.222Z",
-  "record_count": 120,
-  "reviewed_count": 120,
+  "generated_at": "2026-10-28T13:09:29.210Z",
+  "record_count": 122,
+  "reviewed_count": 122,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -11102,6 +11102,193 @@
         "basis": "出版社原始页面",
         "note": "首次在线2026-10-01，非今日发表。"
       }
+    },
+    {
+      "id": "ppgbp-121-context-augmented-session-calibrated-bp",
+      "title": "Context-Augmented, Session-Calibrated Blood Pressure Tracking from Photoplethysmography",
+      "source": {
+        "venue": "arXiv（预印本，未同行评审）",
+        "doi": "10.48550/arXiv.2610.29091",
+        "url": "https://arxiv.org/abs/2610.29091",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "PPG",
+        "session calibration",
+        "context ablation",
+        "leakage audit"
+      ],
+      "datasets": [
+        "AuroraBP：653人、7879次非校准目标",
+        "VitalDB：独立拟合的术中实验"
+      ],
+      "input_signals": [
+        "PPG",
+        "protocol posture/activity",
+        "elapsed time"
+      ],
+      "model_method": "HistGradientBoosting预测相对初始袖带均值的BP变化；比较PPG、时间及协议提供的姿势/活动信息。",
+      "main_results": "主分析SBP/DBP受试者级MAE 7.697/6.139 mmHg；无UCI先验的匹配实验中PPG增益0.214/0.135 mmHg，去时间后DBP增益区间含零。",
+      "calibration": {
+        "type": "initial cuff anchor",
+        "points": 3,
+        "timing": "初始三次袖带读数",
+        "notes": "主分析不更新后续袖带值；VitalDB另用三次早期动脉参考窗口。"
+      },
+      "subject_split": {
+        "status": "participant-level repeated cross-validation",
+        "notes": "三次重复五折；特征选择/填补/拟合限训练人群。历史留出集被反复查看，后续试验仍属探索。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": "VitalDB为另行拟合，非AuroraBP模型迁移",
+        "notes": "未确立外部迁移。"
+      },
+      "deployment": {
+        "level": "retrospective research",
+        "judgment": "尚不能替代袖带",
+        "inference_inputs": [
+          "PPG",
+          "stored initial cuff BP",
+          "elapsed time",
+          "posture/activity context"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "姿势/活动由协议提供，尚未验证独立传感分类；需初始袖带校准。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "主分析用初始校准锚定，未报告当前BP反归一化输入",
+        "abp_bp_alignment": "核验范围未完整复现原始对齐",
+        "abp_bp_windowing": "中央10秒光学窗口",
+        "abp_bp_quality_filtering": "含质量筛选；未完成原始信号复现",
+        "target_dependent_calibration": "明确使用初始BP；剔除初始及后续校准标签行",
+        "window_leakage": "受试者分折",
+        "subject_leakage": "主分析人群分离；反复数据集复用仍有开发偏倚",
+        "notes": "协议元数据可产生捷径；不能把内部CV或独立拟合VitalDB称外部迁移。"
+      },
+      "notes": "首次提交2026-10-21；2026-10-28新发现补录。",
+      "study_summary": {
+        "goal": "区分PPG与采集情境对校准后BP追踪的贡献。",
+        "method": "梯度提升及匹配消融。",
+        "results": "主分析MAE 7.697/6.139 mmHg。",
+        "conclusion": "PPG增益较小并依赖协变量。",
+        "takeaway": "需比较校准和情境基线。",
+        "deployment": "初始三次袖带校准，状态识别尚未验证。",
+        "leakage": "校准标签行剔除，但数据复用与协议捷径仍限制结论。",
+        "evidence_status": "arXiv v1摘要及方法全文核验；未同行评审"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-10-28",
+        "basis": "arXiv v1提交历史",
+        "note": "首次提交2026-10-21，非本日发表。"
+      },
+      "year": 2026,
+      "first_reported_in_daily": "2026-10-28",
+      "record_type": "paper",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-10-28",
+      "dataset": [
+        "AuroraBP：653人、7879次非校准目标",
+        "VitalDB：独立拟合的术中实验"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "stored initial cuff BP",
+        "elapsed time",
+        "posture/activity context"
+      ]
+    },
+    {
+      "id": "ppgbp-122-windkessel-regularized-wearable-ppg-bp",
+      "title": "Cuffless Blood Pressure Estimation From Wearable Photoplethysmography and Windkessel Model-Regularized Learning Approach",
+      "source": {
+        "venue": "IEEE Sensors Letters",
+        "doi": "10.1109/LSENS.2026.3724173",
+        "url": "https://ieeexplore.ieee.org/abstract/document/11656320",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "Windkessel",
+        "physiology-informed learning"
+      ],
+      "datasets": [
+        "自采10名健康受试者"
+      ],
+      "input_signals": [
+        "wearable finger PPG"
+      ],
+      "model_method": "利用PPG舒张时间常数，将Windkessel动脉压力指数衰减约束加入有界损失；具体网络摘要未说明。",
+      "main_results": "摘要报告SBP/DBP MAE 4.10±1.41/2.90±1.20 mmHg；10名健康人静息、情绪刺激及Stroop测试。±统计含义未在摘要说明。",
+      "calibration": {
+        "type": "not reported in available abstract",
+        "points": null,
+        "timing": "未知",
+        "notes": "不能由摘要判断免校准。"
+      },
+      "subject_split": {
+        "status": "not reported in available abstract",
+        "notes": "未确认跨受试者划分或窗口重叠。"
+      },
+      "external_validation": {
+        "status": null,
+        "dataset_or_cohort": "未报告",
+        "notes": "摘要仅描述小规模同质自采队列。"
+      },
+      "deployment": {
+        "level": "small-cohort feasibility",
+        "judgment": "需更大多样队列验证",
+        "inference_inputs": [
+          "wearable finger PPG"
+        ],
+        "current_reference_bp_required": null,
+        "notes": "完整校准与推理流程未知；摘要声称AAMI达标不能等同正式设备验证。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "摘要未报告",
+        "abp_bp_alignment": "摘要未报告",
+        "abp_bp_windowing": "摘要未报告",
+        "abp_bp_quality_filtering": "摘要未报告",
+        "target_dependent_calibration": "未知",
+        "window_leakage": "未确认",
+        "subject_leakage": "未确认",
+        "notes": "需全文核对划分及参考BP使用；低MAE不足以排除泄露。"
+      },
+      "notes": "首次在线2026-08-14；2026年10月期刊卷期；2026-10-28新发现补录。",
+      "study_summary": {
+        "goal": "用生理约束改善可穿戴PPG血压估计。",
+        "method": "Windkessel正则化学习。",
+        "results": "SBP/DBP MAE 4.10/2.90 mmHg。",
+        "conclusion": "小样本可行性证据。",
+        "takeaway": "不能仅凭MAE认定临床验证通过。",
+        "deployment": "输入为手指PPG，校准细节未知。",
+        "leakage": "划分、窗口及BP预处理待全文确认。",
+        "evidence_status": "IEEE出版社索引摘要核验，全文未核验"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-10-28",
+        "basis": "IEEE原始题录Date of Publication",
+        "note": "2026-08-14在线，10月卷期不作为首次发表日。"
+      },
+      "year": 2026,
+      "first_reported_in_daily": "2026-10-28",
+      "record_type": "paper",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-10-28",
+      "dataset": [
+        "自采10名健康受试者"
+      ],
+      "inference_inputs": [
+        "wearable finger PPG"
+      ]
     }
   ]
 }
