@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-28T13:09:29.210Z",
-  "record_count": 122,
-  "reviewed_count": 122,
+  "generated_at": "2026-10-30T13:04:02.701Z",
+  "record_count": 123,
+  "reviewed_count": 123,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -11289,6 +11289,103 @@
       "inference_inputs": [
         "wearable finger PPG"
       ]
+    },
+    {
+      "id": "ppgbp-123-finger-worn-ring-absolute-blood-pressure",
+      "title": "A Finger Worn Ring for On-Demand Measurement of Absolute Blood Pressure",
+      "year": 2026,
+      "first_reported_in_daily": "2026-10-30",
+      "record_type": "paper",
+      "source": {
+        "venue": "IEEE Transactions on Biomedical Engineering",
+        "doi": "10.1109/TBME.2026.3748379",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42955775/",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "oscillometric ring",
+        "absolute BP",
+        "on-demand measurement"
+      ],
+      "datasets": [
+        "自采25名志愿者"
+      ],
+      "input_signals": [
+        "finger PPG",
+        "force sensor",
+        "IMU"
+      ],
+      "model_method": "机械执行器收紧戒指，配合降低手部或单独收紧；PPG、力传感器及IMU采集指动脉振荡，振荡法算法估计绝对BP。",
+      "main_results": "25名志愿者，与经验证的上臂袖带比较，SBP/DBP RMSE为7.1/6.9 mmHg；这是RMSE而非MAE。",
+      "calibration": {
+        "type": "no periodic cuff or demographic calibration reported",
+        "points": 0,
+        "timing": "按需主动测量",
+        "notes": "摘要称无需周期袖带或人口学校准；机械收紧产生测量压力，不等于被动纯PPG推理。"
+      },
+      "subject_split": {
+        "status": "not reported in abstract",
+        "notes": "原型设备25人可行性试验；开发及评价人群独立性未知。"
+      },
+      "external_validation": {
+        "status": null,
+        "dataset_or_cohort": "25 volunteers",
+        "notes": "未报告外部队列。"
+      },
+      "deployment": {
+        "level": "wired prototype feasibility",
+        "judgment": "仍需主动操作与原型系统",
+        "inference_inputs": [
+          "finger PPG",
+          "force sensor",
+          "IMU",
+          "guided ring tightening/hand lowering"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "有线数据采集连接显示器引导操作，尚非已验证的连续被动智能戒指。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "摘要未披露",
+        "abp_bp_alignment": "摘要未披露",
+        "abp_bp_windowing": "摘要未披露",
+        "abp_bp_quality_filtering": "摘要未披露",
+        "target_dependent_calibration": "摘要称不需周期袖带校准；参考袖带用于评价",
+        "window_leakage": "未知",
+        "subject_leakage": "未知",
+        "notes": "摘要未披露训练/测试划分、窗口重叠、对齐、质量筛选或BP归一化；不能仅凭小样本结果排除泄露。"
+      },
+      "notes": "PubMed电子发表日期2026-10-29；2026-10-30收录。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-10-30",
+      "dataset": [
+        "25 volunteers"
+      ],
+      "inference_inputs": [
+        "finger PPG",
+        "force sensor",
+        "IMU",
+        "guided mechanical pressure"
+      ],
+      "study_summary": {
+        "goal": "检验无需周期袖带校准的戒指绝对BP测量。",
+        "method": "机械执行器收紧戒指，配合降低手部或单独收紧；PPG、力传感器及IMU采集指动脉振荡，振荡法算法估计绝对BP。",
+        "results": "25名志愿者，与经验证的上臂袖带比较，SBP/DBP RMSE为7.1/6.9 mmHg；这是RMSE而非MAE。",
+        "conclusion": "支持主动振荡法戒指原型可行性，尚非临床替代证明。",
+        "takeaway": "区分主动加压测量与被动PPG预测。",
+        "deployment": "有线原型且需引导操作。",
+        "leakage": "摘要未披露训练/测试划分、窗口重叠、对齐、质量筛选或BP归一化；不能仅凭小样本结果排除泄露。",
+        "evidence_status": "PubMed原始结构化摘要及电子发表日期核验；未读全文"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-10-30",
+        "basis": "PubMed PMID42955775 ArticleDate Electronic",
+        "note": "2026-10-29在线，2026-10-30收录，非今日发表。"
+      }
     }
   ]
 }
