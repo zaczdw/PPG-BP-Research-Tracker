@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-30T13:04:02.701Z",
-  "record_count": 123,
-  "reviewed_count": 123,
+  "generated_at": "2026-10-31T13:53:19.044Z",
+  "record_count": 124,
+  "reviewed_count": 124,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -11385,6 +11385,107 @@
         "checked_on": "2026-10-30",
         "basis": "PubMed PMID42955775 ArticleDate Electronic",
         "note": "2026-10-29在线，2026-10-30收录，非今日发表。"
+      }
+    },
+    {
+      "id": "ppgbp-124-scgbpnet-generalization-long-term-stability",
+      "title": "Evaluating Generalization and Long-Term Stability of Smartwatch-Based Cuffless Blood Pressure Monitoring",
+      "year": 2026,
+      "first_reported_in_daily": "2026-10-31",
+      "record_type": "paper",
+      "source": {
+        "venue": "arXiv；作者注明BHI 2026接收",
+        "doi": "10.48550/arXiv.2610.39394",
+        "url": "https://arxiv.org/abs/2610.39394",
+        "verification": "primary-full-text"
+      },
+      "topics": [
+        "PPG",
+        "smartwatch",
+        "cross-dataset transfer",
+        "calibration"
+      ],
+      "datasets": [
+        "Aurora-BP：626人9433条",
+        "私有手表：136人24910条"
+      ],
+      "input_signals": [
+        "PPG",
+        "PPG derivatives",
+        "demographics",
+        "baseline BP",
+        "timing"
+      ],
+      "model_method": "SCGBPNet用ResNet34/注意力融合PPG及导数、手工特征，再门控融合人口学、时间及基线BP。",
+      "main_results": "Aurora-BP与手表内部SBP/DBP MAE分别7.08/4.90、6.44/4.89 mmHg；跨库8.98/6.47，去基线BP后12.38/8.66。",
+      "calibration": {
+        "type": "baseline BP with optional periodic recalibration",
+        "points": 1,
+        "timing": "手表首次有效袖带值；Aurora用重复读数均值",
+        "notes": "手表基线1次；Aurora次数未在核验段说明。另比较每日到30日再校准。"
+      },
+      "subject_split": {
+        "status": "five-fold subject-wise CV",
+        "notes": "内部按受试者五折；跨库私有数据10%验证选模型、90%测试。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "Aurora-BP→私有手表数据",
+        "notes": "目标域10%人群用于checkpoint选择，属于目标域辅助选择的跨库测试。"
+      },
+      "deployment": {
+        "level": "retrospective wearable evaluation",
+        "judgment": "跨库与偏离基线时精度下降",
+        "inference_inputs": [
+          "PPG",
+          "stored baseline BP",
+          "demographics",
+          "timing"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "需参考BP基线；再校准方案需更新袖带值；静止测量，不证明活动中连续部署。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "特征缩放仅训练集拟合；未见当前测试BP反归一化输入",
+        "abp_bp_alignment": "参考读数配对PPG",
+        "abp_bp_windowing": "手表60秒记录",
+        "abp_bp_quality_filtering": "Aurora含不合理BP值排除",
+        "target_dependent_calibration": "使用基线或周期首个参考BP；校准行排除细节待核验",
+        "window_leakage": "按受试者分折",
+        "subject_leakage": "跨库验证/测试人群分离，但目标域用于选模型",
+        "notes": "依赖参考BP校准，非免校准；目标域10%人群用于选模型，不能称完全未接触目标域。BP极值筛选及校准行是否完全排除需继续核验。"
+      },
+      "notes": "arXiv首次提交2026-10-29，2026-10-31补录；当前核验为预印本版本。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-10-31",
+      "dataset": [
+        "Aurora-BP",
+        "private smartwatch"
+      ],
+      "inference_inputs": [
+        "PPG",
+        "stored baseline BP",
+        "demographics",
+        "timing"
+      ],
+      "study_summary": {
+        "goal": "评价手表BP跨库泛化及长期稳定性。",
+        "method": "SCGBPNet用ResNet34/注意力融合PPG及导数、手工特征，再门控融合人口学、时间及基线BP。",
+        "results": "Aurora-BP与手表内部SBP/DBP MAE分别7.08/4.90、6.44/4.89 mmHg；跨库8.98/6.47，去基线BP后12.38/8.66。",
+        "conclusion": "总体MAE掩盖域迁移和基线偏离问题。",
+        "takeaway": "必须与基线BP模型比较。",
+        "deployment": "需校准且静止测量。",
+        "leakage": "依赖参考BP校准，非免校准；目标域10%人群用于选模型，不能称完全未接触目标域。BP极值筛选及校准行是否完全排除需继续核验。",
+        "evidence_status": "arXiv摘要、方法及结果表核验；会议接收为作者声明"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-10-31",
+        "basis": "arXiv v1提交历史",
+        "note": "首次提交2026-10-29，非本日发表。"
       }
     }
   ]
