@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-31T13:53:19.044Z",
-  "record_count": 124,
-  "reviewed_count": 124,
+  "generated_at": "2026-11-01T13:58:30.079Z",
+  "record_count": 125,
+  "reviewed_count": 125,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -11486,6 +11486,94 @@
         "checked_on": "2026-10-31",
         "basis": "arXiv v1提交历史",
         "note": "首次提交2026-10-29，非本日发表。"
+      }
+    },
+    {
+      "id": "ppgbp-125-transforhythm-solo-ppg",
+      "title": "TransfoRhythm: A transformer architecture conductive to blood pressure estimation through solo PPG signal capturing",
+      "year": 2026,
+      "first_reported_in_daily": "2026-11-01",
+      "record_type": "paper",
+      "source": {
+        "venue": "Applied Soft Computing",
+        "doi": "10.1016/j.asoc.2026.116316",
+        "url": "https://www.sciencedirect.com/science/article/pii/S1568494626017643",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "Transformer",
+        "subject-independent evaluation"
+      ],
+      "datasets": [
+        "MIMIC-IV Waveform Database"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "TransfoRhythm用多头注意力建模PPG周期级特征；MIMIC-IV患者独立五折，特征选择、缩放及调参仅限训练患者。",
+      "main_results": "SBP/DBP MAE 1.93/1.49 mmHg，RMSE 3.11/2.59 mmHg；限所评估MIMIC-IV队列。",
+      "calibration": {
+        "type": "not reported in abstract",
+        "points": null,
+        "timing": "未知",
+        "notes": "纯PPG输入不等于已证实免校准。"
+      },
+      "subject_split": {
+        "status": "patient-independent five-fold CV",
+        "notes": "摘要明确患者ID分折且训练/测试零患者重叠。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": "未报告外部队列",
+        "notes": "作者明确仍需外部及前瞻验证。"
+      },
+      "deployment": {
+        "level": "retrospective single-dataset evaluation",
+        "judgment": "尚未确立可穿戴泛化",
+        "inference_inputs": [
+          "PPG cycle features"
+        ],
+        "current_reference_bp_required": null,
+        "notes": "摘要核验范围内校准及完整推理流程未知。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "摘要未报告",
+        "abp_bp_alignment": "摘要未报告",
+        "abp_bp_windowing": "摘要未报告",
+        "abp_bp_quality_filtering": "摘要未报告",
+        "target_dependent_calibration": "未知",
+        "window_leakage": "患者分折；具体窗口流程待核验",
+        "subject_leakage": "摘要称无患者重叠",
+        "notes": "摘要未交代参考BP对齐、窗口筛选和反归一化，以及校准需求；患者分离不能排除这些目标依赖风险。"
+      },
+      "notes": "出版社及Crossref列2026年11月卷期；首次在线具体日未确认。本期新发现收录，不宣称今日发表。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-11-01",
+      "dataset": [
+        "MIMIC-IV"
+      ],
+      "inference_inputs": [
+        "PPG cycle features"
+      ],
+      "study_summary": {
+        "goal": "从单PPG估计SBP和DBP。",
+        "method": "TransfoRhythm用多头注意力建模PPG周期级特征；MIMIC-IV患者独立五折，特征选择、缩放及调参仅限训练患者。",
+        "results": "SBP/DBP MAE 1.93/1.49 mmHg，RMSE 3.11/2.59 mmHg；限所评估MIMIC-IV队列。",
+        "conclusion": "内部患者独立结果较好，外部证据不足。",
+        "takeaway": "低MAE仍需核对目标BP使用。",
+        "deployment": "外部、前瞻和可穿戴验证待补。",
+        "leakage": "摘要未交代参考BP对齐、窗口筛选和反归一化，以及校准需求；患者分离不能排除这些目标依赖风险。",
+        "evidence_status": "出版社索引原始摘要核验；全文访问受限"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-11-01",
+        "basis": "出版社及Crossref卷期元数据",
+        "note": "仅确认2026年11月卷期，首次在线具体日期未知；2026-11-01收录。"
       }
     }
   ]
