@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-03T13:18:09.692Z",
-  "record_count": 125,
-  "reviewed_count": 125,
+  "generated_at": "2026-11-09T13:51:41.208Z",
+  "record_count": 126,
+  "reviewed_count": 126,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -11574,6 +11574,98 @@
         "checked_on": "2026-11-01",
         "basis": "出版社及Crossref卷期元数据",
         "note": "仅确认2026年11月卷期，首次在线具体日期未知；2026-11-01收录。"
+      }
+    },
+    {
+      "id": "ppgbp-126-physics-constrained-abp-twin-stress-test",
+      "title": "Stress Testing a Physics-Constrained Arterial-Pressure Twin Candidate: Reconstruction, Forecasting, Uncertainty, and Identifiability from Photoplethysmography",
+      "year": 2026,
+      "first_reported_in_daily": "2026-11-09",
+      "record_type": "paper",
+      "source": {
+        "venue": "Results in Engineering",
+        "doi": "10.1016/j.rineng.2026.113759",
+        "url": "https://www.sciencedirect.com/science/article/pii/S2590123026047699",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "ABP waveform reconstruction",
+        "Windkessel",
+        "uncertainty",
+        "cross-source transfer"
+      ],
+      "datasets": [
+        "PulseDB",
+        "MIMIC-III",
+        "VitalDB"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "使用PulseDB的61,795个同步PPG、ECG及侵入式ABP片段；以卷积编码器—解码器为基础，检验舒张期Windkessel约束、仅基于观测更新的循环预测器，以及深度集成和共形预测区间。",
+      "main_results": "锁定测试集上，相较同容量基线，加约束后波形MAE增加0.091 mmHg（95% CI −0.071至0.240），排除预设5%改善。预测优于上一拍保持基线，但比重建心搏基线差0.89–1.36 mmHg。90.03%区间覆盖率对应242.01 mmHg平均区间宽度；时间扭曲使MAE约翻倍，区间对误差变化反应弱。跨来源误差增加61%–86%，仅5.6%–7.7%的舒张期拟合达到实用可辨识标准，高收缩压被压低。",
+      "calibration": {
+        "type": "no individual BP calibration reported",
+        "points": 0,
+        "timing": "不适用",
+        "notes": "作者报告无个体血压校准；共形校准针对预测区间，不能等同于个体袖带校准。"
+      },
+      "subject_split": {
+        "status": "subject-disjoint locked test",
+        "notes": "作者报告按受试者隔离及锁定测试集；具体分组和样本数未从摘要核实。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "PulseDB跨来源迁移：MIMIC-III和VitalDB",
+        "notes": "报告PulseDB来源间迁移测试（MIMIC-III、VitalDB）；不等同于独立前瞻性穿戴验证。"
+      },
+      "deployment": {
+        "level": "retrospective cross-source stress test",
+        "judgment": "当前候选系统未达到实用部署要求",
+        "inference_inputs": [
+          "PPG；ECG各分支用途未核实"
+        ],
+        "current_reference_bp_required": null,
+        "notes": "现有结果限回顾性波形数据；跨来源、信号时序与高压误差限制部署，未验证独立可穿戴场景。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "未核实",
+        "abp_bp_alignment": "同步记录；目标依赖对齐未核实",
+        "abp_bp_windowing": "未核实",
+        "abp_bp_quality_filtering": "未核实",
+        "target_dependent_calibration": "无个体血压校准；共形校准分区未核实",
+        "window_leakage": "切窗细节未核实",
+        "subject_leakage": "摘要报告受试者分离",
+        "notes": "按人隔离减少受试者重叠风险。摘要未说明是否用测试ABP进行逐窗对齐、切窗或筛选、反归一化，以及共形校准集是否与测试集隔离；泄露状态未判定。"
+      },
+      "notes": "出版社标注2026-10-25首次在线（期刊预校样）；2026-11-09补录。重建以PPG为目标输入；数据同时含ECG和作为参考的侵入式ABP，ECG在各分支推理中的用途未从摘要核实。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-11-09",
+      "dataset": [
+        "PulseDB"
+      ],
+      "inference_inputs": [
+        "PPG；ECG各分支用途未核实"
+      ],
+      "study_summary": {
+        "goal": "检验基于PPG的候选动脉压数字孪生能否可靠地重建与预测ABP波形，以及预测区间和舒张期参数是否可信。",
+        "method": "使用PulseDB的61,795个同步PPG、ECG及侵入式ABP片段；以卷积编码器—解码器为基础，检验舒张期Windkessel约束、仅基于观测更新的循环预测器，以及深度集成和共形预测区间。",
+        "results": "锁定测试集上，相较同容量基线，加约束后波形MAE增加0.091 mmHg（95% CI −0.071至0.240），排除预设5%改善。预测优于上一拍保持基线，但比重建心搏基线差0.89–1.36 mmHg。90.03%区间覆盖率对应242.01 mmHg平均区间宽度；时间扭曲使MAE约翻倍，区间对误差变化反应弱。跨来源误差增加61%–86%，仅5.6%–7.7%的舒张期拟合达到实用可辨识标准，高收缩压被压低。",
+        "conclusion": "所评估候选不能胜任功能性动脉压数字孪生。",
+        "takeaway": "物理约束未改善重建，区间覆盖率需结合区间宽度和跨来源误差判断。",
+        "deployment": "现有结果限回顾性波形数据；跨来源、信号时序与高压误差限制部署，未验证独立可穿戴场景。",
+        "leakage": "按人隔离减少受试者重叠风险。摘要未说明是否用测试ABP进行逐窗对齐、切窗或筛选、反归一化，以及共形校准集是否与测试集隔离；泄露状态未判定。",
+        "evidence_status": "核对出版社原始摘要、上线日期和数据声明；未核验全文流程。"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-11-09",
+        "basis": "ScienceDirect Available online 25 October 2026",
+        "note": "2026-10-25首次在线（期刊预校样）；2026-11-09补录。"
       }
     }
   ]
