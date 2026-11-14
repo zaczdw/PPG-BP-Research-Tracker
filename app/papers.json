@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-09T13:51:41.208Z",
-  "record_count": 126,
-  "reviewed_count": 126,
+  "generated_at": "2026-11-14T15:52:09.989Z",
+  "record_count": 127,
+  "reviewed_count": 127,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -11666,6 +11666,101 @@
         "checked_on": "2026-11-09",
         "basis": "ScienceDirect Available online 25 October 2026",
         "note": "2026-10-25首次在线（期刊预校样）；2026-11-09补录。"
+      }
+    },
+    {
+      "id": "ppgbp-127-lightweight-calibrated-ppg-tracking",
+      "title": "Lightweight Calibration-Based Blood Pressure Tracking from Photoplethysmography Features for Smart Devices: Accuracy, Model Size and Recalibration Interval",
+      "year": 2026,
+      "first_reported_in_daily": "2026-11-14",
+      "record_type": "paper",
+      "source": {
+        "venue": "Diagnostics",
+        "doi": "10.3390/diagnostics16223713",
+        "url": "https://www.mdpi.com/2075-4418/16/22/3713",
+        "verification": "primary-fulltext"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "calibration",
+        "wearable"
+      ],
+      "datasets": [
+        "MIMIC-BP",
+        "VitalDB"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "取每段前10秒PPG，提取65项脉搏形态和统计特征；比较六种免校准回归器及四种校准方法。XGBoost差值模型用当前与参考PPG特征的差、参考特征及历史参考血压估计变化，再加回参考值。ECG只参与原提取器的样本筛选，不作为预测特征。",
+      "main_results": "MIMIC-BP未见受试者免校准SBP MAE为13.0–13.3 mmHg，接近常数基线14.2；模拟校准1次和5次分别为11.8和10.8。VitalDB名义每15分钟重校准，SBP/DBP MAE为10.32/5.31 mmHg。约47 KB的树模型比1.5 MB模型多约0.2 mmHg误差；血压极端值偏差大，所有配置的SBP表现均未达论文比较的准确度标准。",
+      "calibration": {
+        "type": "simulated individual cuff calibration",
+        "points": null,
+        "timing": "初始1、2、3或5点，另比较周期及触发校准",
+        "notes": "取每人前1、2、3或5个可用段的侵入式参考值模拟袖带；固定校准在第5个可用段之后评分。重校准先评分再更新参考；VitalDB按保留片段计算名义间隔。论文另模拟袖带误差，未实测真实袖带校准。"
+      },
+      "subject_split": {
+        "status": "subject-disjoint fixed test",
+        "notes": "MIMIC-BP有1,295人进入训练/验证池，按人重分10次（85/15）；固定测试集229人，设置冻结后才评分。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "VitalDB（17例）",
+        "notes": "VitalDB为不同采集系统的17例手术患者；主模型不用该库训练或选型，部分次要策略按病例留一调参。"
+      },
+      "deployment": {
+        "level": "retrospective model evaluation",
+        "judgment": "具备小模型可行性；真实腕部部署待验证",
+        "inference_inputs": [
+          "当前PPG特征",
+          "校准时PPG特征",
+          "既往校准血压（实验用侵入式参考模拟）"
+        ],
+        "current_reference_bp_required": false,
+        "notes": "模型体积不含前处理和特征提取。需要历史参考血压，未完成腕部日常使用、真实袖带或实际端侧功耗及延迟验证；手术队列的重校准间隔不能直接用于居家。"
+      },
+      "leakage_audit": {
+        "risk_level": "moderate",
+        "abp_bp_denormalization": "未见当前目标ABP反归一化；差值模型加回历史参考BP",
+        "abp_bp_alignment": "PPG定心搏；MIMIC-BP输入10秒、参考30秒",
+        "abp_bp_windowing": "原库固定非重叠段；VitalDB按连续10秒切分",
+        "abp_bp_quality_filtering": "VitalDB使用参考SBP/DBP范围及脉压筛窗",
+        "target_dependent_calibration": "取每人前1、2、3或5个可用段的侵入式参考值模拟袖带；固定校准在第5个可用段之后评分。重校准先评分再更新参考；VitalDB按保留片段计算名义间隔。论文另模拟袖带误差，未实测真实袖带校准。",
+        "window_leakage": "固定校准与评分时序分开；重校准先评分后更新",
+        "subject_leakage": "MIMIC-BP有1,295人进入训练/验证池，按人重分10次（85/15）；固定测试集229人，设置冻结后才评分。",
+        "notes": "有明确的历史ABP依赖：用既往侵入式标签模拟校准，不应解读为免校准或真实袖带部署结果。VitalDB先以参考血压范围和脉压筛窗，另做PPG质量检查，可能改变评估样本分布。特征按PPG定心搏，未见用当前目标ABP反归一化；MIMIC-BP以10秒输入配30秒参考，窗不完全对应。"
+      },
+      "notes": "出版社标注2026-11-10发表；2026-11-14收录。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-11-14",
+      "dataset": [
+        "MIMIC-BP",
+        "VitalDB"
+      ],
+      "inference_inputs": [
+        "当前PPG特征",
+        "校准时PPG特征",
+        "既往校准血压（实验用侵入式参考模拟）"
+      ],
+      "study_summary": {
+        "goal": "比较使用PPG追踪收缩压和舒张压时，个体校准次数、重校准间隔与模型大小对误差的影响。",
+        "method": "取每段前10秒PPG，提取65项脉搏形态和统计特征；比较六种免校准回归器及四种校准方法。XGBoost差值模型用当前与参考PPG特征的差、参考特征及历史参考血压估计变化，再加回参考值。ECG只参与原提取器的样本筛选，不作为预测特征。",
+        "results": "MIMIC-BP未见受试者免校准SBP MAE为13.0–13.3 mmHg，接近常数基线14.2；模拟校准1次和5次分别为11.8和10.8。VitalDB名义每15分钟重校准，SBP/DBP MAE为10.32/5.31 mmHg。约47 KB的树模型比1.5 MB模型多约0.2 mmHg误差；血压极端值偏差大，所有配置的SBP表现均未达论文比较的准确度标准。",
+        "conclusion": "该回顾性试验中，参考血压的时效和重校准影响大于增大模型，现有准确度不足以替代袖带。",
+        "takeaway": "47 KB是模型估算体积，改善依赖模拟参考血压。",
+        "deployment": "模型体积不含前处理和特征提取。需要历史参考血压，未完成腕部日常使用、真实袖带或实际端侧功耗及延迟验证；手术队列的重校准间隔不能直接用于居家。",
+        "leakage": "有明确的历史ABP依赖：用既往侵入式标签模拟校准，不应解读为免校准或真实袖带部署结果。VitalDB先以参考血压范围和脉压筛窗，另做PPG质量检查，可能改变评估样本分布。特征按PPG定心搏，未见用当前目标ABP反归一化；MIMIC-BP以10秒输入配30秒参考，窗不完全对应。",
+        "evidence_status": "出版社全文，重点核对方法2.1–2.6与结果3.1–3.6。"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-11-14",
+        "basis": "Diagnostics 出版社文章页",
+        "note": "2026-11-10发表；2026-11-14收录。"
       }
     }
   ]
