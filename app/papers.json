@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-15T13:02:02.442Z",
-  "record_count": 128,
-  "reviewed_count": 128,
+  "generated_at": "2026-11-19T15:48:07.322Z",
+  "record_count": 130,
+  "reviewed_count": 130,
   "records": [
     {
       "id": "ppgbp-001-blood-pressure-estimation-from-ppg-a-comparative-study-of-direct-and-ecg",
@@ -11850,6 +11850,186 @@
         "checked_on": "2026-11-15",
         "basis": "Sensors发表页与PubMed电子发表日期（PMID 43029695）",
         "note": "2026-10-30发表；2026-11-15补录。"
+      }
+    },
+    {
+      "id": "ppgbp-129-icu-reduced-ppg-features",
+      "title": "Blood Pressure Estimation for Hemodynamic Monitoring Using Reduced Photoplethysmography Features in Intensive Care Units: Prospective Machine Learning Study",
+      "year": 2026,
+      "first_reported_in_daily": "2026-11-19",
+      "record_type": "paper",
+      "source": {
+        "venue": "JMIR AI",
+        "doi": "10.2196/105057",
+        "url": "https://ai.jmir.org/2026/1/e105057",
+        "verification": "primary-fulltext"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "clinical evaluation"
+      ],
+      "datasets": [
+        "Mayo Clinic ICU（100人，3776段）"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "141人纳入，质量筛选后100人。每人约10分钟指端PPG（120 Hz），35秒窗、约60%重叠；从201项特征经RReliefF与模型排名选30项，比较XGBoost、RF、SVR。",
+      "main_results": "一点评定校准后的测试SBP/MAP/DBP MAE为8.61/3.50/2.62 mmHg；MAP和DBP达到作者引用的数值误差标准，SBP为BHS D级，不能等同于完整临床验证。",
+      "calibration": {
+        "type": "individual one-point reference BP calibration",
+        "points": 1,
+        "timing": "见说明",
+        "notes": "每名受试者用首个参考血压与模型预测的差形成固定偏移，训练、验证、测试均如此；参考来自侵入式动脉导管，非免校准结果。"
+      },
+      "subject_split": {
+        "status": "participant-independent evaluation reported",
+        "notes": "按患者80人训练、20人留出；训练内按人嵌套五折，正文称特征选择及调参限训练队列。"
+      },
+      "external_validation": {
+        "status": false,
+        "dataset_or_cohort": "无外部中心独立队列。",
+        "notes": "无外部中心独立队列。"
+      },
+      "deployment": {
+        "level": "clinical cohort evaluation",
+        "judgment": "部署证据尚有限",
+        "inference_inputs": [
+          "PPG特征",
+          "起始参考BP形成的固定偏移"
+        ],
+        "current_reference_bp_required": null,
+        "notes": "限单中心高质量ICU指端信号及短时随访，需要起始参考BP；未证实长期校准稳定或日常穿戴部署。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "未完全核实",
+        "abp_bp_alignment": "见审计说明",
+        "abp_bp_windowing": "见方法与审计",
+        "abp_bp_quality_filtering": "见审计说明",
+        "target_dependent_calibration": "每名受试者用首个参考血压与模型预测的差形成固定偏移，训练、验证、测试均如此；参考来自侵入式动脉导管，非免校准结果。",
+        "window_leakage": "按患者80人训练、20人留出；训练内按人嵌套五折，正文称特征选择及调参限训练队列。",
+        "subject_leakage": "按患者80人训练、20人留出；训练内按人嵌套五折，正文称特征选择及调参限训练队列。",
+        "notes": "首个测试参考BP被明确用于个体校准。监护仪每30秒数值BP插值到15秒，配对35秒PPG窗；生理不合理BP参与筛窗，且仅保留高质量患者。按人划分降低重叠窗跨人的泄露，但校准点是否排除评分及附录筛选细节仍待核实。"
+      },
+      "notes": "预印本首次公开2026-06-19；期刊正式发表2026-11-17；2026-11-19收录。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-11-19",
+      "dataset": [
+        "Mayo Clinic ICU（100人，3776段）"
+      ],
+      "inference_inputs": [
+        "PPG特征",
+        "起始参考BP形成的固定偏移"
+      ],
+      "study_summary": {
+        "goal": "由单传感器PPG估计ICU患者SBP、MAP和DBP，比较少量生理特征模型。",
+        "method": "141人纳入，质量筛选后100人。每人约10分钟指端PPG（120 Hz），35秒窗、约60%重叠；从201项特征经RReliefF与模型排名选30项，比较XGBoost、RF、SVR。",
+        "results": "一点评定校准后的测试SBP/MAP/DBP MAE为8.61/3.50/2.62 mmHg；MAP和DBP达到作者引用的数值误差标准，SBP为BHS D级，不能等同于完整临床验证。",
+        "conclusion": "结果须结合校准与验证范围解释。",
+        "takeaway": "每名受试者用首个参考血压与模型预测的差形成固定偏移，训练、验证、测试均如此；参考来自侵入式动脉导管，非免校准结果。",
+        "deployment": "限单中心高质量ICU指端信号及短时随访，需要起始参考BP；未证实长期校准稳定或日常穿戴部署。",
+        "leakage": "首个测试参考BP被明确用于个体校准。监护仪每30秒数值BP插值到15秒，配对35秒PPG窗；生理不合理BP参与筛窗，且仅保留高质量患者。按人划分降低重叠窗跨人的泄露，但校准点是否排除评分及附录筛选细节仍待核实。",
+        "evidence_status": "出版社正文，附录细节尚未核实"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-11-19",
+        "basis": "出版社及PubMed日期",
+        "note": "预印本首次公开2026-06-19；期刊正式发表2026-11-17；2026-11-19收录。"
+      }
+    },
+    {
+      "id": "ppgbp-130-smartphone-mrm-real-world",
+      "title": "Smartphone-Based Cuffless Blood Pressure Estimation Using a Multiple Regression Model: Revalidation and On-Demand Performance Under Real-World Conditions",
+      "year": 2026,
+      "first_reported_in_daily": "2026-11-19",
+      "record_type": "paper",
+      "source": {
+        "venue": "Annals of Biomedical Engineering",
+        "doi": "10.1007/s10439-026-04427-9",
+        "url": "https://link.springer.com/article/10.1007/s10439-026-04427-9",
+        "verification": "primary-abstract"
+      },
+      "topics": [
+        "PPG",
+        "cuffless BP",
+        "clinical evaluation"
+      ],
+      "datasets": [
+        "自采手机指端PPG：13人开发，另11人日常验证"
+      ],
+      "input_signals": [
+        "PPG"
+      ],
+      "model_method": "13名健康参与者101组数据构建校准模型；由PPG提取对数脉率PRI和基于修正归一化脉搏容积的VRI，用多元回归估计袖带SBP/DBP。另11人收集1至2周168组数据；另报单人20个月752组。",
+      "main_results": "11人独立验证SBP/DBP MAE为3.2±2.59/4.7±2.78 mmHg；单人长期案例为1.6±1.16/2.4±1.71 mmHg。±值沿用论文表述，不将单人结果推广到一般人群。",
+      "calibration": {
+        "type": "calibration details incomplete",
+        "points": null,
+        "timing": "见说明",
+        "notes": "摘要称13人101组建立校准模型，但未交代验证参与者是否需要个体校准、次数、时点及重校准；不能据摘要认定免校准。"
+      },
+      "subject_split": {
+        "status": "participant-independent evaluation reported",
+        "notes": "开发13人，验证另11人；单人长期案例与模型开发的关系摘要未说明。"
+      },
+      "external_validation": {
+        "status": true,
+        "dataset_or_cohort": "同研究另外11名参与者的日常独立验证；非多中心外部数据库。",
+        "notes": "同研究另外11名参与者的日常独立验证；非多中心外部数据库。"
+      },
+      "deployment": {
+        "level": "clinical cohort evaluation",
+        "judgment": "部署证据尚有限",
+        "inference_inputs": [
+          "手机指端PPG的PRI、VRI",
+          "校准参数（验证时个体需求未核实）"
+        ],
+        "current_reference_bp_required": null,
+        "notes": "需手机指端绿光PPG采集，属按需估计；小队列与未知个体校准流程限制泛化，不代表连续无干预监测。"
+      },
+      "leakage_audit": {
+        "risk_level": "unknown",
+        "abp_bp_denormalization": "未完全核实",
+        "abp_bp_alignment": "见审计说明",
+        "abp_bp_windowing": "见方法与审计",
+        "abp_bp_quality_filtering": "见审计说明",
+        "target_dependent_calibration": "摘要称13人101组建立校准模型，但未交代验证参与者是否需要个体校准、次数、时点及重校准；不能据摘要认定免校准。",
+        "window_leakage": "开发13人，验证另11人；单人长期案例与模型开发的关系摘要未说明。",
+        "subject_leakage": "开发13人，验证另11人；单人长期案例与模型开发的关系摘要未说明。",
+        "notes": "摘要未报告目标BP参与归一化、对齐、窗口或质量筛选的细节；mNPV为输入特征不等于证明无标签依赖。验证BP与校准的隔离、长期案例的独立性未知。"
+      },
+      "notes": "2026-11-18期刊在线发表；2026-11-19收录。",
+      "audit_status": "priority-reviewed",
+      "evidence_checked_on": "2026-11-19",
+      "dataset": [
+        "自采手机指端PPG：13人开发，另11人日常验证"
+      ],
+      "inference_inputs": [
+        "手机指端PPG的PRI、VRI",
+        "校准参数（验证时个体需求未核实）"
+      ],
+      "study_summary": {
+        "goal": "复验手机指端绿光PPG多元回归血压估计在日常按需测量中的表现。",
+        "method": "13名健康参与者101组数据构建校准模型；由PPG提取对数脉率PRI和基于修正归一化脉搏容积的VRI，用多元回归估计袖带SBP/DBP。另11人收集1至2周168组数据；另报单人20个月752组。",
+        "results": "11人独立验证SBP/DBP MAE为3.2±2.59/4.7±2.78 mmHg；单人长期案例为1.6±1.16/2.4±1.71 mmHg。±值沿用论文表述，不将单人结果推广到一般人群。",
+        "conclusion": "结果须结合校准与验证范围解释。",
+        "takeaway": "摘要称13人101组建立校准模型，但未交代验证参与者是否需要个体校准、次数、时点及重校准；不能据摘要认定免校准。",
+        "deployment": "需手机指端绿光PPG采集，属按需估计；小队列与未知个体校准流程限制泛化，不代表连续无干预监测。",
+        "leakage": "摘要未报告目标BP参与归一化、对齐、窗口或质量筛选的细节；mNPV为输入特征不等于证明无标签依赖。验证BP与校准的隔离、长期案例的独立性未知。",
+        "evidence_status": "出版社与PubMed摘要，订阅全文未获得"
+      },
+      "publication_audit": {
+        "status": "verified",
+        "verified_year": 2026,
+        "display_year": "2026",
+        "checked_on": "2026-11-19",
+        "basis": "出版社及PubMed日期",
+        "note": "2026-11-18期刊在线发表；2026-11-19收录。"
       }
     }
   ]
